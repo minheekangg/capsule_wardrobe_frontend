@@ -1,7 +1,10 @@
 import React from 'react'
+
 // import axios from 'axios';
 // import { Image, Video, Transformation, CloudinaryContext } from "cloudinary-react";
 
+const MY_CLOUD_NAME = process.env.REACT_APP_MY_CLOUD_NAME;
+const UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
 console.log(
   "hi",
   process.env.REACT_APP_MY_CLOUD_NAME,
@@ -11,34 +14,31 @@ console.log(
 class Cloudinary extends React.Component {
   state = { photo: "" };
 
-  myWidget = window.cloudinary.createUploadWidget(
+  widget = window.cloudinary.createUploadWidget(
     {
-          cloudName: process.env.REACT_APP_MY_CLOUD_NAME,
-          uploadPreset: process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
+      cloudName: MY_CLOUD_NAME,
+      uploadPreset: UPLOAD_PRESET
     },
     (error, result) => {
       if (result && result.event === "success") {
-        debugger;
-        this.setState(
-          {
-            photo: result.info.url
-          },
-          () => {
-            console.log("img updated!", result.info.url);
-          }
-        );
+        this.setState({
+          photo: result.info.url
+        });
       }
     }
   );
 
-//   handleChange = e => {
-//     debugger;
-//     console.log(e);
-//     var file = e.target.files[0];
-//     var formData = new FormData();
-//     formData.append("file", file);
-//     formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-//   };
+  handleChange = e => {
+    debugger;
+    console.log(e);
+    var file = e.target.files[0];
+    var formData = new FormData();
+    formData.append("file", file);
+    formData.append(
+      "upload_preset",
+      process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
+    );
+  };
   // axios.post({
   //   url: CLOUDINARY_URL,
   //   method: 'POST',
@@ -60,7 +60,7 @@ class Cloudinary extends React.Component {
   // <button id="upload_widget" class="cloudinary-button" onClick={}>Upload files</button>
 
   handleClick = event => {
-    this.myWidget.open();
+    this.widget.open();
   };
   render() {
     return (
