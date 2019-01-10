@@ -5,11 +5,6 @@ import React from 'react'
 
 const MY_CLOUD_NAME = process.env.REACT_APP_MY_CLOUD_NAME;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
-console.log(
-  "hi",
-  process.env.REACT_APP_MY_CLOUD_NAME,
-  process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
-);
 
 class Cloudinary extends React.Component {
   state = { photo: "" };
@@ -20,7 +15,6 @@ class Cloudinary extends React.Component {
       uploadPreset: UPLOAD_PRESET
     },
     (error, result) => {
-      // debugger
       if (result && result.event === "success") {
         this.setState({
           photo: result.info.url

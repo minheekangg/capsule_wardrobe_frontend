@@ -3,24 +3,41 @@ import { Card, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { selectThisItem } from "../actions";
 
-const ClosetItem = ({image, name, times_worn, id, selectThisItem}) => {
+const ClosetItem = props => {
+
+    const handleSelectItem = () =>{
+        const category = props.selected.map( s => {
+            return (s.category_id)
+        } )
+        return !category.includes(props.category) ? props.selectThisItem(props.id) : null
+    }
+
     return (
-        <Card onClick={()=>{selectThisItem(id)}} >
-            <Image src={image} />
+        <Card onClick={handleSelectItem} >
+            <Image src={props.image} />
             <Card.Content>
-                <Card.Header>{name}</Card.Header>
+                <Card.Header>{props.name}</Card.Header>
                 <Card.Meta>
-                    <span className='date'>Times Worn: {times_worn}</span>
+                    <span className='date'>Times Worn: {props.times_worn}</span>
                 </Card.Meta>
             </Card.Content>
         </Card>
     )
 }
 
-const mapDispatchToProps = dispatch => {
+function mapStateToProps(state){
+    return {
+        selected: state.closet.selectedItems
+    }
+}
+
+function mapDispatchToProps(dispatch) {
     return { 
         selectThisItem: id => dispatch(selectThisItem(id))
      }
 }
 
-export default connect(null, mapDispatchToProps)(ClosetItem)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ClosetItem);
