@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import Cloudinary from './Components/Cloudinary';
+// import LandingPage from './components/LandingPage'
+import { Link } from 'react-router-dom'
 
-// const API_KEY = `${process.env.REACT_APP_MY_CLOUD_NAME}`;
-console.log(process.env.REACT_APP_MY_CLOUD_NAME);
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-     <Cloudinary/>
+      <div>
+        <Link to="/welcome"> Welcome! </Link>
       </div>
     );
   }

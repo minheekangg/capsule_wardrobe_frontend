@@ -4,9 +4,29 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import {Provider} from 'react-redux';
+import store from './store'
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
+import LandingPage from './components/LandingPage'
+import Market from './components/Market'
+import Closet from './components/Closet'
+
+
+
+
+ReactDOM.render(
+    <Provider store={store}>
+    <Router>
+        <>
+        <Route exact path='/welcome' component={LandingPage} />
+        <Route exact path='/' component={App} />
+        <Route exact path='/Closet' component={Closet} />
+        <Route exact path='/Market' component={Market} />
+        </>
+    </Router>
+  </Provider>,
+  document.getElementById("root")
+);
+ 
 serviceWorker.unregister();

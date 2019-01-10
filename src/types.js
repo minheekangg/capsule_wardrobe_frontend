@@ -1,0 +1,5 @@
+// export const SWITCH_LANDINGPAGE = "SWITCH_LANDINGPAGE"; 
+export const ADD_ITEM = "ADD_ITEM"; 
+export const FETCHED_CLOSET = "FETCHED_CLOSET"; 
+export const FETCHING_CLOSET = "FETCHING_CLOSET"; 
+export const SELECT_ITEM = "SELECT_ITEM"; 

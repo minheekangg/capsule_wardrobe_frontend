@@ -20,6 +20,7 @@ class Cloudinary extends React.Component {
       uploadPreset: UPLOAD_PRESET
     },
     (error, result) => {
+      // debugger
       if (result && result.event === "success") {
         this.setState({
           photo: result.info.url
