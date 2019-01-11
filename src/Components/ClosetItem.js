@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { selectThisItem } from "../actions";
+import { selectThisItem } from "../actions/closetActions";
 
 const ClosetItem = props => {
 

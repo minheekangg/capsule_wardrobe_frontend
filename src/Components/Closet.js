@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux';
-import { fetchCloset } from '../actions'
+import { fetchCloset } from '../actions/closetActions'
 import ClosetItem from './ClosetItem';
 import Selection from './Selection';
 import { Button } from "semantic-ui-react";
