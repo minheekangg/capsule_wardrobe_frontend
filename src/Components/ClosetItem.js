@@ -37,7 +37,8 @@ function mapDispatchToProps(dispatch) {
      }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ClosetItem);
+export default 
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ClosetItem)

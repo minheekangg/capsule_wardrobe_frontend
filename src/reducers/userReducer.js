@@ -1,8 +1,10 @@
 import { SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, RESET } from "../types";
 
 const initialState = {
-    username: "minhee",
-    userId: 1,
+    username: "",
+    userId: 0,
+    city: "",
+    image: "",
     isLoggedIn: false,
     authenticatingUser: false,
     failedLogin: false,
@@ -14,7 +16,7 @@ export default function userReducer(state = initialState, action) {
     console.log('%c userReducer', 'color: blue', state, action);
     switch (action.type) { 
         case SET_CURRENT_USER:
-            return {...state, username: action.payload.username, userId: action.payload.id, isLoggedIn: true, authenticatingUser: false}
+            return {...state, username: action.payload.username, userId: action.payload.id, image: action.payload.image, city: action.payload.city, isLoggedIn: true, authenticatingUser: false}
         case AUTHENTICATED_USER:
             return {...state, authenticatingUser: false}
         case AUTHENTICATING_USER:
