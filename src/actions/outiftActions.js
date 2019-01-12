@@ -6,7 +6,9 @@ export function fetchOutfits(id) {
       return fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${id}/outfits`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        "content-type": "application/json",
+        "accept": "application/json"
       }
     })
       .then(r => r.json())
@@ -17,31 +19,33 @@ export function fetchOutfits(id) {
 }
 
 export function createOutfits(date, userId) {
-    // return dispatch => {
-    //     dispatch({ type: FETCHING_OUTFITS });
-    //     return fetch(
-    //       `${
-    //         process.env.REACT_APP_API_ENDPOINT
-    //       }/api/v1/users/${userId}/outfits`,
-    //       {
-    //         method: "POST",
-    //         headers: {
-    //           Authorization: `Bearer ${localStorage.getItem("jwt")}`
-    //         },
-    //         body: JSON.stringify({
-    //           outfit: {
-    //             user_id: userId,
-    //             day: date
-    //           }
-    //         })
-    //           .then(r => {
-    //             debugger;
-    //           })
-    //           .then(outfits => {
-    //             debugger;
-    //             dispatch({ type: CREATED_OUTFIT, payload: outfits });
-    //           })
-    //       }
-    //     );
-    // }
-}
+  console.log(date, userId)
+    return dispatch => {
+        dispatch({ type: FETCHING_OUTFITS });
+        return fetch(
+          `${
+            process.env.REACT_APP_API_ENDPOINT
+          }/api/v1/users/${userId}/outfits`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              outfit: {
+                user_id: userId,
+                day: date
+              }
+            })
+          })
+            .then(r => {
+                r.json()
+            })
+              .then(outfits => {
+                debugger;
+                dispatch({ type: CREATED_OUTFIT, payload: outfits.outfit });
+              })
+          }
+        }

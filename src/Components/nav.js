@@ -6,7 +6,7 @@ import { Menu } from 'semantic-ui-react'
 const Nav = (props) => {
     return <Menu pointing secondary>
         {props.loggedIn ? <Fragment>
-            <Menu.Menu position="center">
+            <Menu.Menu width={5}>
               <Menu.Item as={NavLink} to="/closet" color={"green"} name="Closet" active={props.location.pathname === "/closet"} />
                 <Menu.Item as={NavLink} to="/" color={"black"} name="Capsule Wardrobe" active={props.location.pathname === "/"} />
               <Menu.Item as={NavLink} to="/market" color={"orange"} name="Market" active={props.location.pathname === "/market"} />

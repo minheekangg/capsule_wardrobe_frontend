@@ -4,8 +4,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { fetchCloset } from '../actions/closetActions'
+import { fetchCategories } from "../actions/categoryActions";
 import { createOutfits } from '../actions/outiftActions'
 import ClosetItem from './ClosetItem';
+import Category from './Category';
 import Selection from './Selection';
 import {LoadingPage} from './misc';
 
@@ -20,13 +22,14 @@ class Closet extends React.Component {
 
   componentDidMount() {
     this.props.fetchCloset(this.props.user);
+    this.props.fetchCategories();
   }
 
   addItemClick = () => {
     console.log("clicked");
   };
 
-  handleDateChange(date) {
+  handleDateChange = (date) => {
     this.setState({
       date: date
     });
@@ -40,6 +43,7 @@ class Closet extends React.Component {
   renderCloset() {
     return (
       <div>
+        <Category category={this.props.categories}/>
         {this.props.items.map(e => {
           return (
             <ClosetItem
@@ -99,18 +103,20 @@ class Closet extends React.Component {
 }
 
 function mapStateToProps(state){
+  console.log(state)
     return (
        { 
         user: state.user.userId,
         items: state.closet.items,
         isLoaded: state.closet.isLoaded,
-        selectedItems: state.closet.selectedItems
+        selectedItems: state.closet.selectedItems,
+        categories: state.category.category
         }
     )
 }
 
 function mapDispatchToProps(dispatch) {
-    return { fetchCloset: id => dispatch(fetchCloset(id)), createOutfits: (date, id) => dispatch(createOutfits(date, id)) };
+  return { fetchCategories: id => dispatch(fetchCategories(id)),fetchCloset: id => dispatch(fetchCloset(id)), createOutfits: (date, id) => dispatch(createOutfits(date, id)) };
 }
 
 

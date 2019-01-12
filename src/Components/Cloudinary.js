@@ -1,5 +1,5 @@
 import React from 'react'
-import { fetchCategories } from "../actions/cloudinaryActions";
+
 import { addItem } from "../actions/closetActions";
 import { connect } from 'react-redux';
 import { categoryOptions } from "../types";
@@ -14,7 +14,7 @@ class Cloudinary extends React.Component {
   state = { itemImg: "", itemName: "", itemCat: 0, addingItem: true};
 
   componentDidMount() {
-    this.props.fetchCategories()
+    
       window.cloudinary.createUploadWidget(
       {
         cloudName: MY_CLOUD_NAME,
@@ -72,7 +72,7 @@ const mapStateToProps = state => {
 
 
 const mapDispatchToProps = (dispatch) => {
-  return { fetchCategories: id => dispatch(fetchCategories(id)), addItem: (name, img, catId, userId) => dispatch(addItem(name, img, catId, userId)) };
+  return {  addItem: (name, img, catId, userId) => dispatch(addItem(name, img, catId, userId)) };
 }
 
 export default withAuth(connect(

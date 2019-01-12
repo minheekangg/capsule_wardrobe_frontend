@@ -5,12 +5,19 @@ export function fetchCloset(id){
         dispatch(
             { type: FETCHING_CLOSET }
         )
-        return fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${id}/items`, {
+        return fetch(
+          `${
+            process.env.REACT_APP_API_ENDPOINT
+          }/api/v1/users/${id}/items`,
+          {
             method: "GET",
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("jwt")}`
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+              "content-type": "application/json",
+              accept: "application/json"
             }
-        })
+          }
+        )
           .then(r => r.json())
           .then(items => {
             dispatch({ type: FETCHED_CLOSET, payload: items });
