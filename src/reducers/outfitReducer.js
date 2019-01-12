@@ -1,8 +1,9 @@
-import { FETCHED_OUTFITS, FETCHING_OUTFITS, RESET } from '../types';
+import { FETCHED_OUTFITS, CREATING_OUTFITS, CREATED_OUTFIT, RESET } from "../types";
+
 
 const initialState = {
     outfits: [],
-    LoadedOutfits: false
+    outfitLoaded: false
 };
 
 
@@ -10,9 +11,11 @@ export default function outfitReducer(state = initialState, action) {
     console.log("%c outfitReducer", "color: pink", state, action);
     switch (action.type) {
         case FETCHED_OUTFITS:
-            return { ...state, items: action.payload, LoadedOutfits: true };
-        case FETCHING_OUTFITS:
-            return { ...state, LoadedOutfits: false };
+            return { ...state, outfits: action.payload, LoadedOutfits: true };
+        case CREATED_OUTFIT:
+            return { ...state, outfitLoaded: true };
+        case CREATING_OUTFITS:
+            return { ...state, outfitLoaded: false };
         case RESET:
             return initialState
         default:
