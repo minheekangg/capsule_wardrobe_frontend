@@ -17,14 +17,4 @@ export const CLOUDINARY_OPEN = "CLOUDINARY_OPEN";
 export const PICTURE_TO_ADD = "PICTURE_TO_ADD"; 
 
 
-export const categoryOptions = [
-    { key: 1, text: "Sweaters", value: 1 },
-    { key: 2, text: "Top", value: 2 },
-    { key: 3, text: "Bottom", value: 3 },
-    { key: 4, text: "Skirt", value: 4 },
-    { key: 5, text: "Outerwear", value: 5 },
-    { key: 6, text: "Shoes", value: 6 },
-    { key: 7, text: "Active", value: 7 },
-    { key: 8, text: "Dress", value: 8 },
-    { key: 9, text: "Misc", value: 9 }
-];
+export const categoryOptions = [{ key: 1, text: "Activewear", value: 1 }, { key: 2, text: "Coats", value: 2 }, { key: 3, text: "Dresses", value: 3 }, { key: 4, text: "Jackets", value: 4 }, { key: 5, text: "Pants", value: 5 }, { key: 6, text: "Jeans", value: 6 }, { key: 7, text: "Skirts", value: 7 }, { key: 8, text: "Sweatshirts", value: 8 }, { key: 9, text: "Tops", value: 9 }, { key: 10, text: "Shoes", value: 10 }, { key: 11, text: "Misc", value: 11 }];
