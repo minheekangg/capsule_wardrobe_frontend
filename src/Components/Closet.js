@@ -5,7 +5,7 @@ import ClosetItem from './ClosetItem';
 import Selection from './Selection';
 import { Button } from "semantic-ui-react";
 import withAuth from "../hoc/withAuth";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 class Closet extends React.Component {
   componentDidMount() {
@@ -56,8 +56,7 @@ class Closet extends React.Component {
     console.log("inside closet, props are", this.props.selectedItems);
     return (
       <div>
-        <Link to="/additem"> Add item </Link>
-        <Button onClick={this.addItemClick}>add</Button>
+        <NavLink to="/additem"> <Button content="Add item"/> </NavLink>
         {this.props.isLoaded ? (
           this.renderCloset()
         ) : (

@@ -1,4 +1,4 @@
-import { ADD_ITEM, FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, RESET } from '../types';
+import {  FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, RESET } from '../types';
 
 const initialState = {
     items: [],
@@ -9,8 +9,6 @@ const initialState = {
 
 export default function itemReducer(state = initialState, action) {
     switch (action.type) {
-        case ADD_ITEM:
-            return {...state, items: [...state.items, action.payload]};
         case FETCHED_CLOSET:
             return { ...state, items: action.payload, isLoaded: true }
         case FETCHING_CLOSET:

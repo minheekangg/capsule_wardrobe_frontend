@@ -1,5 +1,4 @@
-import { FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, ADD_ITEM } from "../types";
-
+import { FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, ADDED_ITEM } from "../types";
 
 export function fetchCloset(id){
     return (dispatch) =>{
@@ -26,7 +25,6 @@ export function selectThisItem(id) {
 }
 
 export function addItem(name, image, catId, userId) {
-    debugger
     return (dispatch) => {
         dispatch(
             { type: FETCHING_CLOSET }
@@ -46,9 +44,11 @@ export function addItem(name, image, catId, userId) {
                 }
             })
         })
-        .then(r => r.json())
-        .then(item => {
-                dispatch({ type: ADD_ITEM, payload: item });
-        });
+        .then(r => {
+            if (r.ok){
+                alert("added!");
+                dispatch({ type: ADDED_ITEM })
+            } 
+        })
     }
 }

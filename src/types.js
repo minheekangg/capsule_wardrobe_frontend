@@ -1,5 +1,5 @@
 export const RESET = "RESET"
-export const ADD_ITEM = "ADD_ITEM"; 
+export const ADDED_ITEM = "ADDED_ITEM"; 
 export const FETCHED_CLOSET = "FETCHED_CLOSET"; 
 export const FETCHING_CLOSET = "FETCHING_CLOSET"; 
 export const FETCHED_CATEGORY = "FETCHED_CATEGORY"; 
