@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { selectThisItem } from "../actions/closetActions";
+import { selectThisItem, replaceSelectedItem } from "../actions/closetActions";
 
 const ClosetItem = props => {
 
@@ -9,7 +9,12 @@ const ClosetItem = props => {
         const category = props.selected.map( s => {
             return (s.category_id)
         } )
-        return !category.includes(props.category) ? props.selectThisItem(props.id) : null
+        if( category.includes(props.category_id)){
+            const toBeReplaced = props.selected.find(s=>s.category_id === props.category_id)
+            props.replaceSelectedItem(props.id, toBeReplaced.id)
+        } else {
+            props.selectThisItem(props.id) 
+        }
     }
 
     return (
@@ -26,15 +31,14 @@ const ClosetItem = props => {
 }
 
 function mapStateToProps(state){
+    console.log("SELECTED ITEMS FROM CLOSET ITEM", state.closet.selectedItems)
     return {
         selected: state.closet.selectedItems
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return { 
-        selectThisItem: id => dispatch(selectThisItem(id))
-     }
+    return { selectThisItem: id => dispatch(selectThisItem(id)), replaceSelectedItem: (newId, oldId) => dispatch(replaceSelectedItem(newId, oldId)) };
 }
 
 export default 

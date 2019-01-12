@@ -1,4 +1,4 @@
-import { FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, ADDED_ITEM } from "../types";
+import { FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, ADD_ITEM, REPLACE_ITEM } from "../types";
 
 export function fetchCloset(id){
     return (dispatch) =>{
@@ -23,6 +23,9 @@ export function selectThisItem(id) {
         id: id
     }
 }
+export function replaceSelectedItem(newId, oldId) {
+    return { type: REPLACE_ITEM, payload: {newId: newId, oldId: oldId} };
+       }
 
 export function addItem(name, image, catId, userId) {
     return (dispatch) => {
@@ -47,7 +50,7 @@ export function addItem(name, image, catId, userId) {
         .then(r => {
             if (r.ok){
                 alert("added!");
-                dispatch({ type: ADDED_ITEM })
+                dispatch({ type: ADD_ITEM})
             } 
         })
     }

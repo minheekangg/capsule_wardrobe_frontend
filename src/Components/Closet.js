@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { fetchCloset } from '../actions/closetActions'
 import ClosetItem from './ClosetItem';
 import Selection from './Selection';
+import {LoadingPage} from './misc';
 
 import { Button } from "semantic-ui-react";
 import withAuth from "../hoc/withAuth";
@@ -19,36 +20,34 @@ class Closet extends React.Component {
   }
 
   renderCloset() {
-    return this.props.items.map(e => {
-      return (
-        <div>
-          <ClosetItem
-            key={e.id}
-            image={e.image}
-            name={e.name}
-            id={e.id}
-            times_worn={e.times_worn}
-            category={e.category_id}
-          />
-        </div>
-      );
-    });
+    return (
+      <div>
+        {this.props.items.map(e => {
+          return <ClosetItem
+                key={e.id}
+                image={e.image}
+                name={e.name}
+                id={e.id}
+                times_worn={e.times_worn}
+                category_id={e.category_id}
+              />
+        })}
+      </div>
+    )
   }
   renderSelection() {
     return (
       <div>
         <h1>Selected:</h1>
-        {this.props.selectedItems.map(e => {
-          return (
-            <Selection
+        {this.props.selectedItems.map(e => {return <Selection
               key={e.id}
               image={e.image}
               name={e.name}
               id={e.id}
               times_worn={e.times_worn}
             />
-          );
-        })}
+        }
+        )}
         <Button>Outfit</Button>
       </div>
     );
@@ -62,7 +61,7 @@ class Closet extends React.Component {
         {this.props.isLoaded ? (
           this.renderCloset()
         ) : (
-          <div>"not loaded yet"</div>
+          <LoadingPage />
         )}
         {this.props.selectedItems.length > 0 ? (
           this.renderSelection()
@@ -75,7 +74,6 @@ class Closet extends React.Component {
 }
 
 function mapStateToProps(state){
-  console.log("HELP")
     return (
        { 
         user: state.user.userId,

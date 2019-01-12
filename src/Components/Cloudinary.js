@@ -11,7 +11,7 @@ const MY_CLOUD_NAME = process.env.REACT_APP_MY_CLOUD_NAME;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
 
 class Cloudinary extends React.Component {
-  state = { itemImg: "", itemName: "", itemCat: "", options: [], addingItem: true};
+  state = { itemImg: "", itemName: "", itemCat: 0, addingItem: true};
 
   componentDidMount() {
     this.props.fetchCategories()
@@ -32,14 +32,14 @@ class Cloudinary extends React.Component {
     this.setState({...this.state, itemName: event.target.value})
   }
   handleDropdownChange = event =>{
-    this.setState({ ...this.state, itemCat: event.target.textContent})
+    let foundCategory = this.props.category.find((e) => { return e.name.toLowerCase() === event.target.textContent.toLowerCase() })
+    this.setState({ itemCat: foundCategory.id}, () => {console.log(this.state.itemCat)})
   }
 
   handleFormSubmit = event =>{
     event.preventDefault()
-    let foundCategory = this.props.category.find((e) => { return e.name === this.state.itemCat.toLowerCase() })
-    this.props.addItem(this.state.itemName, this.state.itemImg, foundCategory.id, this.props.userId);
     this.setState({addingItem: false})
+    this.props.addItem(this.state.itemName, this.state.itemImg, this.state.itemCat, this.props.userId)
   }
 
   renderForm = () =>{
