@@ -3,20 +3,27 @@ import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 
-const Nav = props => {
+const Nav = (props) => {
     return <Menu pointing secondary>
-            {props.isLoggedIn ? (
-                <Fragment>
-                    <Menu.Item as={NavLink} to="/profile" name="Profile" active={props.location.pathname === '/profile'} />
-                    <Menu.Menu position="right">
-                        {/* TODO: logout */}
-                        {/* <Menu.Item to="/logout" name="Logout" onClick={logout} /> */}
-                    </Menu.Menu>
-                </Fragment>
-            ) : (
-                    <Menu.Item as={NavLink} to="/login" name="Login" active={props.location.pathname === '/login'} />
-                )}
-        </Menu>
+        {props.loggedIn ? <Fragment>
+            <Menu.Menu position="center">
+              <Menu.Item as={NavLink} to="/closet" color={"green"} name="Closet" active={props.location.pathname === "/closet"} />
+                <Menu.Item as={NavLink} to="/" color={"black"} name="Capsule Wardrobe" active={props.location.pathname === "/"} />
+              <Menu.Item as={NavLink} to="/market" color={"orange"} name="Market" active={props.location.pathname === "/market"} />
+            </Menu.Menu>
+
+            <Menu.Menu position="right">
+                <Menu.Item as={NavLink} to="/login" name="Logout" color={"grey"} active={props.location.pathname === "/login"} />
+            </Menu.Menu>
+        </Fragment> : <Menu.Item as={NavLink} to="/login" color={"grey"} name="Login" active={props.location.pathname === "/login"} />}
+      </Menu>;
 }
-const mapStateToProps = ({ user }) => ({ user })
+
+const mapStateToProps = state => {
+
+    return(
+        {loggedIn: state.user.isLoggedIn}
+    )
+}
+
 export default withRouter(connect(mapStateToProps)(Nav))

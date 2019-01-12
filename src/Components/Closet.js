@@ -1,8 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux';
+
 import { fetchCloset } from '../actions/closetActions'
 import ClosetItem from './ClosetItem';
 import Selection from './Selection';
+
 import { Button } from "semantic-ui-react";
 import withAuth from "../hoc/withAuth";
 import { NavLink } from "react-router-dom";
@@ -73,6 +75,7 @@ class Closet extends React.Component {
 }
 
 function mapStateToProps(state){
+  console.log("HELP")
     return (
        { 
         user: state.user.userId,

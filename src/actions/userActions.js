@@ -23,7 +23,9 @@ export const LoginUser = (username, password) => {
               throw response;
             }
           })
-        .then(JSONResponse => dispatch(setCurrentUser(JSONResponse.user)))
+        .then(JSONResponse => {
+          localStorage.setItem('jwt', JSONResponse.jwt);
+          dispatch(setCurrentUser(JSONResponse.user))})
           .catch(r =>
             r
               .json()
