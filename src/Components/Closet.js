@@ -116,7 +116,9 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return { fetchCategories: id => dispatch(fetchCategories(id)),fetchCloset: id => dispatch(fetchCloset(id)), createOutfits: (date, id, itemsArr) => dispatch(createOutfits(date, id, itemsArr)) };
+  return { fetchCategories: id => dispatch(fetchCategories(id)),
+    fetchCloset: id => dispatch(fetchCloset(id)), 
+    createOutfits: (date, id, itemsArr) => dispatch(createOutfits(date, id, itemsArr)) };
 }
 
 

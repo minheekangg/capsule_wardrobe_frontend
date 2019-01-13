@@ -4,18 +4,32 @@ import axios from 'axios'
 export function fetchOutfits(id) {
   return dispatch => {
       dispatch({ type: CREATING_OUTFITS });
-      return fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${id}/outfits`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        "content-type": "application/json",
-        "accept": "application/json"
-      }
-    })
-      .then(r => r.json())
-      .then(outfits => {
-          dispatch({ type: FETCHED_OUTFITS, payload: outfits });
-      });
+    return (
+      axios({
+        method: "GET",
+        baseURL: `${
+          process.env.REACT_APP_API_ENDPOINT
+        }/api/v1/users/${id}/outfits`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          // "Access-Control-Allow-Origin": "*"
+        }
+      })
+    )
+        //   return fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${id}/outfits`, {
+        //   method: "GET",
+        //   headers: {
+        //     Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        //     'Content-Type': 'application/json',
+        //     'Accept': 'application/json'
+        //   }
+        // })
+        // .then(r => r.json())
+        .then(outfits => {
+          dispatch({ type: FETCHED_OUTFITS, payload: outfits.data });
+        })
   };
 }
 
@@ -42,6 +56,7 @@ export const createOutfits = (date, userId, itemsArr) => {
       })
       .then(r =>  {
         if (r.statusText === "Created"){
+          alert("created!")
           const newOutfitId = r.data.id 
           return addItemsToOutfit(newOutfitId, currItemArr);
         }
