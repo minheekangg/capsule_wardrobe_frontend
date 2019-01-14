@@ -33,7 +33,7 @@
 }
 
 .loginForm{
-  /* background-color: #282c34; */
+  
   margin-top: 15vh;
   text-align: center;
   align-items: center;
@@ -52,4 +52,12 @@
 
 .loginbutton{
   font-size: 20px
+}
+
+.navbarCss{
+  align-items: center;
+ /* background-color: #282c34; */
+ position: absolute;
+ width: 80%;
+ margin-left:25%;
 }

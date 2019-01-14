@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import './App.css';
 
-import LandingPage from './components/LandingPage'
+import Welcome from './components/welcome'
 import Market from './components/Market'
 import Closet from './components/Closet'
 import NavBar from './components/nav'
@@ -18,7 +18,7 @@ class App extends Component {
         <NavBar />
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/welcome" />} />
-          <Route exact path="/welcome" component={LandingPage} />
+          <Route exact path="/welcome" component={Welcome} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/closet" component={Closet} />
           <Route exact path="/market" component={Market} />

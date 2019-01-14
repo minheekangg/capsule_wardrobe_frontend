@@ -57,7 +57,7 @@ class Login extends React.Component{
     }
     
     render(){
-        return this.props.isLoggedIn ? <Redirect to="/" /> : this.renderLoginForm()
+        return this.props.isLoggedIn ? <Redirect to="/welcome" /> : this.renderLoginForm()
     }
 }
 

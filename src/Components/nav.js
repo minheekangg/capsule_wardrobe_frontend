@@ -1,45 +1,40 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { NavLink, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 
 const NavBar = (props) => {
     return props.loggedIn ? <Navbar>
-        <Navbar.Header>
-            <Navbar.Brand>
-                <a href="#home">React-Bootstrap</a>
-            </Navbar.Brand>
-        </Navbar.Header>
-        <Nav>
-            <NavItem eventKey={1} href="#">
-                Link
-    </NavItem>
-            <NavItem eventKey={2} href="#">
-                Link
-    </NavItem>
-            <NavItem eventKey={2} href="#">
-    </NavItem>
+        <Nav className="navbarCss">
+              <NavItem href="/closet">
+                <div className="navText" style={{ color: "#1D4306" }}>
+                  Closet{" "}
+                </div>
+              </NavItem>
+              <Navbar.Header style={{paddingLeft: "50px", "paddingRight": "50px"}}>
+                <Navbar.Brand>
+                  <a href="/">CAPSULE</a>
+                </Navbar.Brand>
+              </Navbar.Header>
+              <NavItem href="/market">
+                <div className="navText" style={{ color: "#C95D2D" }}>
+                  Market
+                </div>
+              </NavItem>
         </Nav>
-    </Navbar> : null
-    
-   }
-   
-   const mapStateToProps = state => {return {loggedIn: state.user.isLoggedIn}}
-   
-   export default withRouter(connect(mapStateToProps)(NavBar))
-   
-{/* const Nav = (props) => {
-    return <Menu pointing secondary>
-            {props.loggedIn ? <Fragment>
-                <Menu.Menu width={5}>
-                    <Menu.Item as={NavLink} to="/closet" color={"green"} name="Closet" active={props.location.pathname === "/closet"} />
-                    <Menu.Item as={NavLink} to="/" color={"black"} name="Capsule Wardrobe" active={props.location.pathname === "/"} />
-                    <Menu.Item as={NavLink} to="/market" color={"orange"} name="Market" active={props.location.pathname === "/market"} />
-                </Menu.Menu>
+      </Navbar> : null; 
+}
+        
+       
+   const mapStateToProps = state => {
+       return {
+           loggedIn: state.user.isLoggedIn, 
+     username: state.user.username
+  }
+}
+ 
+export default withRouter(connect(mapStateToProps)(NavBar))
 
-                <Menu.Menu position="right">
-                    <Menu.Item as={NavLink} to="/login" name="Logout" color={"grey"} active={props.location.pathname === "/login"} />
-                </Menu.Menu>
-            </Fragment> : null
-     </Menu>
-} */}
+    //  <Navbar.Text pullRight>props.username</Navbar.Text>
+     
+   
