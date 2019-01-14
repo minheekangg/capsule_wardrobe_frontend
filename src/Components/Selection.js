@@ -1,12 +1,9 @@
 import React from 'react'
-import { Card, Image } from "semantic-ui-react";
+// import { Card, Image } from "semantic-ui-react";
 
 const Selection = (props) => {
-    return (
-        <Card style={{size: "50%"}} >
-            <Image src={props.image} />
-        </Card>
-    )
+    return <img className="selected-item" src={props.image} alt={props.id} />
+     
 }
 
 export default Selection

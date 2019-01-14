@@ -2,6 +2,7 @@ import React from 'react'
 // import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { selectThisItem, replaceSelectedItem } from "../actions/closetActions";
+import { Col, Thumbnail } from "react-bootstrap";
 
 const ClosetItem = props => {
 
@@ -17,27 +18,15 @@ const ClosetItem = props => {
         }
     }
 
-    return (
-        <button onClick={handleSelectItem} >
-            <image src={props.image} />
-            <div>
-                <div>{props.name}</div>
-                <div>
-                    <span className='date'>Times Worn: {props.times_worn}</span>
-                </div>
-            </div>
-        </button>
-    )
+    return <Col className="closet-item" xs={6} md={4} onClick={handleSelectItem}>
+          <Thumbnail className="item-img" src={props.image} alt={props.name}>
+        <div className="item-info">
+            <h4>{props.name}</h4>
+            <p>Times Worn: {props.times_worn}</p>
+        </div>
+          </Thumbnail>
+      </Col>;
 }
-/* <Card onClick={handleSelectItem} >
-    <Image src={props.image} />
-    <Card.Content>
-        <Card.Header>{props.name}</Card.Header>
-        <Card.Meta>
-            <span className='date'>Times Worn: {props.times_worn}</span>
-        </Card.Meta>
-    </Card.Content>
-</Card> */
 
 
 function mapStateToProps(state){

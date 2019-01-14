@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import {connect} from 'react-redux';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,7 +11,7 @@ import Category from './Category';
 import Selection from './Selection';
 import {LoadingPage} from './misc';
 
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Grid, Row } from "react-bootstrap";
 import withAuth from "../hoc/withAuth";
 import { NavLink } from "react-router-dom";
 
@@ -37,21 +37,17 @@ class Closet extends React.Component {
 
   renderCloset() {
     return (
-      <div>
-        <Category category={this.props.categories}/>
+      <Fragment>
+      <Category category={this.props.categories}/>
+      <Grid>
+          <Row className="closet-container">
         {this.props.items.map(item => {
-          return (
-            <ClosetItem
-              key={item.id}
-              image={item.image}
-              name={item.name}
-              id={item.id}
-              times_worn={item.times_worn}
-              category_id={item.category_id}
-            />
-          );
-        })}
-      </div>
+          return <ClosetItem key={item.id} image={item.image} name={item.name} id={item.id} times_worn={item.times_worn} category_id={item.category_id} />
+          })
+        }
+        </Row>
+      </Grid>
+      </Fragment>
     );
   }
   renderSelection() {
@@ -59,17 +55,19 @@ class Closet extends React.Component {
       <div>
         <Form onSubmit={this.handleOutfitSubmit}>
           <h1>Selected:</h1>
+          <div clasName="closet-container">
           {this.props.selectedItems.map(selected => {
             return (
               <Selection
-                key={selected.id}
-                image={selected.image}
-                name={selected.name}
-                id={selected.id}
-                times_worn={selected.times_worn}
+              key={selected.id}
+              image={selected.image}
+              name={selected.name}
+              id={selected.id}
+              times_worn={selected.times_worn}
               />
-            );
-          })}
+              );
+            })}
+            </div>
           <DatePicker
             selected={this.state.date}
             onChange={this.handleDateChange}
