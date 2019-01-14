@@ -2,8 +2,7 @@ import React from 'react'
 
 import { addItem } from "../actions/closetActions";
 import { connect } from 'react-redux';
-import { categoryOptions } from "../types";
-import { Form, Image } from 'semantic-ui-react'
+import { Button, FormGroup, ControlLabel, FormControl, Image} from "react-bootstrap";
 import withAuth from "../hoc/withAuth";
 import { Redirect } from "react-router";
 
@@ -14,7 +13,6 @@ class Cloudinary extends React.Component {
   state = { itemImg: "", itemName: "", itemCat: 0, addingItem: true};
 
   componentDidMount() {
-    
       window.cloudinary.createUploadWidget(
       {
         cloudName: MY_CLOUD_NAME,
@@ -22,7 +20,9 @@ class Cloudinary extends React.Component {
       },
       (error, result) => {
         if (result && result.event === "success") {
-          this.setState({ itemImg: result.info.url })
+          this.setState({
+            itemImg: `http://res.cloudinary.com/dly4mslmg/image/upload/w_300,h_300,c_lpad,b_white/${result.info.path}`
+          });
         }
       }
     ).open()
@@ -32,8 +32,10 @@ class Cloudinary extends React.Component {
     this.setState({...this.state, itemName: event.target.value})
   }
   handleDropdownChange = event =>{
-    let foundCategory = this.props.category.find((e) => { return e.name.toLowerCase() === event.target.textContent.toLowerCase() })
-    this.setState({ itemCat: foundCategory.id}, () => {console.log(this.state.itemCat)})
+    if (event.target.value !== "" && this.props.category.length > 0) {
+      let foundCategory = this.props.category.find((e) => { return e.name.toLowerCase() === event.target.value.toLowerCase() })
+      this.setState({ itemCat: foundCategory.id}, () => {console.log(this.state.itemCat)})
+    }
   }
 
   handleFormSubmit = event =>{
@@ -43,14 +45,31 @@ class Cloudinary extends React.Component {
   }
 
   renderForm = () =>{
-    return <Form onSubmit={e => this.handleFormSubmit(e)}>
-          <Image src={this.state.itemImg} alt="test" />
-      <Form.Group widths="equal" >
-        <Form.Select fluid label="Category" name="category" options={categoryOptions} placeholder="Category" onChange={this.handleDropdownChange}/>
-        <Form.Input fluid label="Name" name="photoName" placeholder="Name" value={this.state.itemName} onChange={this.handleNameChange} />
-      </Form.Group>
-        <Form.Button>Submit</Form.Button>
-      </Form>;
+    return <form onSubmit={e => this.handleFormSubmit(e)}>
+          <Image src={this.state.itemImg} alt="item to add" />
+          <FormGroup controlId="formControlsSelect">
+            <ControlLabel>Add information about your piece!</ControlLabel>
+            <FormControl componentClass="select" placeholder="select" onChange={this.handleDropdownChange}>
+              <option value="">Select a category</option>
+              <option value="Activewear">Activewear</option>
+              <option value="Coats">Coats</option>
+              <option value="Dresses">Dresses</option>
+              <option value="Jackets">Jackets</option>
+              <option value="Bottoms">Bottoms</option>
+              <option value="Sweatshirts">Sweatshirts</option>
+              <option value="Tops">Tops</option>
+              <option value="Shoes">Shoes</option>
+              <option value="Misc">Misc</option>
+            </FormControl>
+            <FormControl
+              type="text"
+              value={this.state.itemName}
+              placeholder="Enter Name"
+              onChange={this.handleNameChange}
+            />
+          </FormGroup>
+      <Button type="submit" >Submit</Button>
+      </form>;
   }
 
 
@@ -67,6 +86,7 @@ class Cloudinary extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state)
   return {category: state.category.category, userId: state.user.userId, isLoaded: state.closet.isLoaded}
 }
 

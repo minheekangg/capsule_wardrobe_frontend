@@ -13,7 +13,7 @@ import {LoadingPage} from './misc';
 
 import { Button, Form, Grid, Row } from "react-bootstrap";
 import withAuth from "../hoc/withAuth";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Closet extends React.Component {
   state = {
@@ -38,8 +38,10 @@ class Closet extends React.Component {
   renderCloset() {
     return (
       <Fragment>
-      <Category category={this.props.categories}/>
       <Grid>
+        <div className="category-menu">
+      <Category category={this.props.categories}/>
+        </div>
           <Row className="closet-container">
         {this.props.items.map(item => {
           return <ClosetItem key={item.id} image={item.image} name={item.name} id={item.id} times_worn={item.times_worn} category_id={item.category_id} />
@@ -83,7 +85,7 @@ class Closet extends React.Component {
     console.log("inside closet, props are", this.props);
     return (
       <div>
-        <Button as={NavLink} to="/additem" content="Add item" />
+        <Link to="/additem" content="Add item" > Add more! </Link>
         {this.props.isLoaded ? this.renderCloset() : <LoadingPage />}
         {this.props.selectedItems.length > 0 ? (
           this.renderSelection()

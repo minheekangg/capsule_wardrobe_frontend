@@ -11,7 +11,7 @@ export default function itemReducer(state = initialState, action) {
     console.log("%c itemReducer", "color: purple", state, action);
     switch (action.type) {
         case ADD_ITEM:
-            return {...state, items: [...state.items, action.payload]}
+            return {...state, isLoaded: true, items: [...state.items, action.payload]}
         case FETCHED_CLOSET:
             return { ...state, items: action.payload, isLoaded: true }
         case FETCHING_CLOSET:

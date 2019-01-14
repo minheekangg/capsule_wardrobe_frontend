@@ -17,7 +17,8 @@ const ClosetItem = props => {
             props.selectThisItem(props.id) 
         }
     }
-
+    
+    
     return <Col className="closet-item" xs={6} md={4} onClick={handleSelectItem}>
           <Thumbnail className="item-img" src={props.image} alt={props.name}>
         <div className="item-info">
