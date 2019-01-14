@@ -1,6 +1,5 @@
 import {AUTHENTICATING_USER, SET_CURRENT_USER, FAILED_LOGIN} from '../types'
 
-console.log(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/`);
 export const LoginUser = (username, password) => {
     return (dispatch) =>{
       dispatch(authenticatingUser())

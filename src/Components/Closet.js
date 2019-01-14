@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { fetchCloset } from '../actions/closetActions'
+import { fetchCloset, increaseTimesWorn } from "../actions/closetActions";
 import { fetchCategories } from "../actions/categoryActions";
 import { createOutfits } from '../actions/outfitActions'
 import ClosetItem from './ClosetItem';
@@ -35,6 +35,7 @@ class Closet extends React.Component {
   handleOutfitSubmit = e => {
     e.preventDefault()
     this.props.createOutfits(formatDate(this.state.date), this.props.user, this.props.selectedItems);
+    this.props.increaseTimesWorn(this.props.selectedItems, this.props.user)
   }
 
   renderCloset() {
@@ -89,9 +90,8 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return { fetchCategories: id => dispatch(fetchCategories(id)),
-    fetchCloset: id => dispatch(fetchCloset(id)), 
-    createOutfits: (date, id, itemsArr) => dispatch(createOutfits(date, id, itemsArr)) };
+  return { fetchCategories: id => dispatch(fetchCategories(id)), fetchCloset: id => dispatch(fetchCloset(id)), createOutfits: (date, id, itemsArr) => dispatch(createOutfits(date, id, itemsArr)), increaseTimesWorn: (itemsArr, userId) => dispatch(increaseTimesWorn(itemsArr, userId)) 
+  };
 }
 
 

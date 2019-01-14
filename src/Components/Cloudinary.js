@@ -49,7 +49,7 @@ class Cloudinary extends React.Component {
           <Image src={this.state.itemImg} alt="item to add" />
           <FormGroup controlId="formControlsSelect">
             <ControlLabel>Add information about your piece!</ControlLabel>
-            <FormControl componentClass="select" placeholder="select" onChange={this.handleDropdownChange}>
+            <select placeholder="select" onChange={this.handleDropdownChange}>
               <option value="">Select a category</option>
               <option value="Activewear">Activewear</option>
               <option value="Coats">Coats</option>
@@ -60,7 +60,7 @@ class Cloudinary extends React.Component {
               <option value="Tops">Tops</option>
               <option value="Shoes">Shoes</option>
               <option value="Misc">Misc</option>
-            </FormControl>
+            </select>
             <FormControl
               type="text"
               value={this.state.itemName}

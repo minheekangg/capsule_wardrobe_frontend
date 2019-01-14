@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import withAuth from "../hoc/withAuth";
 import { fetchOutfits } from "../actions/outfitActions";
-import {Carousel, Caption, Item, Image} from "react-bootstrap";
+import {Image} from "react-bootstrap";
 import { fetchCloset } from "../actions/closetActions";
 
 class Outfit extends React.Component {

@@ -75,8 +75,5 @@ export const addItemsToOutfit= (outfitId, itemArr) => {
   })
   alert("created!")
 }
-    // return (dispatch) => {
-    //   dispatch({TYPE: CREATED_OUTFIT})
-    // }
 
 

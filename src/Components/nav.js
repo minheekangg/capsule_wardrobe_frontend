@@ -6,10 +6,10 @@ import { Navbar, Nav, NavItem } from "react-bootstrap";
 const NavBar = (props) => {
     return props.loggedIn ? <Navbar>
         <Nav className="navbarCss">
-              <NavItem href="/closet">
-                <div className="navText" style={{ color: "#1D4306" }}>
-                  Closet{" "}
-                </div>
+              <NavItem href="/closet" >
+                <p className="navText" style={{ color: "#1D4306" }}>
+                  Closet
+                </p>
               </NavItem>
               <Navbar.Header style={{paddingLeft: "50px", "paddingRight": "50px"}}>
                 <Navbar.Brand>
@@ -17,9 +17,9 @@ const NavBar = (props) => {
                 </Navbar.Brand>
               </Navbar.Header>
               <NavItem href="/market">
-                <div className="navText" style={{ color: "#C95D2D" }}>
+                <p className="navText" style={{ color: "#C95D2D" }}>
                   Market
-                </div>
+                </p>
               </NavItem>
         </Nav>
       </Navbar> : null; 

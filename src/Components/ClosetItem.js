@@ -31,7 +31,6 @@ const ClosetItem = props => {
 
 
 function mapStateToProps(state){
-    console.log("SELECTED ITEMS FROM CLOSET ITEM", state.closet.selectedItems)
     return {
         selected: state.closet.selectedItems
     }

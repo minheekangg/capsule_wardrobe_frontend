@@ -1,4 +1,4 @@
-import { FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, ADD_ITEM, REPLACE_ITEM } from "../types";
+import { FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, ADD_ITEM, REPLACE_ITEM, INCREASE_TIMES_WORN } from "../types";
 import axios from "axios";
 
 export function fetchCloset(id){
@@ -67,3 +67,25 @@ export function addItem(name, image, catId, userId) {
 
     }
 }
+export function increaseTimesWorn(itemsArr, userId) {
+    return dispatch => {
+        dispatch({ type: FETCHING_CLOSET })
+        itemsArr.forEach((i)=> {
+        return axios({
+            method: "patch",
+            baseURL: `${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${userId}/items/${i.id}`,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            data: { item: {times_worn: (i.times_worn + 1)}}
+        }).then(r => {
+            if (r.statusText === "Created") {
+                dispatch({ type: INCREASE_TIMES_WORN, payload: r.data })
+            }
+        })
+    })
+}
+}
+   
