@@ -13,20 +13,10 @@ export function fetchOutfits(id) {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           "Content-Type": "application/json",
-          Accept: "application/json",
-          // "Access-Control-Allow-Origin": "*"
+          Accept: "application/json"
         }
       })
     )
-        //   return fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${id}/outfits`, {
-        //   method: "GET",
-        //   headers: {
-        //     Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        //     'Content-Type': 'application/json',
-        //     'Accept': 'application/json'
-        //   }
-        // })
-        // .then(r => r.json())
         .then(outfits => {
           dispatch({ type: FETCHED_OUTFITS, payload: outfits.data });
         })

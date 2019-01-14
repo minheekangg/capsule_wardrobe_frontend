@@ -2,7 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router";
 import { LoginUser } from "../actions/userActions";
-import { Button, Form, Segment, Message } from "semantic-ui-react";
+import '../App.css'
+import {  FormGroup, HelpBlock,  FormControl, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class Login extends React.Component{
     state = {
@@ -20,40 +22,42 @@ class Login extends React.Component{
         this.setState({ username: "", password: "" });
     }
 
+
+
+    renderLoginForm = () => {
+        return <div>
+            <Row className="show-grid">
+              <Col xs={6} md={4} />
+              <Col xs={6} md={4}>
+                <form onSubmit={this.handleLoginSubmit} className="loginForm">
+                  <h1 className="loginHeader">CAPSULE</h1>
+                  <FormControl.Feedback />
+                  <HelpBlock error header={this.props.failedLogin ? this.props.error : null} />
+                  <FormGroup widths="equal" className="loginInput" loading={this.props.authenticatingUser} error={this.props.failedLogin}>
+                    <FormControl type="text" label="Text" name="username" placeholder="Enter text" onChange={this.handleChange} value={this.state.username} />
+                    <FormControl type="password" label="password" placeholder="password" name="password" onChange={this.handleChange} value={this.state.password} />
+                  </FormGroup>
+                  <div className="loginbutton">
+                    <Col md={6}>
+                      <button style={{ color: "#1D4306", border: "none" }}>
+                        Sign In
+                      </button>
+                    </Col>
+                    <Col md={6}>
+                      <Link to="./login" style={{ color: "#C95D2D" }}>
+                        Sign Up
+                      </Link>
+                    </Col>
+                  </div>
+                </form>
+              </Col>
+              <Col xs={6} md={4} />
+            </Row>
+          </div>;
+    }
+    
     render(){
-        return this.props.isLoggedIn ? (
-            <Redirect to="/" />
-        ) : (
-                <Segment>
-                    <Form
-                        onSubmit={this.handleLoginSubmit}
-                        size="mini"
-                        key="mini"
-                        loading={this.props.authenticatingUser}
-                        error={this.props.failedLogin}
-                    >
-                        <Message error header={this.props.failedLogin ? this.props.error : null} />
-                        <Form.Group widths="equal">
-                            <Form.Input
-                                label="username"
-                                placeholder="username"
-                                name="username"
-                                onChange={this.handleChange}
-                                value={this.state.username}
-                            />
-                            <Form.Input
-                                type="password"
-                                label="password"
-                                placeholder="password"
-                                name="password"
-                                onChange={this.handleChange}
-                                value={this.state.password}
-                            />
-                        </Form.Group>
-                        <Button type="submit">Login</Button>
-                    </Form>
-                </Segment>
-        )
+        return this.props.isLoggedIn ? <Redirect to="/" /> : this.renderLoginForm()
     }
 }
 

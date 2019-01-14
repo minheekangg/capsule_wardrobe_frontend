@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Image } from "semantic-ui-react";
+// import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { selectThisItem, replaceSelectedItem } from "../actions/closetActions";
 
@@ -18,17 +18,27 @@ const ClosetItem = props => {
     }
 
     return (
-        <Card onClick={handleSelectItem} >
-            <Image src={props.image} />
-            <Card.Content>
-                <Card.Header>{props.name}</Card.Header>
-                <Card.Meta>
+        <button onClick={handleSelectItem} >
+            <image src={props.image} />
+            <div>
+                <div>{props.name}</div>
+                <div>
                     <span className='date'>Times Worn: {props.times_worn}</span>
-                </Card.Meta>
-            </Card.Content>
-        </Card>
+                </div>
+            </div>
+        </button>
     )
 }
+/* <Card onClick={handleSelectItem} >
+    <Image src={props.image} />
+    <Card.Content>
+        <Card.Header>{props.name}</Card.Header>
+        <Card.Meta>
+            <span className='date'>Times Worn: {props.times_worn}</span>
+        </Card.Meta>
+    </Card.Content>
+</Card> */
+
 
 function mapStateToProps(state){
     console.log("SELECTED ITEMS FROM CLOSET ITEM", state.closet.selectedItems)

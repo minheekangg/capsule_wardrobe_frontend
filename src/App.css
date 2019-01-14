@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: "Arial Black", Times, serif;
 }
 
 .App-logo {
@@ -29,4 +30,26 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.loginForm{
+  /* background-color: #282c34; */
+  margin-top: 15vh;
+  text-align: center;
+  align-items: center;
+  padding: 10vh;
+
+}
+
+.loginInput{
+  margin-top: 8vh;
+  margin-bottom: 5vh;
+}
+
+.loginHeader{
+  margin-bottom: 5vh;
+}
+
+.loginbutton{
+  font-size: 20px
 }

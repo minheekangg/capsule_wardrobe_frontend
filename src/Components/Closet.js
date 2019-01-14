@@ -11,7 +11,7 @@ import Category from './Category';
 import Selection from './Selection';
 import {LoadingPage} from './misc';
 
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form } from "react-bootstrap";
 import withAuth from "../hoc/withAuth";
 import { NavLink } from "react-router-dom";
 
@@ -25,10 +25,6 @@ class Closet extends React.Component {
     this.props.fetchCategories(this.props.user);
   }
 
-  addItemClick = () => {
-    console.log("clicked");
-  };
-
   handleDateChange = (date) => {
     this.setState({
       date: date
@@ -36,7 +32,6 @@ class Closet extends React.Component {
   }
 
   handleOutfitSubmit = () => {
-    // console.log("userid", this.props.user, "date", formatDate(this.state.date), "selected", this.props.selectedItems)
     this.props.createOutfits(formatDate(this.state.date), this.props.user, this.props.selectedItems);
   }
 
@@ -44,15 +39,15 @@ class Closet extends React.Component {
     return (
       <div>
         <Category category={this.props.categories}/>
-        {this.props.items.map(e => {
+        {this.props.items.map(item => {
           return (
             <ClosetItem
-              key={e.id}
-              image={e.image}
-              name={e.name}
-              id={e.id}
-              times_worn={e.times_worn}
-              category_id={e.category_id}
+              key={item.id}
+              image={item.image}
+              name={item.name}
+              id={item.id}
+              times_worn={item.times_worn}
+              category_id={item.category_id}
             />
           );
         })}
@@ -64,14 +59,14 @@ class Closet extends React.Component {
       <div>
         <Form onSubmit={this.handleOutfitSubmit}>
           <h1>Selected:</h1>
-          {this.props.selectedItems.map(e => {
+          {this.props.selectedItems.map(selected => {
             return (
               <Selection
-                key={e.id}
-                image={e.image}
-                name={e.name}
-                id={e.id}
-                times_worn={e.times_worn}
+                key={selected.id}
+                image={selected.image}
+                name={selected.name}
+                id={selected.id}
+                times_worn={selected.times_worn}
               />
             );
           })}
@@ -103,7 +98,6 @@ class Closet extends React.Component {
 }
 
 function mapStateToProps(state){
-  console.log(state)
     return (
        { 
         user: state.user.userId,

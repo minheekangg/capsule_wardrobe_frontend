@@ -5,7 +5,7 @@ import './App.css';
 import LandingPage from './components/LandingPage'
 import Market from './components/Market'
 import Closet from './components/Closet'
-import Nav from './components/nav'
+import NavBar from './components/nav'
 import Login from './components/login'
 import Cloudinary from './components/Cloudinary'
 import Outfit from './components/Outfit'
@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <Nav />
+        <NavBar />
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/welcome" />} />
           <Route exact path="/welcome" component={LandingPage} />
