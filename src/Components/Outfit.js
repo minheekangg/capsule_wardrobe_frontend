@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import withAuth from "../hoc/withAuth";
 import { fetchOutfits } from "../actions/outfitActions";
-import { Card, Image } from "semantic-ui-react";
+import {Carousel, Caption, Item, Image} from "react-bootstrap";
 import { fetchCloset } from "../actions/closetActions";
 
 class Outfit extends React.Component {
@@ -11,22 +11,31 @@ class Outfit extends React.Component {
      this.props.fetchCloset(this.props.userId)
     }
 
+        // return <Carousel> {[1,2,3,4,5].map((e)=> {return <Carousel.Item>
+        //         <img width={900} height={500} alt="900x500" src="/carousel.png" />
+        //         <Carousel.Caption>
+        //             <h3>First slide label</h3>
+        //             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        //         </Carousel.Caption>
+        //     </Carousel.Item>}
+        // )}
+        // </Carousel>
     renderOutfits = () => {
-        console.log(this.props.outfits)
-        // debugger
-        // <Card.Group itemsPerRow={4} items={"fsdfd"} />
-        return this.props.outfits.map(o=>{
-            return <Card key={o.id}>
-                <Card.Header key={o.id}>{o.day}</Card.Header>
-                {this.renderEachItemCollection(o.items, o.day)}
-              </Card>;
-                  
-            })
-        }
-
+        const sortedOutfitsByDate = this.props.outfits.sort(function (a, b) {
+            return a.day - b.day;
+        })
+        return sortedOutfitsByDate.map(o => {
+          return <div className="outfit-container" key={o.id}>
+              <h5 key={o.id}>{o.day}</h5>
+              {this.renderEachItemCollection(o.items, o.day)}
+            </div>;
+        });
+    }
+   
+        
     renderEachItemCollection = (itemsArr, outfitDay) => {
         return itemsArr.map(i=>{
-            return <Image key={(outfitDay + i.id)} src={i.image}  />
+            return <Image key={(outfitDay + i.id)} src={i.image}  style={{height: "20vh", width: "20vh"}} />
         })
 
     }
@@ -34,7 +43,7 @@ class Outfit extends React.Component {
     render(){
         return (
             <div>
-                { this.props.outfits.length > 0 ? this.renderOutfits() : null }
+            { this.props.outfits.length > 0 ? this.renderOutfits() : null }
             </div>
         )
     }

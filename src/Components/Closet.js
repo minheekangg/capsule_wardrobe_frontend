@@ -13,7 +13,8 @@ import {LoadingPage} from './misc';
 
 import { Button, Form, Grid, Row } from "react-bootstrap";
 import withAuth from "../hoc/withAuth";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+
 
 class Closet extends React.Component {
   state = {
@@ -31,7 +32,8 @@ class Closet extends React.Component {
     });
   }
 
-  handleOutfitSubmit = () => {
+  handleOutfitSubmit = e => {
+    e.preventDefault()
     this.props.createOutfits(formatDate(this.state.date), this.props.user, this.props.selectedItems);
   }
 
@@ -53,33 +55,20 @@ class Closet extends React.Component {
     );
   }
   renderSelection() {
-    return (
-      <div>
+    return <div>
         <Form onSubmit={this.handleOutfitSubmit}>
           <h1>Selected:</h1>
           <div clasName="closet-container">
-          {this.props.selectedItems.map(selected => {
-            return (
-              <Selection
-              key={selected.id}
-              image={selected.image}
-              name={selected.name}
-              id={selected.id}
-              times_worn={selected.times_worn}
-              />
-              );
+            {this.props.selectedItems.map(selected => {
+              return <Selection key={selected.id} image={selected.image} name={selected.name} id={selected.id} times_worn={selected.times_worn} />;
             })}
-            </div>
-          <DatePicker
-            selected={this.state.date}
-            onChange={this.handleDateChange}
-          />
-          <Button>Outfit</Button>
+          </div>
+          <DatePicker selected={this.state.date} onChange={this.handleDateChange} />
+            <Button type="submit">Outfit</Button>
         </Form>
-      </div>
-    );
+      </div>;
   }
-  // <Button as={NavLink} to='./outfits'>Outfit</Button>
+
 
   render() {
     console.log("inside closet, props are", this.props);

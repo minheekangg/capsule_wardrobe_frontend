@@ -89,6 +89,17 @@
   margin-right: -20vh;
 }
 
+.outfit-container{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  justify-content: flex-start;
+  /* background-color: green; */
+  padding: 2vh;
+  max-height: 25vh;
+}
+
 
 .closet-category{
   position: absolute;

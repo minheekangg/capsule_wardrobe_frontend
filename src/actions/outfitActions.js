@@ -74,6 +74,7 @@ export const addItemsToOutfit= (outfitId, itemArr) => {
     })
   })
   return (dispatch) => {
+    debugger
     dispatch({TYPE: CREATED_OUTFIT})
   }
 }
