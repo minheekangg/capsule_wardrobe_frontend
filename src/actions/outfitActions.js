@@ -24,7 +24,6 @@ export function fetchOutfits(id) {
 }
 
 export const createOutfits = (date, userId, itemsArr) => {
-  console.log(date, userId, itemsArr)
   const currItemArr = itemsArr
     return dispatch => {
      dispatch({ type: CREATING_OUTFITS });
@@ -46,10 +45,11 @@ export const createOutfits = (date, userId, itemsArr) => {
       })
       .then(r =>  {
         if (r.statusText === "Created"){
-          alert("created!")
           const newOutfitId = r.data.id 
           return addItemsToOutfit(newOutfitId, currItemArr);
         }
+      }).then(r => {
+        dispatch({ type: CREATED_OUTFIT })
       })
     }
 }
@@ -73,10 +73,10 @@ export const addItemsToOutfit= (outfitId, itemArr) => {
       }
     })
   })
-  return (dispatch) => {
-    debugger
-    dispatch({TYPE: CREATED_OUTFIT})
-  }
+  alert("created!")
 }
+    // return (dispatch) => {
+    //   dispatch({TYPE: CREATED_OUTFIT})
+    // }
 
 

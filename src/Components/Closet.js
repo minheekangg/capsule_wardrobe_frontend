@@ -74,28 +74,18 @@ class Closet extends React.Component {
     console.log("inside closet, props are", this.props);
     return (
       <div>
+      {this.props.hasOutfits ? <Redirect to='./outfits'/> : <div>
         <Link to="/additem" content="Add item" > Add more! </Link>
-        {this.props.isLoaded ? this.renderCloset() : <LoadingPage />}
-        {this.props.selectedItems.length > 0 ? (
-          this.renderSelection()
-        ) : (
-          <div>"Please select items to wear today!"</div>
-        )}
-      </div>
-    );
+          {this.props.isLoaded ? this.renderCloset() : <LoadingPage />}
+          {this.props.selectedItems.length > 0 ? this.renderSelection() : <div>"Please select items to wear today!"</div>}
+        </div>
+      }
+    </div> )
   }
 }
 
 function mapStateToProps(state){
-    return (
-       { 
-        user: state.user.userId,
-        items: state.closet.items,
-        isLoaded: state.closet.isLoaded,
-        selectedItems: state.closet.selectedItems,
-        categories: state.category.category
-        }
-    )
+    return { user: state.user.userId, items: state.closet.items, isLoaded: state.closet.isLoaded, selectedItems: state.closet.selectedItems, categories: state.category.category, hasOutfits: state.outfit.outfitsLoaded };
 }
 
 function mapDispatchToProps(dispatch) {

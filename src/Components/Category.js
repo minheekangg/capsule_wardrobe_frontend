@@ -4,7 +4,7 @@ import React from 'react'
 const Category = props => {
   const category = () => {
       return <ul> {props.category.map( c => {
-          return (<li>{c.name}</li>) 
+          return (<li key={c.name}>{c.name}</li>) 
       })
       }</ul>
     }
