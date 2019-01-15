@@ -89,6 +89,14 @@
   margin-right: -20vh;
 }
 
+.category-item{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
 .outfit-container{
   position: relative;
   display: flex;

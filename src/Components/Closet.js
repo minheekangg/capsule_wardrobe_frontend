@@ -60,7 +60,6 @@ class Closet extends React.Component {
   }
 
   renderCloset() {
-    const sorted = sortByCategory(this.props.items);
     return (
       <Fragment>
         <Grid>
@@ -71,7 +70,7 @@ class Closet extends React.Component {
             />
           </div>
           <Row className="closet-container">
-            <ClosetItem items={sorted} handleSelectItem={this.handleSelectItem} />
+            <ClosetItem items={this.props.items} handleSelectItem={this.handleSelectItem} category={this.props.categories} />
           </Row>
         </Grid>
       </Fragment>
