@@ -1,4 +1,12 @@
-import { FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, ADD_ITEM, REPLACE_ITEM, INCREASE_TIMES_WORN } from "../types";
+import {
+  FETCHED_CLOSET,
+  FETCHING_CLOSET,
+  SELECT_ITEM,
+  ADD_ITEM,
+  REPLACE_ITEM,
+  INCREASE_TIMES_WORN,
+  DESELECT_ITEM
+} from "../types";
 import axios from "axios";
 
 export function fetchCloset(id){
@@ -28,7 +36,14 @@ export function fetchCloset(id){
 export function selectThisItem(id) {
     return {
         type: SELECT_ITEM,
-        id: id
+        payload: id
+    }
+}
+
+export function deselectThisItem(id) {
+    return {
+        type: DESELECT_ITEM,
+        payload: id
     }
 }
 export function replaceSelectedItem(newId, oldId) {

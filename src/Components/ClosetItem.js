@@ -24,6 +24,12 @@ const ClosetItem = props => {
         <div className="item-info">
             <h4>{props.name}</h4>
             <p>Times Worn: {props.times_worn}</p>
+                <Col md={6}>
+                    <button style={{ color: "#1D4306", border: 'none', width:"12vh", "marginLeft": "-4vh" }}> Donate </button>
+                </Col>
+                <Col md={6}>
+                    <button style={{ color: "#C95D2D", width: "12vh","marginRight": "4vh"}}> Sell</button>
+                </Col>
         </div>
           </Thumbnail>
       </Col>;

@@ -39,6 +39,7 @@ class Closet extends React.Component {
   }
 
   renderCloset() {
+    const sorted = sortByCategory(this.props.items)
     return (
       <Fragment>
       <Grid>
@@ -46,21 +47,22 @@ class Closet extends React.Component {
       <Category category={this.props.categories}/>
         </div>
           <Row className="closet-container">
-        {this.props.items.map(item => {
-          return <ClosetItem key={item.id} image={item.image} name={item.name} id={item.id} times_worn={item.times_worn} category_id={item.category_id} />
-          })
-        }
+            {sorted.map(item => {
+              return <ClosetItem key={item.id} image={item.image} name={item.name} id={item.id} times_worn={item.times_worn} category_id={item.category_id} />
+               })
+            }
         </Row>
       </Grid>
       </Fragment>
     );
   }
   renderSelection() {
+    const sortedSelection = sortByCategory(this.props.selectedItems)
     return <div>
         <Form onSubmit={this.handleOutfitSubmit}>
           <h1>Selected:</h1>
-          <div clasName="closet-container">
-            {this.props.selectedItems.map(selected => {
+          <div className="closet-container">
+          {sortedSelection.map(selected => {
               return <Selection key={selected.id} image={selected.image} name={selected.name} id={selected.id} times_worn={selected.times_worn} />;
             })}
           </div>
@@ -72,7 +74,6 @@ class Closet extends React.Component {
 
 
   render() {
-    console.log("inside closet, props are", this.props);
     return (
       <div>
       {this.props.hasOutfits ? <Redirect to='./outfits'/> : <div>
@@ -86,6 +87,7 @@ class Closet extends React.Component {
 }
 
 function mapStateToProps(state){
+  console.log(state)
     return { user: state.user.userId, items: state.closet.items, isLoaded: state.closet.isLoaded, selectedItems: state.closet.selectedItems, categories: state.category.category, hasOutfits: state.outfit.outfitsLoaded };
 }
 
@@ -110,4 +112,10 @@ function formatDate(date) {
   if (day.length < 2) day = '0' + day;
 
   return [year, month, day].join('-');
+}
+
+function sortByCategory(arr) {
+  return arr.sort(function (a, b) {
+    return a.category_id - b.category_id
+  })
 }
