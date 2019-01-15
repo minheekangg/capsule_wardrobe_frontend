@@ -95,7 +95,7 @@
   flex-direction: row;
   /* flex-wrap: wrap; */
   justify-content: flex-start;
-  background-color: green;
+  /* background-color: green; */
   padding: 2vh;
   max-height: 25vh;
 }
@@ -109,7 +109,7 @@
   position: relative;
   flex-direction: column;
   padding: 2vh;
-  background-color: grey;
+  /* background-color: grey; */
   width: 20vh;
   height: 20vh;
 }

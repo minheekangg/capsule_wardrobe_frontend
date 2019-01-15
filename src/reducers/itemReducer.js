@@ -2,27 +2,29 @@ import {  FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, RESET, ADD_ITEM, REPLACE
 
 const initialState = {
     items: [],
-    isLoaded: false,
+    loadingItems: false,
     selectedItems: []
 };
 
 
 export default function itemReducer(state = initialState, action) {
     console.log("%c itemReducer", "color: purple", state, action);
+    let selected
     switch (action.type) {
         case ADD_ITEM:
-            return {...state, isLoaded: true, items: [...state.items, action.payload]}
+            return { ...state, loadingItems: false, items: [...state.items, action.payload] };
         case FETCHED_CLOSET:
-            return { ...state, items: action.payload, isLoaded: true }
+            return { ...state, items: action.payload, loadingItems: false };
         case FETCHING_CLOSET:
-            return { ...state, isLoaded: false }
+            return { ...state, loadingItems: true };
         case SELECT_ITEM:
             return { ...state, selectedItems: [...state.selectedItems, state.items.find((item) => item.id === action.payload)]}
         case REPLACE_ITEM:
-            return { ...state, selectedItems: [...state.selectedItems.filter(s=>{return s.id !== action.payload.oldId}), state.items.find((item) => item.id === action.payload.newId)]}
+            selected = state.selectedItems.filter(s => { return s.id !== action.payload.oldId })
+            return { ...state, selectedItems: [...selected, state.items.find((item) => item.id === action.payload.newId)]}
         case DESELECT_ITEM:
-                debugger
-            return { ...state, selectedItems: [state.selectedItems.filter((e) => { return e.id !== action.payload })]}
+            selected = state.selectedItems.filter((e) => { return e.id !== action.payload })
+            return { ...state, selectedItems: [...selected], loadingItems: false}
         case INCREASE_TIMES_WORN:
             return { ...state, items: [...state.items.filter(s => { return s.id !== action.payload.id }), action.payload ] }
         case RESET:

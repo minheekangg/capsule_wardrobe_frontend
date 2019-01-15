@@ -2,17 +2,19 @@ import React from 'react'
 
 
 const Category = props => {
-  const category = () => {
+    console.log(props)
+  const renderCategory = () => {
       return <ul> {props.category.map( c => {
-          return (<li key={c.name}>{c.name}</li>) 
+          return (<button key={c.name} onClick={e=> props.handleFilterCategory(e, c.name)}>{c.name}</button>) 
       })
       }</ul>
     }
      
     return(
         <div>
+            View All
            {props.category.length > 0 ?  
-             category() : null
+             renderCategory() : null
             } 
         </div>
     )

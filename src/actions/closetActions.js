@@ -41,9 +41,11 @@ export function selectThisItem(id) {
 }
 
 export function deselectThisItem(id) {
-    return {
-        type: DESELECT_ITEM,
-        payload: id
+    return (dispatch) => {
+        dispatch(
+            { type: DESELECT_ITEM,
+            payload: id
+            })
     }
 }
 export function replaceSelectedItem(newId, oldId) {

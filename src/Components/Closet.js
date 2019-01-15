@@ -26,69 +26,115 @@ class Closet extends React.Component {
     this.props.fetchCategories(this.props.user);
   }
 
-  handleDateChange = (date) => {
+  handleDateChange = date => {
     this.setState({
       date: date
     });
-  }
+  };
 
   handleOutfitSubmit = e => {
-    e.preventDefault()
-    this.props.createOutfits(formatDate(this.state.date), this.props.user, this.props.selectedItems);
-    this.props.increaseTimesWorn(this.props.selectedItems, this.props.user)
+    e.preventDefault();
+    this.props.createOutfits(
+      formatDate(this.state.date),
+      this.props.user,
+      this.props.selectedItems
+    );
+    this.props.increaseTimesWorn(this.props.selectedItems, this.props.user);
+  };
+
+  handleFilterCategory = (event, name) => {
+    console.log(name)
   }
 
   renderCloset() {
-    const sorted = sortByCategory(this.props.items)
+    const sorted = sortByCategory(this.props.items);
     return (
       <Fragment>
-      <Grid>
-        <div className="category-menu">
-      <Category category={this.props.categories}/>
-        </div>
+        <Grid>
+          <div className="category-menu">
+            <Category
+              category={this.props.categories}
+              handleFilterCategory={this.handleFilterCategory}
+            />
+          </div>
           <Row className="closet-container">
             {sorted.map(item => {
-              return <ClosetItem key={item.id} image={item.image} name={item.name} id={item.id} times_worn={item.times_worn} category_id={item.category_id} />
-               })
-            }
-        </Row>
-      </Grid>
+              return (
+                <ClosetItem
+                  key={item.id}
+                  image={item.image}
+                  name={item.name}
+                  id={item.id}
+                  times_worn={item.times_worn}
+                  category_id={item.category_id}
+                />
+              );
+            })}
+          </Row>
+        </Grid>
       </Fragment>
     );
   }
   renderSelection() {
-    const sortedSelection = sortByCategory(this.props.selectedItems)
-    return <div>
+    const sortedSelection = sortByCategory(this.props.selectedItems);
+    return (
+      <div>
         <Form onSubmit={this.handleOutfitSubmit}>
           <h1>Selected:</h1>
           <div className="closet-container">
-          {sortedSelection.map(selected => {
-              return <Selection key={selected.id} image={selected.image} name={selected.name} id={selected.id} times_worn={selected.times_worn} />;
+            {sortedSelection.map(selected => {
+              return (
+                <Selection
+                  key={selected.id}
+                  image={selected.image}
+                  name={selected.name}
+                  id={selected.id}
+                  times_worn={selected.times_worn}
+                />
+              );
             })}
           </div>
-          <DatePicker selected={this.state.date} onChange={this.handleDateChange} />
-            <Button type="submit">Outfit</Button>
+          <DatePicker
+            selected={this.state.date}
+            onChange={this.handleDateChange}
+          />
+          <Button type="submit">Outfit</Button>
         </Form>
-      </div>;
+      </div>
+    );
   }
-
 
   render() {
     return (
       <div>
-      {this.props.hasOutfits ? <Redirect to='./outfits'/> : <div>
-        <Link to="/additem" content="Add item" > Add more! </Link>
-          {this.props.isLoaded ? this.renderCloset() : <LoadingPage />}
-          {this.props.selectedItems.length > 0 ? this.renderSelection() : <div>"Please select items to wear today!"</div>}
-        </div>
-      }
-    </div> )
+        {this.props.hasOutfits ? (
+          <Redirect to="./outfits" />
+        ) : (
+          <div>
+            <Link to="/additem" content="Add item">
+              {" "}
+              Add more!{" "}
+            </Link>
+            {this.props.items.length > 0 ? (
+              this.renderCloset()
+            ) : (
+              <LoadingPage />
+            )}
+            {this.props.selectedItems.length > 0 ? (
+              this.renderSelection()
+            ) : (
+              <div>"Please select items to wear today!"</div>
+            )}
+          </div>
+        )}
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state){
   console.log(state)
-    return { user: state.user.userId, items: state.closet.items, isLoaded: state.closet.isLoaded, selectedItems: state.closet.selectedItems, categories: state.category.category, hasOutfits: state.outfit.outfitsLoaded };
+  return { user: state.user.userId, items: state.closet.items, selectedItems: state.closet.selectedItems, categories: state.category.category, hasOutfits: state.outfit.outfitsLoaded };
 }
 
 function mapDispatchToProps(dispatch) {
