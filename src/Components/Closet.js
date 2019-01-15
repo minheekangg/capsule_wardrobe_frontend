@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { fetchCloset, increaseTimesWorn } from "../actions/closetActions";
+import { fetchCloset, increaseTimesWorn, selectThisItem, replaceSelectedItem } from "../actions/closetActions";
 import { fetchCategories } from "../actions/categoryActions";
 import { createOutfits } from '../actions/outfitActions'
 import ClosetItem from './ClosetItem';
@@ -42,8 +42,21 @@ class Closet extends React.Component {
     this.props.increaseTimesWorn(this.props.selectedItems, this.props.user);
   };
 
-  handleFilterCategory = (event, name) => {
-    console.log(name)
+  // handleFilterCategory = (event, name) => {
+  //   console.log(name)
+  // }
+
+  handleSelectItem = (newItemId, newItemCatId) => {
+    console.log(newItemId, newItemCatId)
+    const category = this.props.selectedItems.map(s => {
+      return (s.category_id)
+    })
+    if (category.includes(newItemCatId)) {
+      const toBeReplaced = this.props.selectedItems.find(s => s.category_id === newItemCatId);
+      this.props.replaceSelectedItem(newItemId, toBeReplaced.id);
+    } else {
+      this.props.selectThisItem(newItemId);
+    }
   }
 
   renderCloset() {
@@ -58,18 +71,7 @@ class Closet extends React.Component {
             />
           </div>
           <Row className="closet-container">
-            {sorted.map(item => {
-              return (
-                <ClosetItem
-                  key={item.id}
-                  image={item.image}
-                  name={item.name}
-                  id={item.id}
-                  times_worn={item.times_worn}
-                  category_id={item.category_id}
-                />
-              );
-            })}
+            <ClosetItem items={sorted} handleSelectItem={this.handleSelectItem} />
           </Row>
         </Grid>
       </Fragment>
@@ -138,8 +140,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return { fetchCategories: id => dispatch(fetchCategories(id)), fetchCloset: id => dispatch(fetchCloset(id)), createOutfits: (date, id, itemsArr) => dispatch(createOutfits(date, id, itemsArr)), increaseTimesWorn: (itemsArr, userId) => dispatch(increaseTimesWorn(itemsArr, userId)) 
-  };
+  return { fetchCategories: id => dispatch(fetchCategories(id)), fetchCloset: id => dispatch(fetchCloset(id)), createOutfits: (date, id, itemsArr) => dispatch(createOutfits(date, id, itemsArr)), increaseTimesWorn: (itemsArr, userId) => dispatch(increaseTimesWorn(itemsArr, userId)), selectThisItem: id => dispatch(selectThisItem(id)), replaceSelectedItem: (newId, oldId) => dispatch(replaceSelectedItem(newId, oldId)) };
 }
 
 
