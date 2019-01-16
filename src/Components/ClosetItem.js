@@ -34,21 +34,24 @@ const ClosetItem = props => {
           </Col>;
     }
 
+
+    const renderContainerWithFilteredCategory = (categoryWithItems) => {
+        return <div className="category-item" key={categoryWithItems.id}>
+            <h5>{categoryWithItems.name}</h5>
+            <div className="category-item-overflow">
+                {sortByTimesWorn(categoryWithItems.items).map(item => {
+                return renderEachItem(item);
+              })}
+            </div>
+          </div>;
+    }
+
     return (
-        <div>
-        {props.category.map((c => {
-            if (c.items.length > 0) { 
-                return (<div className="category-item" key={c.id}>
-                    <h5>{c.name}</h5>
-                    <div className="category-item-overflow">
-                    {sortByTimesWorn(c.items).map(item=>{
-                        return renderEachItem(item)} 
-                    )}
-                    </div>
-                </div>)
-            }
-        }))}
-    </div>
+        <div> {props.category.map((c => {
+           return c.items.length > 0 ? renderContainerWithFilteredCategory(c) : null
+        }))
+        }
+        </div>
     )
 }
 
