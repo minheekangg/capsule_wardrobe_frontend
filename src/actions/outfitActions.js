@@ -1,4 +1,9 @@
-import { FETCHED_OUTFITS, CREATING_OUTFITS, CREATED_OUTFIT } from "../types";
+import {
+  FETCHED_OUTFITS,
+  CREATING_OUTFITS,
+  CREATED_OUTFIT,
+  UPDATED_OUTFITS
+} from "../types";
 import axios from 'axios'
 
 export function fetchOutfits(id) {
@@ -76,4 +81,30 @@ export const addItemsToOutfit= (outfitId, itemArr) => {
   alert("created!")
 }
 
-
+export const faveOutfit = (userId, id, favorite) => {
+  console.log(favorite)
+  return dispatch => {
+    dispatch({ type: CREATING_OUTFITS });
+    return (
+      axios({
+        method: "PATCH",
+        baseURL: `${
+          process.env.REACT_APP_API_ENDPOINT
+          }/api/v1/users/${userId}/outfits/${id}`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        data: {
+          outfit: {
+            favorite: !favorite
+          }
+        }
+      })
+    )
+      .then(outfits => {
+        dispatch({ type: UPDATED_OUTFITS, payload: outfits.data });
+      })
+  };
+} 

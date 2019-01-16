@@ -1,4 +1,4 @@
-import { FETCHED_OUTFITS, CREATING_OUTFITS, CREATED_OUTFIT, RESET } from "../types";
+import { FETCHED_OUTFITS, CREATING_OUTFITS, CREATED_OUTFIT, RESET, UPDATED_OUTFITS } from "../types";
 
 
 const initialState = {
@@ -16,6 +16,9 @@ export default function outfitReducer(state = initialState, action) {
             return { ...state, outfitsLoaded: true };
         case CREATING_OUTFITS:
             return { ...state, outfitsLoaded: false };
+        case UPDATED_OUTFITS: 
+            let others = state.outfits.filter(s => { return s.id !== action.payload.id })
+            return { ...state, outfits: [...others, action.payload], outfitsLoaded: true };
         case RESET:
             return initialState
         default:

@@ -104,8 +104,12 @@ class Closet extends React.Component {
           <Redirect to="./outfits" />
         ) : (
           <div>
-            <Link to="/additem" content="Add item">
+              <Link to="/additem" content="Add item" style={{ color: "#C95D2D" }} >
               Add more!
+            </Link>
+            <br/>
+              <Link to="/outfits" content="outfits" style={{ color: "#1D4306" }} >
+              See Outfits
             </Link>
             { this.props.isLoaded ? (
               this.renderCloset()
