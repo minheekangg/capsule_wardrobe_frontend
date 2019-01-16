@@ -34,7 +34,7 @@ const ClosetItem = props => {
             if (c.items.length > 0) { 
                 return (<div className="category-item" key={c.id}>
                     <h5>{c.name}</h5>
-                    {c.items.map(item=>{
+                    {sortByTimesWorn(c.items).map(item=>{
                         return renderEachItem(item)} 
                     )}
                 </div>)
@@ -48,8 +48,8 @@ const ClosetItem = props => {
 
 export default ClosetItem
 
-// export function itemByCategory = (items) =>{
-//     props.items.forEach((e)=>{
-//         Object.assign(obj, {e.cat})
-//     })
-// }
+function sortByTimesWorn(arr) {
+    return arr.sort(function (a, b) {
+        return a.times_worn - b.times_worn
+    })
+}

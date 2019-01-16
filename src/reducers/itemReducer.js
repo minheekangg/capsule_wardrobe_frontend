@@ -3,7 +3,8 @@ import {  FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, RESET, ADD_ITEM, REPLACE
 const initialState = {
     items: [],
     loadingItems: false,
-    selectedItems: []
+    selectedItems: [],
+    isLoaded: false
 };
 
 
@@ -12,11 +13,11 @@ export default function itemReducer(state = initialState, action) {
     let selected
     switch (action.type) {
         case ADD_ITEM:
-            return { ...state, loadingItems: false, items: [...state.items, action.payload] };
+            return { ...state, loadingItems: false, items: [...state.items, action.payload], isLoaded: true };
         case FETCHED_CLOSET:
-            return { ...state, items: action.payload, loadingItems: false };
+            return { ...state, items: action.payload, loadingItems: false, isLoaded: true };
         case FETCHING_CLOSET:
-            return { ...state, loadingItems: true };
+            return { ...state, loadingItems: true, isLoaded: false };
         case SELECT_ITEM:
             return { ...state, selectedItems: [...state.selectedItems, state.items.find((item) => item.id === action.payload)]}
         case REPLACE_ITEM:

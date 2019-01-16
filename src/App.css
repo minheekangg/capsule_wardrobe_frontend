@@ -61,7 +61,19 @@
  width: 80%;
  margin-left:15%;
 }
+
+
+.category-item{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  position: relative;
+   display: flex;
+}
+
 .closet-item{
+  flex: 0 0 auto;
   width: 30vh;
   height: 40vh;
   padding: 2vh;
@@ -86,16 +98,9 @@
   justify-content: flex-start;
   /* background-color: green; */
   margin-left: 0vh;
-  margin-right: -20vh;
+  /* margin-right: -20vh; */
 }
 
-.category-item{
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
 
 .outfit-container{
   position: relative;

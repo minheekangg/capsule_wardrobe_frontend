@@ -7,7 +7,7 @@ import { fetchCloset, increaseTimesWorn, selectThisItem, replaceSelectedItem } f
 import { fetchCategories } from "../actions/categoryActions";
 import { createOutfits } from '../actions/outfitActions'
 import ClosetItem from './ClosetItem';
-import Category from './Category';
+import ClosetView from './ClosetView';
 import Selection from './Selection';
 import {LoadingPage} from './misc';
 
@@ -42,39 +42,35 @@ class Closet extends React.Component {
     this.props.increaseTimesWorn(this.props.selectedItems, this.props.user);
   };
 
-  // handleFilterCategory = (event, name) => {
-  //   console.log(name)
-  // }
+  handleViewFilterClick = (event) => {
+    console.log("%c hererrrrr", "color: blue", event)
 
+  }
   handleSelectItem = (newItemId, newItemCatId) => {
-    console.log(newItemId, newItemCatId)
     const category = this.props.selectedItems.map(s => {
-      return (s.category_id)
-    })
+      return s.category_id;
+    });
     if (category.includes(newItemCatId)) {
-      const toBeReplaced = this.props.selectedItems.find(s => s.category_id === newItemCatId);
+      const toBeReplaced = this.props.selectedItems.find(
+        s => s.category_id === newItemCatId
+      );
       this.props.replaceSelectedItem(newItemId, toBeReplaced.id);
     } else {
       this.props.selectThisItem(newItemId);
     }
-  }
+  };
 
   renderCloset() {
-    return (
-      <Fragment>
+    return <Fragment>
         <Grid>
           <div className="category-menu">
-            <Category
-              category={this.props.categories}
-              handleFilterCategory={this.handleFilterCategory}
-            />
+            <ClosetView handleViewFilterClick={this.handleViewFilterClick} />
           </div>
           <Row className="closet-container">
             <ClosetItem items={this.props.items} handleSelectItem={this.handleSelectItem} category={this.props.categories} />
           </Row>
         </Grid>
-      </Fragment>
-    );
+      </Fragment>;
   }
   renderSelection() {
     const sortedSelection = sortByCategory(this.props.selectedItems);
@@ -116,12 +112,12 @@ class Closet extends React.Component {
               {" "}
               Add more!{" "}
             </Link>
-            {this.props.items.length > 0 ? (
+            { this.props.isLoaded ? (
               this.renderCloset()
             ) : (
               <LoadingPage />
             )}
-            {this.props.selectedItems.length > 0 ? (
+            {this.props.isLoaded ? (
               this.renderSelection()
             ) : (
               <div>"Please select items to wear today!"</div>
@@ -135,7 +131,7 @@ class Closet extends React.Component {
 
 function mapStateToProps(state){
   console.log(state)
-  return { user: state.user.userId, items: state.closet.items, selectedItems: state.closet.selectedItems, categories: state.category.category, hasOutfits: state.outfit.outfitsLoaded };
+  return { user: state.user.userId, items: state.closet.items, selectedItems: state.closet.selectedItems, categories: state.category.category, hasOutfits: state.outfit.outfitsLoaded, isLoaded: state.closet.isLoaded };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -165,3 +161,4 @@ function sortByCategory(arr) {
     return a.category_id - b.category_id
   })
 }
+
