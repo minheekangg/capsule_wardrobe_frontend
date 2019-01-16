@@ -29,7 +29,7 @@ export function fetchCloset(id){
         )
           .then(r => r.json())
           .then(items => {
-            dispatch({ type: FETCHED_CLOSET, payload: items });
+            dispatch({ type: FETCHED_CLOSET, payload: items.filter((e=> e.current_status=== "closet")) });
           });
     }
 }
