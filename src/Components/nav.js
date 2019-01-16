@@ -13,7 +13,7 @@ const NavBar = (props) => {
               </NavItem>
               <Navbar.Header style={{paddingLeft: "50px", "paddingRight": "50px"}}>
                 <Navbar.Brand>
-                  <a href="/">CAPSULE</a>
+                  <a href="/">CAPSULE WARDROBE</a>
                 </Navbar.Brand>
               </Navbar.Header>
               <NavItem href="/market">
