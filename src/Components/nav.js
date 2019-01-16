@@ -2,8 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Navbar, Nav, NavItem } from "react-bootstrap";
+import {logout} from '../actions/userActions'
 
 const NavBar = (props) => {
+
+  const handleLogoutClick = () => {
+    props.history.push('./login')
+    props.logout()
+  }
+
     return props.loggedIn ? <Navbar>
         <Nav className="navbarCss">
               <NavItem href="/closet" >
@@ -21,6 +28,7 @@ const NavBar = (props) => {
                   Market
                 </p>
               </NavItem>
+        <button onClick={()=> handleLogoutClick()}>Logout</button>
         </Nav>
       </Navbar> : null; 
 }
@@ -32,8 +40,14 @@ const NavBar = (props) => {
      username: state.user.username
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
  
-export default withRouter(connect(mapStateToProps)(NavBar))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))
 
     //  <Navbar.Text pullRight>props.username</Navbar.Text>
      

@@ -1,52 +1,53 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router";
-import { LoginUser } from "../actions/userActions";
+import { SignUpUser } from "../actions/userActions";
 import '../App.css'
 import {  FormGroup,  FormControl, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
-class Login extends React.Component{
+class signUp extends React.Component{
     state = {
         username: "",
-        password: ""
+        password: "",
+        city: "",
+        image: "",
+        isSignedUp: false
     }
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
-    }
-
-    handleLoginSubmit = (e) => { 
+      }
+      
+      handleSubmit = (e) => { 
         e.preventDefault()
-        this.props.LoginUser(this.state.username, this.state.password)
-        this.setState({ username: "", password: "" });
+        this.props.SignUpUser(this.state.username, this.state.password);
+        this.setState({ username: "", password: "", isSignedUp: true });
     }
 
 
-        // <FormGroup widths="equal" className="loginInput" loading={this.props.authenticatingUser} error={this.props.failedLogin}></FormGroup>
-    // <HelpBlock error header={this.props.failedLogin ? this.props.error : null} />
-    renderLoginForm = () => {
+
+    renderSignUpForm = () => {
         return <div>
             <Row className="show-grid">
               <Col xs={6} md={4} />
               <Col xs={6} md={4}>
-                <form onSubmit={this.handleLoginSubmit} className="loginForm">
+              <form onSubmit={this.handleSubmit} className="loginForm">
                   <h2 className="loginHeader">CAPSULE WARDROBE</h2>
                   <FormControl.Feedback />
-                  <FormGroup widths="equal" className="loginInput">
+                  <FormGroup widths="equal" className="loginInput" >
                     <FormControl type="text" label="Text" name="username" placeholder="Enter text" onChange={this.handleChange} value={this.state.username} />
                     <FormControl type="password" label="password" placeholder="password" name="password" onChange={this.handleChange} value={this.state.password} />
+                    <FormControl type="text" label="Text" name="city" placeholder="Enter your city" onChange={this.handleChange} value={this.state.city} />
+                    <FormControl type="text" label="Text" name="image" placeholder="Upload Image" onChange={this.handleChange} value={this.state.image} />
                   </FormGroup>
                   <div className="loginbutton">
                     <Col md={6}>
-                      <button style={{ color: "#1D4306", border: "none" }}>
-                        Sign In
-                      </button>
                     </Col>
                     <Col md={6}>
-                      <Link to="/signup" style={{ color: "#C95D2D" }}>
-                        Sign Up
-                      </Link>
+                      <button type="submit" style={{ color: "#C95D2D" }}>
+                        submit
+                      </button>
                     </Col>
                   </div>
                 </form>
@@ -57,7 +58,13 @@ class Login extends React.Component{
     }
     
     render(){
-        return this.props.isLoggedIn ? <Redirect to="/welcome" /> : this.renderLoginForm()
+        return this.state.isSignedUp ? (
+        <Redirect to="/welcome" />
+      ) : (
+          <div className="card">
+              {this.renderSignUpForm()}
+          </div>
+        )
     }
 }
 
@@ -73,6 +80,6 @@ const mapStateToProps = (state) => {
 export default withRouter(
   connect(
     mapStateToProps,
-    { LoginUser }
-  )(Login)
+    { SignUpUser }
+  )(signUp)
 );

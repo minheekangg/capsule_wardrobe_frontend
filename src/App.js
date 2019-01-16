@@ -9,6 +9,7 @@ import NavBar from './components/nav'
 import Login from './components/login'
 import Cloudinary from './components/Cloudinary'
 import Outfit from './components/Outfit'
+import signUp from './components/signUp'
 
 class App extends Component {
   // <Route component={NotFound} />
@@ -24,6 +25,7 @@ class App extends Component {
           <Route exact path="/market" component={Market} />
           <Route exact path="/additem" component={Cloudinary} />
           <Route exact path="/outfits" component={Outfit} />
+          <Route exact path="/signup" component={signUp} />
         </Switch>
       </Fragment>
     );

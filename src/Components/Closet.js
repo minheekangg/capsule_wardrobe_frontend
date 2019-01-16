@@ -57,6 +57,7 @@ class Closet extends React.Component {
   };
 
   renderCloset() {
+    console.log("HERE inside rendercloset function", this.props.items )
     return <Fragment>
         <Grid>
           <div className="category-menu">
@@ -129,7 +130,7 @@ class Closet extends React.Component {
 }
 
 function mapStateToProps(state){
-  console.log(state)
+  console.log('%c inside closet', 'color:green',state)
   return { user: state.user.userId, items: state.closet.items, selectedItems: state.closet.selectedItems, categories: state.category.category, hasOutfits: state.outfit.outfitsLoaded, isLoaded: state.closet.isLoaded };
 }
 

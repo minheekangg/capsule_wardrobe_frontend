@@ -1,4 +1,4 @@
-import {AUTHENTICATING_USER, SET_CURRENT_USER, FAILED_LOGIN} from '../types'
+import {AUTHENTICATING_USER, SET_CURRENT_USER, FAILED_LOGIN, RESET} from '../types'
 
 export const LoginUser = (username, password) => {
     return (dispatch) =>{
@@ -60,3 +60,28 @@ export const failedLogin = errorMsg => ({
 });
 
 export const authenticatingUser = () => ({ type: AUTHENTICATING_USER });
+
+export const logout = () => {
+  localStorage.removeItem('jwt')
+  return { type: RESET }
+}
+
+export const SignUpUser = (username, password) => {
+  return (dispatch) => {
+    const data = { user: {username: username, password: password, city: "NYC", image: "TEST"}}
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(data)
+     })
+      .then(r=> r.json())
+      .then(res=> {
+        localStorage.setItem("jwt", res.jwt)
+        debugger
+        dispatch({ type: SET_CURRENT_USER, payload: res.user})
+      })
+  }
+}
