@@ -7,8 +7,8 @@ const ClosetItem = props => {
         const itemUpdateDate = new Date (updated_at)
         const daysSinceLastWorn = today.getDate() - itemUpdateDate.getDate();
         return <Fragment>
+            {daysSinceLastWorn > 0 ? <div style={{ "borderStyle": "groove"}}>
             <p style={{color: "grey"}}>Days since last worn: {daysSinceLastWorn}</p>
-            {daysSinceLastWorn > 0 ? <div >
                 <Col md={6}> 
                     <button className="item-buttons" style={{ color: "#1D4306"}}>
                     Donate </button>
@@ -17,7 +17,9 @@ const ClosetItem = props => {
                     <button className="item-buttons" style={{ color: "#C95D2D" }}>
                     Sell </button>
                 </Col>
-              </div> : null}
+              </div> : 
+            null
+            }
           </Fragment>;
     }
     
