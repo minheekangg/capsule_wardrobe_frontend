@@ -42,10 +42,6 @@ class Closet extends React.Component {
     this.props.increaseTimesWorn(this.props.selectedItems, this.props.user);
   };
 
-  handleViewFilterClick = (event) => {
-    console.log("%c hererrrrr", "color: blue", event)
-
-  }
   handleSelectItem = (newItemId, newItemCatId) => {
     const category = this.props.selectedItems.map(s => {
       return s.category_id;
@@ -64,7 +60,7 @@ class Closet extends React.Component {
     return <Fragment>
         <Grid>
           <div className="category-menu">
-            <ClosetView handleViewFilterClick={this.handleViewFilterClick} />
+            <ClosetView count={this.props.items.length}/>
           </div>
           <Row className="closet-container">
             <ClosetItem items={this.props.items} handleSelectItem={this.handleSelectItem} category={this.props.categories} />
@@ -109,8 +105,7 @@ class Closet extends React.Component {
         ) : (
           <div>
             <Link to="/additem" content="Add item">
-              {" "}
-              Add more!{" "}
+              Add more!
             </Link>
             { this.props.isLoaded ? (
               this.renderCloset()

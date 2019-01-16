@@ -30,7 +30,7 @@ class Login extends React.Component{
               <Col xs={6} md={4} />
               <Col xs={6} md={4}>
                 <form onSubmit={this.handleLoginSubmit} className="loginForm">
-                  <h1 className="loginHeader">CAPSULE</h1>
+                  <h2 className="loginHeader">CAPSULE WARDROBE</h2>
                   <FormControl.Feedback />
                   <HelpBlock error header={this.props.failedLogin ? this.props.error : null} />
                   <FormGroup widths="equal" className="loginInput" loading={this.props.authenticatingUser} error={this.props.failedLogin}>
@@ -62,7 +62,7 @@ class Login extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    console.log("inside login", state)
+    // console.log("inside login", state)
     return{
         authenticatingUser: state.user.authenticatingUser,
         failedLogin: state.user.failedLogin,

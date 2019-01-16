@@ -1,31 +1,37 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import { Col, Thumbnail } from "react-bootstrap";
 
 const ClosetItem = props => {
+    const renderDaysWorn = (updated_at) =>{
+        const today = new Date()
+        const itemUpdateDate = new Date (updated_at)
+        const daysSinceLastWorn = today.getDate() - itemUpdateDate.getDate();
+        return <Fragment>
+            <p style={{color: "grey"}}>Days since last worn: {daysSinceLastWorn}</p>
+            {daysSinceLastWorn > 0 ? <div >
+                <Col md={6}> 
+                    <button className="item-buttons" style={{ color: "#1D4306"}}>
+                    Donate </button>
+                </Col>
+                <Col md={6}>
+                    <button className="item-buttons" style={{ color: "#C95D2D" }}>
+                    Sell </button>
+                </Col>
+              </div> : null}
+          </Fragment>;
+    }
     
-    // function renderEachItemInCategory(category){
-    //    return props.items.map(i => {
-    //         if (i.category_id === category.id){
-    //             return renderEachItem(i)
-    //         }
-    //     })   
-    // }
 
     const renderEachItem = eachItem => {
         return <Col className="closet-item" xs={6} md={4} key={eachItem.id} onClick={() => props.handleSelectItem(eachItem.id, eachItem.category_id)}>
-          <Thumbnail className="item-img" src={eachItem.image} alt={eachItem.name}>
-            <div className="item-info">
-                            <h4>{eachItem.name}</h4>
-                             <p>Times Worn: {eachItem.times_worn}</p>
-                             <Col md={6}>
-                                 <button style={{ color: "#1D4306", border: "none", width: "12vh", marginLeft: "-4vh" }}> Donate </button>
-                             </Col>
-                             <Col md={6}>
-                                 <button style={{ color: "#C95D2D", width: "12vh", marginRight: "4vh" }} > Sell </button>
-                             </Col>
-                         </div>
-                     </Thumbnail>
-                 </Col>;
+            <Thumbnail className="item-img" src={eachItem.image} alt={eachItem.name}>
+              <div className="item-info">
+                <h4>{eachItem.name}</h4>
+                <p>Times Worn: {eachItem.times_worn}</p>
+                {renderDaysWorn(eachItem.updated_at)}
+              </div>
+            </Thumbnail>
+          </Col>;
     }
 
     return (
@@ -34,9 +40,11 @@ const ClosetItem = props => {
             if (c.items.length > 0) { 
                 return (<div className="category-item" key={c.id}>
                     <h5>{c.name}</h5>
+                    <div className="category-item-overflow">
                     {sortByTimesWorn(c.items).map(item=>{
                         return renderEachItem(item)} 
                     )}
+                    </div>
                 </div>)
             }
         }))}
