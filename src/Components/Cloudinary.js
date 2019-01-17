@@ -21,7 +21,9 @@ class Cloudinary extends React.Component {
       (error, result) => {
         if (result && result.event === "success") {
           this.setState({
-            itemImg: `http://res.cloudinary.com/dly4mslmg/image/upload/w_300,h_300,c_lpad,b_white/${result.info.path}`
+            itemImg: `http://res.cloudinary.com/${MY_CLOUD_NAME}/image/upload/w_300,h_300,c_lpad,b_white/${
+              result.info.path
+            }`
           });
         }
       }

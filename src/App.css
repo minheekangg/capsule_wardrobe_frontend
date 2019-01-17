@@ -133,3 +133,16 @@
   margin-left: -2vh;
   /* z-index: 0; */
 }
+
+.listing-item{
+  /* position:absolute; */
+  background-color: cornflowerblue;
+  width: 20vh;
+  height: 25vh;
+  padding: 2vh;
+}
+.listing-item img{
+  object-fit: cover;
+  width: 100%;
+  max-height: 20vh;
+}
