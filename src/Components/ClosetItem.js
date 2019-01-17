@@ -1,8 +1,10 @@
 import React, {Fragment} from 'react'
 import { Col, Thumbnail } from "react-bootstrap";
 
-const ClosetItem = props => {
-    const renderDaysWorn = (updated_at) =>{
+class ClosetItem extends React.Component {
+
+
+     renderDaysWorn = (updated_at) =>{
         const today = new Date()
         const itemUpdateDate = new Date (updated_at)
         const daysSinceLastWorn = today.getDate() - itemUpdateDate.getDate();
@@ -24,37 +26,44 @@ const ClosetItem = props => {
     }
     
 
-    const renderEachItem = eachItem => {
-        return <Col className="closet-item" xs={6} md={4} key={eachItem.id} onClick={() => props.handleSelectItem(eachItem.id, eachItem.category_id)}>
-            <Thumbnail className="item-img" src={eachItem.image} alt={eachItem.name}>
-              <div className="item-info">
-                <h4>{eachItem.name}</h4>
-                <p>Times Worn: {eachItem.times_worn}</p>
-                {renderDaysWorn(eachItem.updated_at)}
-              </div>
-            </Thumbnail>
-          </Col>;
+     renderEachItem = itemArr => {
+         return sortByTimesWorn(itemArr).map(eachItem=> {
+            return(<Col className="closet-item" xs={6} md={4} key={eachItem.id} onClick={() => this.props.handleSelectItem(eachItem.id, eachItem.category_id)}>
+                <Thumbnail className="item-img" src={eachItem.image} alt={eachItem.name}>
+                <div className="item-info">
+                    <h4>{eachItem.name}</h4>
+                    <p>Times Worn: {eachItem.times_worn}</p>
+                    {this.renderDaysWorn(eachItem.updated_at)}
+                </div>
+                </Thumbnail>
+            </Col>)
+         })
     }
 
 
-    const renderContainerWithFilteredCategory = (categoryWithItems) => {
-        return <div className="category-item" key={categoryWithItems.id}>
-            <h5>{categoryWithItems.name}</h5>
-            <div className="category-item-overflow">
-                {sortByTimesWorn(categoryWithItems.items).map(item => {
-                return renderEachItem(item);
-              })}
+     renderContainerWithFilteredCategory = (filteredCategory) => {
+         return filteredCategory.map(category=> {
+             return <div className="category-item" key={`123${category}`}>
+                <h5>{filteredCategory.name}</h5>
+                <div className="category-item-overflow">
+                  {this.renderEachItem(
+                    returnArrItemsByCategory(this.props.items, category)
+                  )}
+                </div>
+              </div>;
+            })
+    }
+
+    
+
+    render(){
+        // console.log(filterOutCategoryName(this.props.items));
+        return (
+            <div>
+                {(filterOutCategoryName(this.props.items)).length > 0 ? this.renderContainerWithFilteredCategory(filterOutCategoryName(filterByClosetStatus((this.props.items)))) : null }
             </div>
-          </div>;
+        )
     }
-
-    return (
-        <div> {props.category.map((c => {
-           return c.items.length > 0 ? renderContainerWithFilteredCategory(c) : null
-        }))
-        }
-        </div>
-    )
 }
 
 
@@ -65,4 +74,24 @@ function sortByTimesWorn(arr) {
     return arr.sort(function (a, b) {
         return a.times_worn - b.times_worn
     })
+}
+
+function filterByClosetStatus(arr) {
+    return arr.filter(e=> {
+        return e.current_status === "closet"
+    })
+}
+
+// function mapItemsToCatIemHash(arr) {
+//     return new Map(arr.map(i => [i.category.name, i]))
+// }
+
+function filterOutCategoryName(itemArr){
+    return (itemArr.map(e => e.category.name)).filter((v, i, a) => a.indexOf(v) === i)
+}
+
+function returnArrItemsByCategory(totalItemArr, categoryName){
+    return totalItemArr.filter(i => {
+        return i.category.name === categoryName;
+    });
 }

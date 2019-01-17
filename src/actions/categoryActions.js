@@ -1,6 +1,6 @@
 import { FETCHED_CATEGORY, FETCHING_CATEGORY } from "../types";
 
-export function fetchCategories() {
+export function fetchCategories(userId) {
     return (dispatch) => {
         dispatch(
             { type: FETCHING_CATEGORY }
