@@ -8,6 +8,7 @@ import { Redirect } from "react-router";
 
 const MY_CLOUD_NAME = process.env.REACT_APP_MY_CLOUD_NAME;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
+const CLOUD_SETTING = process.env.REACT_APP_CLOUDINARY_SETTING;
 
 class Cloudinary extends React.Component {
   state = { itemImg: "", itemName: "", itemCat: 0, addingItem: true};
@@ -21,7 +22,7 @@ class Cloudinary extends React.Component {
       (error, result) => {
         if (result && result.event === "success") {
           this.setState({
-            itemImg: `http://res.cloudinary.com/${MY_CLOUD_NAME}/image/upload/w_300,h_300,c_lpad,b_white/${
+            itemImg: `http://res.cloudinary.com/${MY_CLOUD_NAME}/image/upload/${CLOUD_SETTING}/${
               result.info.path
             }`
           });
@@ -48,29 +49,23 @@ class Cloudinary extends React.Component {
 
   renderForm = () =>{
     return <form onSubmit={e => this.handleFormSubmit(e)}>
-          <Image src={this.state.itemImg} alt="item to add" />
-          <FormGroup controlId="formControlsSelect">
-            <ControlLabel>Add information about your piece!</ControlLabel>
-            <select placeholder="select" onChange={this.handleDropdownChange}>
-              <option value="">Select a category</option>
-              <option value="Activewear">Activewear</option>
-              <option value="Coats">Coats</option>
-              <option value="Dresses">Dresses</option>
-              <option value="Jackets">Jackets</option>
-              <option value="Bottoms">Bottoms</option>
-              <option value="Sweatshirts">Sweatshirts</option>
-              <option value="Tops">Tops</option>
-              <option value="Shoes">Shoes</option>
-              <option value="Misc">Misc</option>
-            </select>
-            <FormControl
-              type="text"
-              value={this.state.itemName}
-              placeholder="Enter Name"
-              onChange={this.handleNameChange}
-            />
-          </FormGroup>
-      <Button type="submit" >Submit</Button>
+        <Image src={this.state.itemImg} alt="item to add" />
+        <FormGroup controlId="formControlsSelect">
+          <ControlLabel>Add information about your piece!</ControlLabel>
+          <select placeholder="select" onChange={this.handleDropdownChange}>
+            <option value="">Select a category</option>
+            <option value="Activewear">Activewear</option>
+            <option value="Dresses">Dresses</option>
+            <option value="Outerwears">Outerwears</option>
+            <option value="Bottoms">Bottoms</option>
+            <option value="Sweatshirts">Sweatshirts</option>
+            <option value="Tops">Tops</option>
+            <option value="Shoes">Shoes</option>
+            <option value="Misc">Misc</option>
+          </select>
+          <FormControl type="text" value={this.state.itemName} placeholder="Enter Name" onChange={this.handleNameChange} />
+        </FormGroup>
+        <Button type="submit">Submit</Button>
       </form>;
   }
 
