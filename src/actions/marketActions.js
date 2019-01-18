@@ -27,7 +27,7 @@ export function fetchListings() {
                   type: FETCHED_LISTINGS,
                   payload: listings
                 });
-            });
+            }); 
     }
 }
 

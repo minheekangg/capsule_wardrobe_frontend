@@ -3,7 +3,7 @@ import { FETCHED_LISTINGS, FETCHING_LISTINGS, RESET, SELECT_LISTING } from '../t
 const initialState = {
     listings: [],
     isListingLoading: false,
-    selectedListing: []
+    select: []
 };
 
 
@@ -14,7 +14,7 @@ export default function itemReducer(state = initialState, action) {
         case FETCHING_LISTINGS:
             return { ...state, isListingLoading: true };
         case SELECT_LISTING:
-            return { ...state, selectedListing: action.payload };
+            return { ...state, select: [action.payload] };
         case RESET:
             return initialState;
         default:
