@@ -1,7 +1,8 @@
 import {
     FETCHING_LISTINGS,
     FETCHED_LISTINGS,
-    SELECT_LISTING
+    SELECT_LISTING,
+    DESELECT_LISTING
 } from "../types";
 // import axios from "axios";
 
@@ -36,4 +37,10 @@ export function selectListing(itemId){
     return (dispatch) => {
         dispatch({ type: SELECT_LISTING, payload: itemId });
     }
+}
+
+export function deselect(){
+    return dispatch => {
+      dispatch({ type: DESELECT_LISTING});
+    };
 }

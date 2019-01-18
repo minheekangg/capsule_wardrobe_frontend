@@ -1,4 +1,4 @@
-import { FETCHED_LISTINGS, FETCHING_LISTINGS, RESET, SELECT_LISTING } from '../types';
+import { FETCHED_LISTINGS, FETCHING_LISTINGS, RESET, SELECT_LISTING, DESELECT_LISTING } from '../types';
 
 const initialState = {
     listings: [],
@@ -15,6 +15,8 @@ export default function itemReducer(state = initialState, action) {
             return { ...state, isListingLoading: true };
         case SELECT_LISTING:
             return { ...state, select: [action.payload] };
+        case DESELECT_LISTING:
+            return {...state, select: []}
         case RESET:
             return initialState;
         default:

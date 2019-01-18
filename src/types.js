@@ -22,5 +22,6 @@ export const LOGOUT_USER = "LOGOUT_USER";
 export const FETCHED_LISTINGS = "FETCHED_LISTINGS";
 export const FETCHING_LISTINGS = "FETCHING_LISTINGS"; 
 export const SELECT_LISTING = "SELECT_LISTING"; 
+export const DESELECT_LISTING = "DESELECT_LISTING"; 
 
 export const donationLocations = [{name: "Salvation Army", latitude: 40.732953, longitude: 73.990442}, {name: "Salvation Army", latitude: 40.732953, longitude: 73.990442}, {name: "Salvation Army", latitude: 40.732953, longitude: 73.990442}]
