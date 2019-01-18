@@ -11,6 +11,7 @@ import Cloudinary from './components/Cloudinary'
 import Outfit from './components/Outfit'
 import signUp from './components/signUp'
 import Listing from './components/Listing'
+import Donate from './components/Donate'
 
 class App extends Component {
   // <Route component={NotFound} />
@@ -28,6 +29,7 @@ class App extends Component {
           <Route exact path="/outfits" component={Outfit} />
           <Route exact path="/signup" component={signUp} />
           <Route exact path="/listing" component={Listing} />
+          <Route exact path="/donate" component={Donate} />
         </Switch>
       </Fragment>
     );

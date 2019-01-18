@@ -31,6 +31,7 @@ export function fetchListings() {
     }
 }
 
+//TODO: NEED TO FILTER THROOUGH WHATS MINE
 export function selectListing(itemId){
     return (dispatch) => {
         dispatch({ type: SELECT_LISTING, payload: itemId });
