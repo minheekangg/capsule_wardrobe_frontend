@@ -7,6 +7,7 @@ import {
 } from "../types";
 import axios from "axios";
 
+
 export function fetchListings() {
     return (dispatch) => {
         dispatch({ type: FETCHING_LISTINGS });
@@ -33,7 +34,7 @@ export function fetchListings() {
     }
 }
 
-//TODO: NEED TO FILTER THROOUGH WHATS MINE
+
 export function selectListing(itemId){
     return (dispatch) => {
         dispatch({ type: SELECT_LISTING, payload: itemId });
@@ -74,5 +75,29 @@ export function postMyItem(userId, itemId, price){
             }
         })
     }
+
+}
+
+export function purchaseItem(listing, userId) {
+    return (dispatch) => {
+        dispatch({ type: FETCHING_LISTINGS });
+        return axios({
+            method: "patch",
+            baseURL: `${
+                process.env.REACT_APP_API_ENDPOINT
+                }/api/v1/listings/${listing.id}`,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            data: {listing: {buyer_id: userId}}
+        }).then(r => {
+            if (r.statusText === "OK") {
+                alert("posted!")
+                dispatch({ type: POST_LISTING, payload: r.data });
+            }
+    })
+}
 
 }

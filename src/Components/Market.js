@@ -27,12 +27,13 @@ class Market extends React.Component {
 
 
   render() {
+    console.log(this.props.userId, "available", this.props.listings, "mine", this.props.myItems);
       return <div>{this.props.selection.length >0 ? <Redirect to="/listing" /> : (this.props.listings.length > 0 ? (<div className="closet-container">   {this.renderMarketListings()}  </div>) : null ) }</div>;
   }
 }
 
 function mapStateToProps(state) {
-    return { user: state.user.userId, listings: state.market.listings, selection: state.market.select};
+    return { userId: state.user.userId, listings: filterItemsAvailable(state.market.listings, state.user.userId), selection: state.market.select, myItems: filterMyItemsAvailable(state.market.listings, state.user.userId) };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -42,3 +43,15 @@ function mapDispatchToProps(dispatch) {
 
 
 export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Market))
+
+//HELPER METHODS:
+function filterItemsAvailable(arr, userId){
+    return arr.filter(e=> {
+        return e.buyer_id === null && e.seller_id !== userId
+    })
+}
+function filterMyItemsAvailable(arr, userId){
+    return arr.filter(e=> {
+        return e.seller_id === userId
+    })
+}

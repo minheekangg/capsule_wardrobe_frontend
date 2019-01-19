@@ -12,7 +12,7 @@ class ClosetItem extends React.Component {
          const daysSinceLastWorn = Math.ceil((Math.abs(today.getTime() - itemUpdateDate.getTime())) / (1000 * 3600 * 24))
         //  console.log("DAYS SINCE LAST WORN", daysSinceLastWorn, itemUpdateDate, today);
         return <Fragment>
-            {daysSinceLastWorn > 1 ? <div style={{ "borderStyle": "groove"}}>
+            {daysSinceLastWorn > 0 ? <div style={{ "borderStyle": "groove"}}>
             <p style={{color: "grey"}}>Days since last worn: {daysSinceLastWorn}</p>
                 <Col md={6}> 
                     <button to="./donate" className="item-buttons" style={{ color: "#1D4306"}} onClick={(e)=>this.redirectDonateOrSell(e,item.id)}>

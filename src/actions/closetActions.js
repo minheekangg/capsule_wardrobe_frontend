@@ -57,7 +57,8 @@ export function addItem(name, image, catId, userId) {
     return (dispatch) => {
         dispatch(
             { type: FETCHING_CLOSET }
-        )
+            )
+            debugger
         return axios({
             method: "post",
             baseURL: `${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${userId}/items`,

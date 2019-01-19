@@ -27,7 +27,7 @@ export default function itemReducer(state = initialState, action) {
         case RESET:
             return initialState;
         case POST_LISTING:
-            return { ...state, listings: [...state.listings, action.payload], isListingLoading: false }; 
+            return { ...state, listings: [...state.listings.filter(l => l.id !== action.payload.id), action.payload], isListingLoading: false, select: [] }; 
         default:
             return state;
     }
