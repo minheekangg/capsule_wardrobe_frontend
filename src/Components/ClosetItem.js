@@ -6,11 +6,6 @@ import { connect } from 'react-redux';
 
 class ClosetItem extends React.Component {
 
-    state = {
-        redirect: ""
-    }
-
-
      renderDaysWorn = (item) =>{
         const today = new Date()
         const itemUpdateDate = new Date(item.updated_at)
@@ -24,7 +19,7 @@ class ClosetItem extends React.Component {
                     Donate </button>
                 </Col>
                 <Col md={6}>
-                    <button className="item-buttons" style={{ color: "#C95D2D" }} onClick={(e)=>this.redirectDonateOrSell(e,item)}>
+                    <button className="item-buttons" style={{ color: "#C95D2D" }} onClick={(e)=>this.redirectDonateOrSell(e,item.id)}>
                     Sell </button>
                 </Col>
               </div> : 
@@ -70,10 +65,10 @@ class ClosetItem extends React.Component {
     renderBasedOnItemToDeleteStatus = () => {
         if (this.props.itemToDeleteStatus === "Donate") {
             return <Redirect to="/donate" />
-        } else if (this.props.itemToDelete === "Sell") {
-            return <Redirect to="/listing" />
+        } else if (this.props.itemToDeleteStatus === "Sell") {
+            return <Redirect to="/sell" />;
         } else {
-            return (filterOutCategoryName(this.props.items)).length > 0 ? this.renderContainerWithFilteredCategory(filterOutCategoryName(filterByClosetStatus((this.props.items)))) : null
+            return filterOutCategoryName(this.props.items).length > 0 ? this.renderContainerWithFilteredCategory(filterOutCategoryName(filterByClosetStatus(this.props.items))) : null;
         }
     }
 
@@ -85,8 +80,7 @@ class ClosetItem extends React.Component {
         )
     }
 }
-// itemToDelete: [],
-//     itemToDeleteStatus: ""
+
 const mapStateToProps = state => {
     return{itemToDeleteStatus: state.closet.itemToDeleteStatus}
 }

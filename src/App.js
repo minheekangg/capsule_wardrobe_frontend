@@ -12,6 +12,7 @@ import Outfit from './components/Outfit'
 import signUp from './components/signUp'
 import Listing from './components/Listing'
 import Donate from './components/Donate'
+import Sell from './components/Sell'
 
 class App extends Component {
   // <Route component={NotFound} />
@@ -30,6 +31,7 @@ class App extends Component {
           <Route exact path="/signup" component={signUp} />
           <Route exact path="/listing" component={Listing} />
           <Route exact path="/donate" component={Donate} />
+          <Route exact path="/sell" component={Sell} />
         </Switch>
       </Fragment>
     );

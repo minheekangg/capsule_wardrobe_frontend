@@ -7,14 +7,10 @@ const API_KEY = process.env.REACT_APP_GOOGLE_MAP_API
 
 
 class Donate extends React.Component {
-    // state = {
-    //     rerender: false
-    // }
-    handleDonateButtonClick = () => {
+
+  handleDonateButtonClick = () => {
     this.props.donateItem(this.props.userId, this.props.firstItem.id)
-    // console.log("loaded?",this.props.isLoaded)
-    // this.setState({ rerender: true })
-    }
+  }
 
   renderDonate = () => {
         return <div>
