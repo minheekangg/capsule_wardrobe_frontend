@@ -40,6 +40,7 @@ export function selectListing(itemId){
 }
 
 export function deselect(){
+    debugger
     return dispatch => {
       dispatch({ type: DESELECT_LISTING});
     };

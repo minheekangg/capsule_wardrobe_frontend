@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react'
 import { Col, Thumbnail } from "react-bootstrap";
-import { Link, Redirect } from "react-router-dom";
-import { selectItemToDelete } from '../actions/closetActions'
+import { Redirect } from "react-router-dom";
+import { selectItemToDelete, selectItemStatus } from "../actions/closetActions";
 import { connect } from 'react-redux';
 
 class ClosetItem extends React.Component {
@@ -20,7 +20,7 @@ class ClosetItem extends React.Component {
             {daysSinceLastWorn > 1 ? <div style={{ "borderStyle": "groove"}}>
             <p style={{color: "grey"}}>Days since last worn: {daysSinceLastWorn}</p>
                 <Col md={6}> 
-                    <button to="./donate" className="item-buttons" style={{ color: "#1D4306"}} onClick={(e)=>this.redirectDonateOrSell(e,item)}>
+                    <button to="./donate" className="item-buttons" style={{ color: "#1D4306"}} onClick={(e)=>this.redirectDonateOrSell(e,item.id)}>
                     Donate </button>
                 </Col>
                 <Col md={6}>
@@ -33,20 +33,16 @@ class ClosetItem extends React.Component {
           </Fragment>;
     }
 
-    redirectDonateOrSell = (event, item) => {
-        if (event.target.innerText === "Donate") {
-            this.props.selectItemToDelete(item.id, "donate" )
-        // } else if (event.target.innerText === "Sell") {
-        //     console.log("clickedddd",item)
-        //     this.setState({redirect: "listing"})
-        }
+    redirectDonateOrSell = (event, id) => {
+        this.props.selectItemToDelete(id)
+        this.props.selectItemStatus(event.target.innerText)
     }
     
 
      renderEachItem = itemArr => {
          return sortByTimesWorn(itemArr).map(eachItem=> {
-            return(<Col className="closet-item" xs={6} md={4} key={eachItem.id} onClick={() => this.props.handleSelectItem(eachItem.id, eachItem.category_id)}>
-                <Thumbnail className="item-img" src={eachItem.image} alt={eachItem.name}>
+            return(<Col className="closet-item" xs={6} md={4} key={eachItem.id} >
+                <Thumbnail className="item-img" src={eachItem.image} alt={eachItem.name} onClick={() => this.props.handleSelectItem(eachItem.id, eachItem.category_id)}>
                 <div className="item-info">
                     <h4>{eachItem.name}</h4>
                     <p>Times Worn: {eachItem.times_worn}</p>
@@ -71,12 +67,20 @@ class ClosetItem extends React.Component {
             })
     }
 
-    
+    renderBasedOnItemToDeleteStatus = () => {
+        if (this.props.itemToDeleteStatus === "Donate") {
+            return <Redirect to="/donate" />
+        } else if (this.props.itemToDelete === "Sell") {
+            return <Redirect to="/listing" />
+        } else {
+            return (filterOutCategoryName(this.props.items)).length > 0 ? this.renderContainerWithFilteredCategory(filterOutCategoryName(filterByClosetStatus((this.props.items)))) : null
+        }
+    }
 
     render(){
         return (
             <div>
-                {(filterOutCategoryName(this.props.items)).length > 0 ? this.renderContainerWithFilteredCategory(filterOutCategoryName(filterByClosetStatus((this.props.items)))) : null }
+                {this.renderBasedOnItemToDeleteStatus()}
             </div>
         )
     }
@@ -84,14 +88,11 @@ class ClosetItem extends React.Component {
 // itemToDelete: [],
 //     itemToDeleteStatus: ""
 const mapStateToProps = state => {
-    console.log(state)
-    return{itemToDelete: state.closet.itemToDelete}
+    return{itemToDeleteStatus: state.closet.itemToDeleteStatus}
 }
 
 const mapDispatchToProps = dispatch => {
-    return{
-        selectItemToDelete: (id, status) => dispatch(selectItemToDelete(id, status))
-    }
+    return { selectItemToDelete: (id) => dispatch(selectItemToDelete(id)), selectItemStatus: (status) => dispatch(selectItemStatus(status)) };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClosetItem)

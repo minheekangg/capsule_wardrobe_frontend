@@ -4,9 +4,9 @@ import {
   SELECT_ITEM,
   ADD_ITEM,
   REPLACE_ITEM,
-  INCREASE_TIMES_WORN,
+  UPDATED_ITEM,
   DESELECT_ITEM,
-  SELECT_DELETE_ACTION
+    SELECT_DELETE_ACTION, SELECT_ITEM_TO_DELETE
 } from "../types";
 import axios from "axios";
 
@@ -100,19 +100,51 @@ export function increaseTimesWorn(itemsArr, userId) {
             data: { item: {times_worn: (i.times_worn + 1)}}
         }).then(r => {
             if (r.statusText === "Created") {
-                dispatch({ type: INCREASE_TIMES_WORN, payload: r.data })
+                dispatch({ type: UPDATED_ITEM, payload: r.data })
             }
         })
     })
 }
 }
 
-export function selectItemToDelete(id, status){
-    return dispatch => {
-        dispatch({
-          type: SELECT_DELETE_ACTION,
-          payload: { id: id, status: status }
-        });
+export function selectItemToDelete(id){
+        return dispatch => {
+            dispatch({
+                type: SELECT_ITEM_TO_DELETE,
+                payload: id
+            })
+        }
     }
+
+export function selectItemStatus(status){
+    return dispatch => dispatch({ type: SELECT_DELETE_ACTION, payload: status })
 }
    
+
+export function donateItem(userId, id){
+    return (dispatch) => {
+        dispatch(
+            { type: FETCHING_CLOSET }
+        )
+        return axios({
+            method: "patch",
+            baseURL: `${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${userId}/items/${id}`,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            data: {
+                item: {
+                    current_status: "donated"
+                }
+            }
+        }).then(r => {
+            if (r.statusText === "OK") {
+                alert("donated!")
+                dispatch({ type: UPDATED_ITEM, payload: r.data });
+            }
+        })
+    }
+
+}

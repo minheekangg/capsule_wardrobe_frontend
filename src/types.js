@@ -15,7 +15,7 @@ export const AUTHENTICATED_USER = "AUTHENTICATED_USER";
 export const FAILED_LOGIN = "FAILED_LOGIN"; 
 export const CLOUDINARY_OPEN = "CLOUDINARY_OPEN"; 
 export const PICTURE_TO_ADD = "PICTURE_TO_ADD"; 
-export const INCREASE_TIMES_WORN = "INCREASE_TIMES_WORN"; 
+export const UPDATED_ITEM = "UPDATED_ITEM"; 
 export const DESELECT_ITEM = "DESELECT_ITEM"; 
 export const UPDATED_OUTFITS = "UPDATED_OUTFITS"; 
 export const LOGOUT_USER = "LOGOUT_USER"; 
@@ -24,5 +24,6 @@ export const FETCHING_LISTINGS = "FETCHING_LISTINGS";
 export const SELECT_LISTING = "SELECT_LISTING"; 
 export const DESELECT_LISTING = "DESELECT_LISTING"; 
 export const SELECT_DELETE_ACTION = "SELECT_DELETE_ACTION"; 
+export const SELECT_ITEM_TO_DELETE = "SELECT_ITEM_TO_DELETE"; 
 
 export const donationLocations = [{name: "Salvation Army", latitude: 40.732953, longitude: 73.990442}, {name: "Salvation Army", latitude: 40.732953, longitude: 73.990442}, {name: "Salvation Army", latitude: 40.732953, longitude: 73.990442}]
