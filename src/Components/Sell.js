@@ -1,45 +1,55 @@
 import React from 'react'
 import { connect } from 'react-redux';
-// import { donateItem } from "../actions/closetActions";
-import { Redirect } from "react-router-dom";
+import { postMyItem } from "../actions/marketActions";
+import { changeItemStatus } from "../actions/closetActions";
+import { Redirect, Link } from "react-router-dom";
 
 
 class Sell extends React.Component {
+    state = {
+        price: 0
+    }
 
-    // handleDonateButtonClick = () => {
-    //     this.props.donateItem(this.props.userId, this.props.firstItem.id)
-    // }
+  handleSellPost = (e) => {
+      e.preventDefault()
+      this.props.changeItemStatus(this.props.userId,this.props.firstItem.id, "Sell" )
+      this.props.postMyItem(this.props.userId, this.props.firstItem.id, this.state.price)
+  }
 
-    renderSellForm = () => {
-        return <form>
-            <h2>Please add more information to post to Market</h2>
-            <div className="listing-item">
-                <img
-                    src={this.props.firstItem.image}
-                    alt={this.props.firstItem.id}
-                />
+    handlePriceChange = event => {
+        this.setState({price: event.target.value })
+    }
+
+  renderSellForm = () => {
+    return (
+        <div>
+            <form onSubmit={(e)=> this.handleSellPost(e)}>
+              <h2>Please add more information to post to Market</h2>
+              <div className="listing-item">
+                <img src={this.props.firstItem.image} alt={this.props.firstItem.id} />
                 <p>{this.props.firstItem.name}</p>
-                <button>
-                    I'll donate!
-              </button>
-            </div>
-        </form>
-            
-    }
+                <input type="number" min="0" placeholder="Price" onChange={this.handlePriceChange}value={this.state.price}/>
+              </div>
+                <button type="Submit">I'll sell!</button>
+            </form>
+                <Link to="/donate">I'll donate!</Link>
+        </div>
+    );
+  };
 
-    // return this.props.item.length > 0 ? this.renderSellForm() : <Redirect to="/market" />;
-    render() {
-        return this.props.item.length > 0 ? this.renderSellForm() : "hello"
-    }
+
+  render() {
+      return this.props.item.length > 0 ? this.renderSellForm() : <Redirect to="/market" />;
+  }
 }
 
 const mapStateToProps = state => {
     return {
-        item: state.closet.itemToDelete, firstItem: state.closet.itemToDelete[0], userId: state.user.userId, isLoaded: state.closet.isLoaded
+        item: state.closet.itemToDelete, firstItem: state.closet.itemToDelete[0], userId: state.user.userId
     }
 }
 
 const mapDispatchToProps = dispatch => {
-    // return { sellItem: (userId, itemId) => dispatch(donateItem(userId, itemId)) }
+    return { postMyItem: (userId, itemId, price) => dispatch(postMyItem(userId, itemId, price)), changeItemStatus: (userId, itemId, newStatus) => dispatch(changeItemStatus(userId, itemId, newStatus)) };
 }
-export default connect(mapStateToProps, null)(Sell)
+export default connect(mapStateToProps, mapDispatchToProps)(Sell)

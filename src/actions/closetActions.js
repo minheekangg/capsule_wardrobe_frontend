@@ -121,30 +121,32 @@ export function selectItemStatus(status){
 }
    
 
-export function donateItem(userId, id){
+export function changeItemStatus(userId, id, newStatus){
     return (dispatch) => {
         dispatch(
             { type: FETCHING_CLOSET }
         )
         return axios({
-            method: "patch",
-            baseURL: `${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${userId}/items/${id}`,
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-                "Content-Type": "application/json",
-                Accept: "application/json"
-            },
-            data: {
-                item: {
-                    current_status: "donated"
-                }
+          method: "patch",
+          baseURL: `${
+            process.env.REACT_APP_API_ENDPOINT
+          }/api/v1/users/${userId}/items/${id}`,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          data: {
+            item: {
+              current_status: newStatus
             }
+          }
         }).then(r => {
-            if (r.statusText === "OK") {
-                alert("donated!")
-                dispatch({ type: UPDATED_ITEM, payload: r.data });
-            }
-        })
+          if (r.statusText === "OK") {
+            alert("donated!");
+            dispatch({ type: UPDATED_ITEM, payload: r.data });
+          }
+        });
     }
 
 }

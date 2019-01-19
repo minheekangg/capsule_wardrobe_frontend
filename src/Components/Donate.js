@@ -1,7 +1,7 @@
 import React from 'react'
 import DonateMap from './DonateMap'
 import { connect } from 'react-redux';
-import { donateItem } from "../actions/closetActions";
+import { changeItemStatus } from "../actions/closetActions";
 import { Redirect } from "react-router-dom";
 const API_KEY = process.env.REACT_APP_GOOGLE_MAP_API
 
@@ -9,7 +9,7 @@ const API_KEY = process.env.REACT_APP_GOOGLE_MAP_API
 class Donate extends React.Component {
 
   handleDonateButtonClick = () => {
-    this.props.donateItem(this.props.userId, this.props.firstItem.id)
+      this.props.changeItemStatus(this.props.userId, this.props.firstItem.id, "Donate")
   }
 
   renderDonate = () => {
@@ -51,6 +51,6 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch =>{
-    return { donateItem: (userId, itemId) => dispatch(donateItem(userId, itemId))}
+    return { changeItemStatus: (userId, itemId, newStatus) => dispatch(changeItemStatus(userId, itemId, newStatus)) };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Donate)

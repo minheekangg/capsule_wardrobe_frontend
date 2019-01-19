@@ -19,7 +19,7 @@ class ClosetItem extends React.Component {
                     Donate </button>
                 </Col>
                 <Col md={6}>
-                    <button className="item-buttons" style={{ color: "#C95D2D" }} onClick={(e)=>this.redirectDonateOrSell(e,item.id)}>
+                    <button className="item-buttons" style={{ color: "#C95D2D" }} onClick={(e) => this.redirectDonateOrSell(e, item.id)}>
                     Sell </button>
                 </Col>
               </div> : 
