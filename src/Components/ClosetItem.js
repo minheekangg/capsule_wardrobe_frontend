@@ -89,11 +89,6 @@ function sortCategoryById(arr) {
   });
 }
 
-
-// function mapItemsToCatIemHash(arr) {
-//     return new Map(arr.map(i => [i.category.name, i]))
-// }
-
 function filterOutCategoryName(itemArr){
     console.log(sortCategoryById(itemArr))
     return ((sortCategoryById(itemArr)).map(e => e.category.name)).filter((v, i, a) => a.indexOf(v) === i)

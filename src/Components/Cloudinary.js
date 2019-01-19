@@ -8,7 +8,6 @@ import { Redirect } from "react-router";
 
 const MY_CLOUD_NAME = process.env.REACT_APP_MY_CLOUD_NAME;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
-const CLOUD_SETTING = process.env.REACT_APP_CLOUDINARY_SETTING;
 
 class Cloudinary extends React.Component {
   state = { itemImg: "", itemName: "", itemCat: 0, addingItem: true};
@@ -21,8 +20,9 @@ class Cloudinary extends React.Component {
       },
       (error, result) => {
         if (result && result.event === "success") {
+          debugger
           this.setState({
-            itemImg: `http://res.cloudinary.com/${MY_CLOUD_NAME}/image/upload/${CLOUD_SETTING}/${
+            itemImg: `http://res.cloudinary.com/${MY_CLOUD_NAME}/image/upload/w_300,h_300,c_lpad,b_white/${
               result.info.path
             }`
           });

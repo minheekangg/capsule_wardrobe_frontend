@@ -33,9 +33,9 @@ class Outfit extends React.Component {
    
         
     renderEachItemCollection = (itemsArr, outfitDay) => {
-        return itemsArr.map(i=>{
-            return <Image key={(outfitDay + i.id)} src={i.image}  style={{height: "20vh", width: "20vh"}} />
-        })
+        return sortCategoryById(itemsArr).map(i => {
+          return <Image key={outfitDay + i.id} src={i.image} style={{ height: "20vh", width: "20vh" }} />;
+        });
 
     }
 
@@ -76,4 +76,11 @@ const sortByDate = (arr) => {
    return arr.sort(function (a, b) {
        return new Date(b.day) - new Date(a.day);
     })
+}
+
+
+function sortCategoryById(arr) {
+    return arr.sort(function (a, b) {
+        return a.category_id - b.category_id;
+    });
 }
