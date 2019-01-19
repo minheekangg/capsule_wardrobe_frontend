@@ -45,7 +45,7 @@ class ClosetItem extends React.Component {
      renderContainerWithFilteredCategory = (filteredCategory) => {
          return filteredCategory.map(category=> {
              return <div className="category-item" key={`123${category}`}>
-                <h5>{filteredCategory.name}</h5>
+                <h5>{category}</h5>
                 <div className="category-item-overflow">
                   {this.renderEachItem(
                     returnArrItemsByCategory(this.props.items, category)
@@ -58,7 +58,7 @@ class ClosetItem extends React.Component {
     
 
     render(){
-        // console.log(filterOutCategoryName(this.props.items));
+        console.log(filterOutCategoryName(this.props.items));
         return (
             <div>
                 {(filterOutCategoryName(this.props.items)).length > 0 ? this.renderContainerWithFilteredCategory(filterOutCategoryName(filterByClosetStatus((this.props.items)))) : null }
@@ -83,12 +83,20 @@ function filterByClosetStatus(arr) {
     })
 }
 
+function sortCategoryById(arr) {
+  return arr.sort(function(a, b) {
+      return a.category_id - b.category_id;
+  });
+}
+
+
 // function mapItemsToCatIemHash(arr) {
 //     return new Map(arr.map(i => [i.category.name, i]))
 // }
 
 function filterOutCategoryName(itemArr){
-    return (itemArr.map(e => e.category.name)).filter((v, i, a) => a.indexOf(v) === i)
+    console.log(sortCategoryById(itemArr))
+    return ((sortCategoryById(itemArr)).map(e => e.category.name)).filter((v, i, a) => a.indexOf(v) === i)
 }
 
 function returnArrItemsByCategory(totalItemArr, categoryName){
