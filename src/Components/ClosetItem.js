@@ -1,29 +1,45 @@
 import React, {Fragment} from 'react'
 import { Col, Thumbnail } from "react-bootstrap";
+import { Link, Redirect } from "react-router-dom";
+import { selectItemToDelete } from '../actions/closetActions'
+import { connect } from 'react-redux';
 
 class ClosetItem extends React.Component {
 
+    state = {
+        redirect: ""
+    }
 
-     renderDaysWorn = (updated_at) =>{
+
+     renderDaysWorn = (item) =>{
         const today = new Date()
-        const itemUpdateDate = new Date(updated_at)
+        const itemUpdateDate = new Date(item.updated_at)
          const daysSinceLastWorn = Math.ceil((Math.abs(today.getTime() - itemUpdateDate.getTime())) / (1000 * 3600 * 24))
         //  console.log("DAYS SINCE LAST WORN", daysSinceLastWorn, itemUpdateDate, today);
         return <Fragment>
             {daysSinceLastWorn > 1 ? <div style={{ "borderStyle": "groove"}}>
             <p style={{color: "grey"}}>Days since last worn: {daysSinceLastWorn}</p>
                 <Col md={6}> 
-                    <button className="item-buttons" style={{ color: "#1D4306"}}>
+                    <button to="./donate" className="item-buttons" style={{ color: "#1D4306"}} onClick={(e)=>this.redirectDonateOrSell(e,item)}>
                     Donate </button>
                 </Col>
                 <Col md={6}>
-                    <button className="item-buttons" style={{ color: "#C95D2D" }}>
+                    <button className="item-buttons" style={{ color: "#C95D2D" }} onClick={(e)=>this.redirectDonateOrSell(e,item)}>
                     Sell </button>
                 </Col>
               </div> : 
             null
             }
           </Fragment>;
+    }
+
+    redirectDonateOrSell = (event, item) => {
+        if (event.target.innerText === "Donate") {
+            this.props.selectItemToDelete(item.id, "donate" )
+        // } else if (event.target.innerText === "Sell") {
+        //     console.log("clickedddd",item)
+        //     this.setState({redirect: "listing"})
+        }
     }
     
 
@@ -34,7 +50,7 @@ class ClosetItem extends React.Component {
                 <div className="item-info">
                     <h4>{eachItem.name}</h4>
                     <p>Times Worn: {eachItem.times_worn}</p>
-                    {this.renderDaysWorn(eachItem.updated_at)}
+                    {this.renderDaysWorn(eachItem)}
                 </div>
                 </Thumbnail>
             </Col>)
@@ -58,7 +74,6 @@ class ClosetItem extends React.Component {
     
 
     render(){
-        console.log(filterOutCategoryName(this.props.items));
         return (
             <div>
                 {(filterOutCategoryName(this.props.items)).length > 0 ? this.renderContainerWithFilteredCategory(filterOutCategoryName(filterByClosetStatus((this.props.items)))) : null }
@@ -66,11 +81,23 @@ class ClosetItem extends React.Component {
         )
     }
 }
+// itemToDelete: [],
+//     itemToDeleteStatus: ""
+const mapStateToProps = state => {
+    console.log(state)
+    return{itemToDelete: state.closet.itemToDelete}
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        selectItemToDelete: (id, status) => dispatch(selectItemToDelete(id, status))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClosetItem)
 
 
-
-export default ClosetItem
-
+//HELPER METHODS BELOW:
 function sortByTimesWorn(arr) {
     return arr.sort(function (a, b) {
         return a.times_worn - b.times_worn
@@ -90,7 +117,6 @@ function sortCategoryById(arr) {
 }
 
 function filterOutCategoryName(itemArr){
-    console.log(sortCategoryById(itemArr))
     return ((sortCategoryById(itemArr)).map(e => e.category.name)).filter((v, i, a) => a.indexOf(v) === i)
 }
 

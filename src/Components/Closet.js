@@ -57,7 +57,6 @@ class Closet extends React.Component {
   };
 
   renderCloset() {
-    console.log("HERE inside rendercloset function", this.props.items )
     return <Fragment>
         <Grid>
           <div className="category-menu">

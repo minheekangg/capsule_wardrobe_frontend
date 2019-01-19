@@ -1,10 +1,12 @@
-import {  FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, RESET, ADD_ITEM, REPLACE_ITEM, INCREASE_TIMES_WORN, DESELECT_ITEM } from '../types';
+import { FETCHED_CLOSET, FETCHING_CLOSET, SELECT_ITEM, RESET, ADD_ITEM, REPLACE_ITEM, INCREASE_TIMES_WORN, DESELECT_ITEM, SELECT_DELETE_ACTION } from '../types';
 
 const initialState = {
     items: [],
     loadingItems: false,
     selectedItems: [],
-    isLoaded: false
+    isLoaded: false,
+    itemToDelete: [],
+    itemToDeleteStatus: ""
 };
 
 
@@ -28,6 +30,8 @@ export default function itemReducer(state = initialState, action) {
             return { ...state, selectedItems: [...selected], loadingItems: false}
         case INCREASE_TIMES_WORN:
             return { ...state, items: [...state.items.filter(s => { return s.id !== action.payload.id }), action.payload ] }
+        case SELECT_DELETE_ACTION:
+            return {...state, itemToDelete: state.items.filter(i=> i.id === action.payload.id), itemToDeleteStatus: action.payload.status }
         case RESET:
             return initialState
         default:

@@ -5,7 +5,8 @@ import {
   ADD_ITEM,
   REPLACE_ITEM,
   INCREASE_TIMES_WORN,
-  DESELECT_ITEM
+  DESELECT_ITEM,
+  SELECT_DELETE_ACTION
 } from "../types";
 import axios from "axios";
 
@@ -104,5 +105,14 @@ export function increaseTimesWorn(itemsArr, userId) {
         })
     })
 }
+}
+
+export function selectItemToDelete(id, status){
+    return dispatch => {
+        dispatch({
+          type: SELECT_DELETE_ACTION,
+          payload: { id: id, status: status }
+        });
+    }
 }
    
