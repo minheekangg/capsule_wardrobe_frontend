@@ -31,21 +31,6 @@ class Donate extends React.Component {
         }).catch(error => {
             console.log(error)
         })
-        axios({
-            method: "get",
-            baseURL:`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.8670522,-74.1957362&radius=1500&keyword=donation&key=${API_KEY}`,
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "Access-Control-Allow-Origin": "*"}
-        })
-          .then(r => {
-            debugger
-          })
-          .catch(error => {
-            console.log(error);
-          });
     }
 
 

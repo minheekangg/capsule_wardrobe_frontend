@@ -4,13 +4,8 @@ import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
 import {donationLocations} from '../types'
 import { connect } from 'react-redux';
 import { getMarkers } from "../actions/mapActions";
-// `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${props.center.lat},&${props.center.long}&radius=1500&type=restaurant&key=${API_KEY}`,
-const DonateMap = withScriptjs(withGoogleMap((props) => {
 
-    const fetchNearByMarkers = () =>{
-        props.getMarkers(props.center.lat, props.center.lng)
-        
-    }
+const DonateMap = withScriptjs(withGoogleMap((props) => {
 
     const markers = donationLocations.map(store => (
         <DonateMarker
