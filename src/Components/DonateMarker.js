@@ -3,6 +3,7 @@ import { Marker } from "react-google-maps";
 import image from "../images/waste-bin.png"; 
 // import StoreCard from "./StoreCard"
 // import { InfoWindow } from 'google-maps-react';
+
 export default class DonateMarker extends React.Component {
 
     state = {
