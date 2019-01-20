@@ -12,7 +12,7 @@ class Donate extends React.Component {
         lat: ""
     }
     componentDidMount() {
-        var location = '2586 44th st Astoria NY'
+        var location = this.props.city
         axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
             params: {
                 address: location,
@@ -71,7 +71,7 @@ class Donate extends React.Component {
 
 const mapStateToProps = state => {
     return{
-        item: state.closet.itemToDelete, firstItem: state.closet.itemToDelete[0], userId: state.user.userId, isLoaded: state.closet.isLoaded
+        item: state.closet.itemToDelete, firstItem: state.closet.itemToDelete[0], userId: state.user.userId, isLoaded: state.closet.isLoaded, city: state.user.city
     }
 }
 
