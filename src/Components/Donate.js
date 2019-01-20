@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { changeItemStatus } from "../actions/closetActions";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+
 const API_KEY = process.env.REACT_APP_GOOGLE_MAP_API
 
 class Donate extends React.Component {
@@ -24,13 +25,27 @@ class Donate extends React.Component {
                     long: r.data.results[0].geometry.location.lng,
                     lat: r.data.results[0].geometry.location.lat
                 },
-                () => {
-                    console.log(this.state);
+                () =>{console.log(this.state)
                 }
             );
         }).catch(error => {
             console.log(error)
         })
+        axios({
+            method: "get",
+            baseURL:`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.8670522,-74.1957362&radius=1500&keyword=donation&key=${API_KEY}`,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "Access-Control-Allow-Origin": "*"}
+        })
+          .then(r => {
+            debugger
+          })
+          .catch(error => {
+            console.log(error);
+          });
     }
 
 
