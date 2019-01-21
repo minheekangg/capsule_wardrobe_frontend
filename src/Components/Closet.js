@@ -18,7 +18,8 @@ import { Link, Redirect } from "react-router-dom";
 
 class Closet extends React.Component {
   state = {
-    date: new Date()
+    date: new Date(),
+    selectionRender: false
   };
 
   componentDidMount() {
@@ -71,49 +72,38 @@ class Closet extends React.Component {
   }
   renderSelection() {
     const sortedSelection = sortByCategory(this.props.selectedItems);
-    return (
-      <div>
-        
+    return <div className="selection-container">
         <Form onSubmit={this.handleOutfitSubmit}>
           <h1>Selected:</h1>
           <div className="closet-container">
             {sortedSelection.map(selected => {
-              return (
-                <Selection
-                  key={selected.id}
-                  image={selected.image}
-                  name={selected.name}
-                  id={selected.id}
-                  times_worn={selected.times_worn}
-                />
-              );
+              return <Selection key={selected.id} image={selected.image} name={selected.name} id={selected.id} times_worn={selected.times_worn} />;
             })}
           </div>
-          <DatePicker
-            selected={this.state.date}
-            onChange={this.handleDateChange}
-          />
+          <DatePicker selected={this.state.date} onChange={this.handleDateChange} />
           <Button type="submit">Outfit</Button>
         </Form>
-      </div>
-    );
+      </div>;
   }
 
   render() {
     return <div>
         <div className="fakeNavbar" style={{ backgroundColor: "#1D4306" }} />
         {this.props.hasOutfits ? <Redirect to="./outfits" /> : <div>
-            <Link to="/additem" content="Add item" style={{ color: "#C95D2D" }}>
+          <div style={{position: "relative", height: "2vh", fontSize: "15px"}}>
+            <Link to="/additem" content="Add item" style={{ color: "#C95D2D", position:"absolute", right:0, paddingRight: "2vh" }}>
               Add more!
             </Link>
-            <br />
-            <Link to="/outfits" content="outfits" style={{ color: "#1D4306" }}>
+          <Link to="/outfits" content="outfits" style={{ color: "#1D4306", position: "absolute", paddingLeft: "2vh"}}>
               See Outfits
             </Link>
+          </div>
+        <div className="closetselection-container">
             {this.props.isLoaded ? this.renderCloset() : <LoadingPage />}
             {this.props.isLoaded ? this.renderSelection() : <div>
-                "Please select items to wear today!"
+              "Please select items to wear today!"
               </div>}
+          </div>
           </div>}
       </div>;
   }

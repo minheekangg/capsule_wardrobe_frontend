@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react'
-import { Col, Thumbnail } from "react-bootstrap";
+import { Col} from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import { selectItemToDelete, selectItemStatus } from "../actions/closetActions";
 import { connect } from 'react-redux';
@@ -12,8 +12,8 @@ class ClosetItem extends React.Component {
          const daysSinceLastWorn = Math.ceil((Math.abs(today.getTime() - itemUpdateDate.getTime())) / (1000 * 3600 * 24))
         //  console.log("DAYS SINCE LAST WORN", daysSinceLastWorn, itemUpdateDate, today);
         return <Fragment>
-            {daysSinceLastWorn > 0 ? <div style={{ "borderStyle": "groove"}}>
-            <p style={{color: "grey"}}>Days since last worn: {daysSinceLastWorn}</p>
+            {daysSinceLastWorn > 30 ? <div>
+                <p style={{ fontSize: "12px"}}> {daysSinceLastWorn} days since last worn</p>
                 <Col md={6}> 
                     <button to="./donate" className="item-buttons" style={{ color: "#1D4306"}} onClick={(e)=>this.redirectDonateOrSell(e,item.id)}>
                     Donate </button>
@@ -36,27 +36,36 @@ class ClosetItem extends React.Component {
 
      renderEachItem = itemArr => {
          return sortByTimesWorn(itemArr).map(eachItem=> {
-            return(<Col className="closet-item" xs={6} md={4} key={eachItem.id} >
-                <Thumbnail className="item-img" src={eachItem.image} alt={eachItem.name} onClick={() => this.props.handleSelectItem(eachItem.id, eachItem.category_id)}>
-                <div className="item-info">
-                    <h4>{eachItem.name}</h4>
-                    <p>Times Worn: {eachItem.times_worn}</p>
-                    {this.renderDaysWorn(eachItem)}
+            return <div className="closet-item">
+                <div class="card" key={eachItem.id}>
+                  <div class="card-image">
+                    <img src={eachItem.image} alt={eachItem.name} />
+                    <span class="card-title" style={{color: "grey", fontSize: "20px"}}>{eachItem.name}
+                    </span>
+                    <button class="btn-floating halfway-fab waves-effect waves-light red">
+                            <i class="material-icons" onClick={() => this.props.handleSelectItem(eachItem.id, eachItem.category_id)}>+</i>
+                    </button>
+                  </div>
+                  <div class="card-content">
+                        <p style={{fontSize: "15px"}}> Times Worn: {eachItem.times_worn}</p>
+                        <p> {this.renderDaysWorn(eachItem)}</p>
+                  </div>
                 </div>
-                </Thumbnail>
-            </Col>)
+              </div>;
          })
     }
-
+     
 
      renderContainerWithFilteredCategory = (filteredCategory) => {
          return filteredCategory.map(category=> {
              return <div className="category-item" key={`123${category}`}>
-                <h5>{category}</h5>
+                 <div class="col s12">
+                     <h5 class="col s2">{category}</h5>
                 <div className="category-item-overflow">
                   {this.renderEachItem(
                     returnArrItemsByCategory(this.props.items, category)
                   )}
+                  </div>
                 </div>
               </div>;
             })

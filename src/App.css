@@ -1,4 +1,5 @@
 
+/* $link-color {color: "purple", "darken-1" !default;} */
 
 .App {
   text-align: center;
@@ -106,14 +107,14 @@
 
 
 .category-item{
-
+  margin-left: -20vh;
   display: flex;
   position: relative;
 }
 
 .closet-item{
-  width: 30vh;
-  height: 40vh;
+  width: 25vh;
+  height: 35vh;
   padding: 2vh;
 }
 
@@ -175,10 +176,13 @@
 }
 
 .item-buttons{
+  position:absolute;
   border: none;
-  width: 12vh;
+  width: 10vh;
   margin-left: -2vh;
   /* z-index: 0; */
+  font-size: 15px;
+  background-color: #F0FBFF;
 }
 
 .listing-item{
@@ -192,4 +196,43 @@
   object-fit: cover;
   width: 100%;
   max-height: 20vh;
+}
+
+.selection-container{
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  /* overflow-x: hidden; */
+  flex-flow: column;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.closetselection-container{
+
 }
