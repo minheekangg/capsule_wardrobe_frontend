@@ -75,7 +75,7 @@ class Cloudinary extends React.Component {
       <Redirect to="/closet" />
     ) : (
      <div className="card">
-        {this.state.itemImg.length > 0 ? this.renderForm() : null}
+          <div className="fakeNavbar" style={{ backgroundColor: "#1D4306", marginTop: "-1vh"}} />{this.state.itemImg.length > 0 ? this.renderForm() : null}
       </div>
     )
 

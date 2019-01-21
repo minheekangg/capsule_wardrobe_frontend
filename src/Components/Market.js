@@ -28,7 +28,13 @@ class Market extends React.Component {
 
   render() {
     console.log(this.props.userId, "available", this.props.listings, "mine", this.props.myItems);
-      return <div>{this.props.selection.length >0 ? <Redirect to="/listing" /> : (this.props.listings.length > 0 ? (<div className="closet-container">   {this.renderMarketListings()}  </div>) : null ) }</div>;
+      return <div>
+          <div className="fakeNavbar" style={{ backgroundColor: "#C95D2D" }} />
+          {this.props.selection.length > 0 ? <Redirect to="/listing" /> : this.props.listings.length > 0 ? <div className="closet-container">
+              {" "}
+              {this.renderMarketListings()}{" "}
+            </div> : null}
+        </div>;
   }
 }
 

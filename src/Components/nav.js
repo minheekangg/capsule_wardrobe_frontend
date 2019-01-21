@@ -15,17 +15,17 @@ const NavBar = (props) => {
 
 
   return props.loggedIn ? <div class="navbar-fixed">
-    <nav>
+    <nav >
       <div class="nav-wrapper">
-        <a href="/" class="brand-logo center" style={{color: "grey"}}>CAPSULE WARDROBE</a>
+        <a href="/" className="brand-logo center" style={{color: "black", fontSize: "2vh"}}>CAPSULE WARDROBE</a>
    
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-         
-          <li><a href="/closet" style={{ color: "#1D4306", marginRight: "70vh" }}>JavaScript</a></li>
+         <li><a href="/market" className="nav-closet-right">MARKET</a></li>
+          <li> <button className="logout-button" onClick={() => handleLogoutClick()}>Logout</button> </li>
         </ul>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li><a href="/closet" style={{ color: "#C95D2D", marginleft: "70vh" }}>JavaScript</a></li>
-          <li>  <button onClick={() => handleLogoutClick()}>Logout</button> </li>
+          <li> <p className="userIcon">{props.username}</p> </li>
+          <li><a href="/closet" className="nav-closet-left">CLOSET</a></li>
         </ul>
      
       </div>

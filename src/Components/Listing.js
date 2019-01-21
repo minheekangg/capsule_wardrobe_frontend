@@ -32,7 +32,9 @@ class Listing extends React.Component{
         <button onClick={this.backtoMarketClick}>Back to Market</button> </div>)
     }
     render(){
-        return this.props.select ? this.renderItemInfo() : <Redirect to="/market" /> 
+        return <div>
+    <div className="fakeNavbar" style={{ backgroundColor: "#C95D2D" }} />{this.props.select ? this.renderItemInfo() : <Redirect to="/market" /> }
+        </div>
     }
 }
 function mapStateToProps(state) {

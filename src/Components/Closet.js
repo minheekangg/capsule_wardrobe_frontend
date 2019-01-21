@@ -73,6 +73,7 @@ class Closet extends React.Component {
     const sortedSelection = sortByCategory(this.props.selectedItems);
     return (
       <div>
+        
         <Form onSubmit={this.handleOutfitSubmit}>
           <h1>Selected:</h1>
           <div className="closet-container">
@@ -99,33 +100,22 @@ class Closet extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.props.hasOutfits ? (
-          <Redirect to="./outfits" />
-        ) : (
-          <div>
-              <Link to="/additem" content="Add item" style={{ color: "#C95D2D" }} >
+    return <div>
+        <div className="fakeNavbar" style={{ backgroundColor: "#1D4306" }} />
+        {this.props.hasOutfits ? <Redirect to="./outfits" /> : <div>
+            <Link to="/additem" content="Add item" style={{ color: "#C95D2D" }}>
               Add more!
             </Link>
-            <br/>
-              <Link to="/outfits" content="outfits" style={{ color: "#1D4306" }} >
+            <br />
+            <Link to="/outfits" content="outfits" style={{ color: "#1D4306" }}>
               See Outfits
             </Link>
-            { this.props.isLoaded ? (
-              this.renderCloset()
-            ) : (
-              <LoadingPage />
-            )}
-            {this.props.isLoaded ? (
-              this.renderSelection()
-            ) : (
-              <div>"Please select items to wear today!"</div>
-            )}
-          </div>
-        )}
-      </div>
-    );
+            {this.props.isLoaded ? this.renderCloset() : <LoadingPage />}
+            {this.props.isLoaded ? this.renderSelection() : <div>
+                "Please select items to wear today!"
+              </div>}
+          </div>}
+      </div>;
   }
 }
 
