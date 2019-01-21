@@ -41,27 +41,33 @@ class Donate extends React.Component {
   renderDonate = () => {
       return <div >
             <div className="fakeNavbar" style={{ backgroundColor: "#1D4306"}} />
-            <h2>Please confirm to donate</h2>
-            <div className="listing-item">
-                <img
-                    src={this.props.firstItem.image}
-                    alt={this.props.firstItem.id}
-                />
-                <p>{this.props.firstItem.name}</p>
-                <button onClick={()=>this.handleDonateButtonClick()}>
-                    I'll donate!
-              </button>
+            <div className="donate">
+            <h4>Please confirm to donate</h4>
+              <div class="row"> 
+                  <div class="col s3">      
+                    <div className="listing-item">
+                        <img
+                            src={this.props.firstItem.image}
+                            alt={this.props.firstItem.id}
+                        />
+                        <h6>{this.props.firstItem.name}</h6>
+                        <button onClick={()=>this.handleDonateButtonClick()}>
+                            I'll donate!
+                    </button>
+                    </div>
+                  </div>
+                  <div class="col s9">      
+                    <p style={{color: "grey"}}>Donation Bins Near You</p>
+                    <DonateMap
+                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+                        loadingElement={<div style={{ height: `100%` }} />}
+                        containerElement={<div style={{ height: `600px`, width: `600px` }} />}
+                        mapElement={<div style={{ height: `100%` }} />}
+                        center={{ lat: this.state.lat, lng: this.state.long }}
+                    />
+                  </div>
+              </div>
             </div>
-            }
-            <br />
-            <h5>Please see nearby donations bins :) </h5>
-            <DonateMap
-                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
-                loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={{ height: `600px`, width: `600px` }} />}
-                mapElement={<div style={{ height: `100%` }} />}
-                center={{ lat: this.state.lat, lng: this.state.long }}
-            />
         </div>
   }
 
