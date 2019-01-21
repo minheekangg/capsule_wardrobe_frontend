@@ -200,12 +200,12 @@
 
 .selection-container{
   height: 100%;
-  width: 250px;
+  width: 40vh;
   position: fixed;
   z-index: 1;
   top: 0;
   right: 0;
-  background-color: #111;
+  background-color:#F0FBFF;
   /* overflow-x: hidden; */
   flex-flow: column;
   transition: 0.5s;
@@ -225,14 +225,14 @@
   color: #f1f1f1;
 }
 
-.sidenav .closebtn {
+/* .sidenav .closebtn {
   position: absolute;
   top: 0;
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
-}
+} */
 
 .closetselection-container{
-
+  position: relative
 }

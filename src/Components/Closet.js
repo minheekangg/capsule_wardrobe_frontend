@@ -75,15 +75,24 @@ class Closet extends React.Component {
     return <div className="selection-container">
         <Form onSubmit={this.handleOutfitSubmit}>
           <h1>Selected:</h1>
+          <DatePicker selected={this.state.date} onChange={this.handleDateChange} />
           <div className="closet-container">
             {sortedSelection.map(selected => {
               return <Selection key={selected.id} image={selected.image} name={selected.name} id={selected.id} times_worn={selected.times_worn} />;
             })}
           </div>
-          <DatePicker selected={this.state.date} onChange={this.handleDateChange} />
-          <Button type="submit">Outfit</Button>
+          <Button type="submit" style={{margin: "2vh", backgroundColor: "grey"}}>Outfit</Button>
         </Form>
       </div>;
+  }
+
+  renderClosetAndSelectionContainer = () => {
+    return this.props.selectedItems.length > 0 ? <div className="closetselection-container">
+   { this.renderSelection()}
+      <div style={{ width: "60%"}}>
+       { this.renderCloset()}
+    </div>
+      </div> : this.renderCloset();
   }
 
   render() {
@@ -98,12 +107,10 @@ class Closet extends React.Component {
               See Outfits
             </Link>
           </div>
-        <div className="closetselection-container">
-            {this.props.isLoaded ? this.renderCloset() : <LoadingPage />}
-            {this.props.isLoaded ? this.renderSelection() : <div>
-              "Please select items to wear today!"
-              </div>}
-          </div>
+        
+        {this.props.isLoaded ? this.renderClosetAndSelectionContainer() : <LoadingPage />}
+
+      
           </div>}
       </div>;
   }
