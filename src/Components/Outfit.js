@@ -4,6 +4,8 @@ import withAuth from "../hoc/withAuth";
 import { fetchOutfits, faveOutfit } from "../actions/outfitActions";
 import {Image} from "react-bootstrap";
 import { fetchCloset } from "../actions/closetActions";
+import favoriteImg from '../images/favorite.png'
+import starImg from '../images/star.png'
 
 class Outfit extends React.Component {
     state = {
@@ -19,14 +21,12 @@ class Outfit extends React.Component {
         let sorted = sortByDate(this.props.outfits);
         return sorted.map(o => {
           return <div className="outfit-container" key={o.id}>
-              <h5 key={o.id}>{o.day}
-              </h5>
-              {this.renderEachItemCollection(o.items, o.day)}
-              <h5>
-                  <button onClick={()=>this.props.faveOutfit(this.props.user, o.id, o.favorite)} style={{ border: "none" }}>
-                      Favorite: {o.favorite ? "★TRUE" : "☆FALSE"}
+              <h6 key={o.id}>{o.day}
+                  <button onClick={()=>this.props.faveOutfit(this.props.user, o.id, o.favorite)}  style={{border: "none"}}>
+         {o.favorite ? <img src={favoriteImg} alt="favorite"/> : <img src={starImg} alt="star" /> }
                   </button>
-              </h5>
+              </h6>
+              {this.renderEachItemCollection(o.items, o.day)}
             </div>;
         });
     }
@@ -34,7 +34,7 @@ class Outfit extends React.Component {
         
     renderEachItemCollection = (itemsArr, outfitDay) => {
         return sortCategoryById(itemsArr).map(i => {
-          return <Image key={outfitDay + i.id} src={i.image} style={{ height: "20vh", width: "20vh" }} />;
+          return <Image key={outfitDay + i.id} src={i.image} style={{ height: "20vh", width: "20vh", margin: ".5vh" }} />;
         });
 
     }

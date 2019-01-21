@@ -89,7 +89,7 @@ class Closet extends React.Component {
   renderClosetAndSelectionContainer = () => {
     return this.props.selectedItems.length > 0 ? <div className="closetselection-container">
    { this.renderSelection()}
-      <div style={{ width: "60%"}}>
+      <div style={{ width: "60%", marginLeft: "10vh"}}>
        { this.renderCloset()}
     </div>
       </div> : this.renderCloset();

@@ -48,12 +48,12 @@ class Cloudinary extends React.Component {
   }
 
   renderForm = () =>{
-    return <form onSubmit={e => this.handleFormSubmit(e)}>
+    return <form onSubmit={e => this.handleFormSubmit(e)} className="newItemForm">
         <Image src={this.state.itemImg} alt="item to add" />
         <FormGroup controlId="formControlsSelect">
           <ControlLabel>Add information about your piece!</ControlLabel>
-          <select placeholder="select" onChange={this.handleDropdownChange}>
-            <option value="">Select a category</option>
+        <FormControl componentClass="select" style={{ width: "70vh", marginLeft: "30%" }} onChange={this.handleDropdownChange}>
+            <option value="select">Category</option>
             <option value="Activewear">Activewear</option>
             <option value="Dresses">Dresses</option>
             <option value="Outerwears">Outerwears</option>
@@ -62,8 +62,8 @@ class Cloudinary extends React.Component {
             <option value="Tops">Tops</option>
             <option value="Shoes">Shoes</option>
             <option value="Misc">Misc</option>
-          </select>
-          <FormControl type="text" value={this.state.itemName} placeholder="Enter Name" onChange={this.handleNameChange} />
+          </FormControl>
+          <FormControl type="text" style={{width: "70vh", marginLeft: "30%"}} value={this.state.itemName} placeholder="Enter Name" onChange={this.handleNameChange} />
         </FormGroup>
         <Button type="submit">Submit</Button>
       </form>;

@@ -39,7 +39,7 @@ class Donate extends React.Component {
   }
 
   renderDonate = () => {
-        return <div>
+      return <div >
             <div className="fakeNavbar" style={{ backgroundColor: "#1D4306"}} />
             <h2>Please confirm to donate</h2>
             <div className="listing-item">

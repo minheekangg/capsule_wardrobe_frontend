@@ -151,11 +151,17 @@
   position: relative;
   display: flex;
   flex-direction: row;
+  border-style: groove;
+  /* border-color: #F0FBFF; */
+  /* border-width: 2px; */
   /* flex-wrap: wrap; */
   justify-content: flex-start;
-  /* background-color: green; */
   padding: 2vh;
   max-height: 25vh;
+  /* background-color: #F0FBFF; */
+  max-width: 1280px;
+  margin: 1vh;
+  margin-left: 426px;
 }
 
 
@@ -191,6 +197,7 @@
   width: 20vh;
   height: 25vh;
   padding: 2vh;
+  margin-left: 426px;
 }
 .listing-item img{
   object-fit: cover;
@@ -235,4 +242,16 @@
 
 .closetselection-container{
   position: relative
+}
+
+.newItemForm{
+  /* margin-left: 426px; */
+  height: 100vh;
+  margin-top: 2vh;
+  /* background-color: purple; */
+  text-align: center;
+  align-items: center;
+  padding: 10vh;
+  border: none;
+  overflow-y: hidden;
 }
