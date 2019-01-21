@@ -4,7 +4,7 @@ import { withRouter, Redirect } from "react-router";
 import { LoginUser } from "../actions/userActions";
 import '../App.css'
 import {  FormGroup,  FormControl, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 class Login extends React.Component{
     state = {
@@ -34,19 +34,17 @@ class Login extends React.Component{
                   <h2 className="loginHeader">CAPSULE WARDROBE</h2>
                   <FormControl.Feedback />
                   <FormGroup widths="equal" className="loginInput">
-                    <FormControl type="text" label="Text" name="username" placeholder="Enter text" onChange={this.handleChange} value={this.state.username} />
+                    <FormControl type="text" label="Text" name="username" placeholder="Enter text" onChange={this.handleChange} value={this.state.username} style={{color: "grey"}} />
                     <FormControl type="password" label="password" placeholder="password" name="password" onChange={this.handleChange} value={this.state.password} />
                   </FormGroup>
                   <div className="loginbutton">
                     <Col md={6}>
-                      <button style={{ color: "#1D4306", border: "none" }}>
+                    <button style={{ color: "#1D4306", border: "none", font:"inherit", cursor: "pointer"}}>
                         Sign In
                       </button>
                     </Col>
                     <Col md={6}>
-                      <Link to="/signup" style={{ color: "#C95D2D" }}>
-                        Sign Up
-                      </Link>
+                    <button to="/signup" style={{ color: "#C95D2D", border: "none", font: "inherit", cursor: "pointer" }}> Sign Up </button>
                     </Col>
                   </div>
                 </form>
