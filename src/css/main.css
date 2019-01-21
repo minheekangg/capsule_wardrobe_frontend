@@ -1,0 +1,24 @@
+/* primaryGreen = "#1D4306" */
+/* primaryOrange = "#C95D2D" */
+
+.welcome{
+    position:relative;
+      display: flex;
+}
+.btn:hover {
+  background-color:grey;
+}
+.leftButton{
+    background-color: #1D4306;
+    width: 5vh;
+    height: 100vh;
+
+}
+
+.rightButton{
+    position: absolute;
+    background-color: #C95D2D;
+    width: 5vh;
+    height: 100vh;
+    right: 0;
+}
