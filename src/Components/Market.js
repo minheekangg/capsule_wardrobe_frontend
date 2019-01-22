@@ -8,8 +8,9 @@ import { fetchCategories } from "../actions/categoryActions";
 import { Redirect } from "react-router-dom";
 import { Grid, Row, Col, Image, ListGroup, ListGroupItem } from "react-bootstrap";
 class Market extends React.Component {
-    status={
-        reload: false
+    state={
+        reload: false,
+        filtered: []
     }
 
   componentDidMount() {
@@ -23,7 +24,11 @@ class Market extends React.Component {
   }
 
     handleFilterListings = event => {
-        console.log(event.target.innerText)
+        if (event.target.innerText === "View All") {
+           this.setState({filtered: this.props.listings})
+        } else {
+           this.setState({filtered: this.props.listings.filter(l=> l.item.category_id === event.target.value) })
+        }
     }
 
     rendermarketOption = () => {
@@ -38,7 +43,7 @@ class Market extends React.Component {
                 View All
               </ListGroupItem>
               {this.props.categories.map(c=> {
-                  return (<ListGroupItem className="list-group-item" key={c.id}>
+                  return (<ListGroupItem className="list-group-item" value={c.id} key={c.id}>
                       {c.name}
               </ListGroupItem>)
               })}
@@ -48,14 +53,16 @@ class Market extends React.Component {
 
 
   renderMarketListings = () => {
-    return this.props.listings.map(e=> {
+      return this.state.filtered.length > 0 ? this.state.filtered.map(e => {
+          return <MarketItem item={e} key={e.id} handleListingInfoClick={this.handleListingInfoClick} />
+      }) : this.props.listings.map(e=> {
         return <MarketItem item={e} key={e.id} handleListingInfoClick={this.handleListingInfoClick} />
     })
   }
 
 
   render() {
-    console.log(this.props.userId, "available", this.props.listings, "mine", this.props.myItems);
+    // console.log(this.props.userId, "available", this.props.listings, "mine", this.props.myItems);
       return <div>
           <div className="fakeNavbar" style={{ backgroundColor: "#C95D2D" }} />
           {this.props.selection.length > 0 ? <Redirect to="/listing" /> : this.props.listings.length > 0 ? <div className="closet-container">
