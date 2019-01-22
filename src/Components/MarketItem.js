@@ -1,7 +1,7 @@
 import React from 'react'
 
 const MarketItem = props =>{
-
+  console.log(props)
     return !props.item.buyer_id ? <div className="market-listing-item">
         <div className="card">
           <div className="card-image">
@@ -16,7 +16,8 @@ const MarketItem = props =>{
         <div className="card-content">
           <p>{props.item.item.name}</p>
           <p>${props.item.price}</p>
-        </div>{" "}
+          <p style={{color: "grey"}}>{props.item.seller.username}</p>
+        </div>
       </div> :
             <div className="market-listing-item">
         <div className="card">
@@ -28,6 +29,7 @@ const MarketItem = props =>{
         <div className="card-content">
           <p>{props.item.item.name}</p>
           <p>${props.item.price}</p>
+            <p style={{color: "grey"}}>{props.item.seller.username}</p>
         </div>
     </div >
 }
