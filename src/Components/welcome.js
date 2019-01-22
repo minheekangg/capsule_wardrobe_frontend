@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import withAuth from "../hoc/withAuth";
-import { Button, Carousel } from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 import { Redirect } from "react-router";
 
 import '../css/main.css'
@@ -9,7 +9,7 @@ class Welcome extends React.Component {
 
     render() {
         return ( this.props.loggedIn ? <div className="welcome">
-                <Button className="leftButton" to="/closet">  </Button>
+                <a className="leftButton" href="/closet">  </a>
             <Carousel style={{width: "98%", height: "80vh", marginTop: "4vh"}}>
                 <Carousel.Item>
                     <img width={300} height={150} alt="900x500" src="/carousel.png" />
@@ -33,7 +33,7 @@ class Welcome extends React.Component {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-                <Button className="rightButton" to="/market">  </Button>
+                <a className="rightButton" href="/market">  </a>
         </div> : <Redirect to="/login" />
         )
     }
