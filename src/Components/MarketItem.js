@@ -24,11 +24,6 @@ const MarketItem = props =>{
             <img className="market-listing-item-img1" src={props.item.item.image} alt={props.item.item.id} />
             <img className="market-listing-item-img2" src="http://raylittlerealty.com/wp-content/themes/gwenty/images/sold.png" alt={`${props.item.item.id}234}`} />
             </div>
-            <button className="btn-floating halfway-fab waves-effect waves-light red">
-              <i className="material-icons" onClick={() => props.handleListingInfoClick(props.item)}>
-                +
-              </i>
-            </button>
         </div>
         <div className="card-content">
           <p>{props.item.item.name}</p>
