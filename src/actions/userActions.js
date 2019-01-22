@@ -66,9 +66,9 @@ export const logout = () => {
   return { type: RESET }
 }
 
-export const SignUpUser = (username, password) => {
+export const SignUpUser = (username, password, city, image) => {
   return (dispatch) => {
-    const data = { user: {username: username, password: password, city: "NYC", image: "TEST"}}
+    const data = { user: {username: username, password: password, city: city, image: image}}
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users`, {
       method: "POST",
       headers: {
