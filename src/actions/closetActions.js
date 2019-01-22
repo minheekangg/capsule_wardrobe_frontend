@@ -58,7 +58,6 @@ export function addItem(name, image, catId, userId) {
         dispatch(
             { type: FETCHING_CLOSET }
             )
-            debugger
         return axios({
             method: "post",
             baseURL: `${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${userId}/items`,
@@ -79,7 +78,6 @@ export function addItem(name, image, catId, userId) {
         })
             .then(r => {
                 if (r.statusText === "Created") {
-                    alert("added!")
                     dispatch({ type: ADD_ITEM, payload: r.data });
                 }
             })

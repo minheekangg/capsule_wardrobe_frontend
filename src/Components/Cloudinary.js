@@ -10,7 +10,7 @@ const MY_CLOUD_NAME = process.env.REACT_APP_MY_CLOUD_NAME;
 const UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
 
 class Cloudinary extends React.Component {
-  state = { itemImg: "", itemName: "", itemCat: 0, addingItem: true};
+  state = { itemImg: "", itemName: "", itemCat: 0};
 
   componentDidMount() {
       window.cloudinary.createUploadWidget(
@@ -43,7 +43,6 @@ class Cloudinary extends React.Component {
 
   handleFormSubmit = event =>{
     event.preventDefault()
-    this.setState({addingItem: false})
     this.props.addItem(this.state.itemName, this.state.itemImg, this.state.itemCat, this.props.userId)
   }
 
@@ -71,7 +70,7 @@ class Cloudinary extends React.Component {
 
 
   render() {
-    return !this.state.addingItem ? (
+    return this.props.addedItem ? (
       <Redirect to="/closet" />
     ) : (
      <div className="card">
@@ -84,7 +83,7 @@ class Cloudinary extends React.Component {
 
 const mapStateToProps = state => {
   console.log(state)
-  return {category: state.category.category, userId: state.user.userId, isLoaded: state.closet.isLoaded}
+  return {category: state.category.category, userId: state.user.userId, addedItem: state.closet.addedItem}
 }
 
 
