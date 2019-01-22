@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { deselect, purchaseItem } from "../actions/marketActions";
 import { Redirect } from "react-router-dom";
 import { addItem } from "../actions/closetActions";
+import { Button} from "react-bootstrap";
 
 class Listing extends React.Component{
     state={
@@ -17,19 +18,18 @@ class Listing extends React.Component{
     handleBuyButton = () => {
         const selected = this.props.select
         this.props.purchaseItem(selected, this.props.user);
-        debugger
         this.props.addItem(selected.item.name, selected.item.image, selected.item.category_id, this.props.user);
     }
 
     renderItemInfo=()=>{
         const item = this.props.select.item
         const seller = this.props.select.seller.username
-        return(< div > <p>{item.name}</p>
+        return (< div className="donate">
         <img src={item.image} alt={item.name}/>
-        <h3>{seller}</h3><p>{item.name}</p>
-        <p>{this.props.select.price}</p>
-        <button onClick={this.handleBuyButton}>BUY</button>
-        <button onClick={this.backtoMarketClick}>Back to Market</button> </div>)
+        <p>Seller: {seller}</p><h6>{item.name}</h6>
+        <h5>${this.props.select.price}</h5>
+            <Button style={{ color: "#1D4306", marginRight: "2vh", width: "20vh"}} onClick={this.handleBuyButton}>BUY</Button> 
+            <Button style={{ backgroundColor: "#C95D2D", width: "20vh" }} onClick={this.backtoMarketClick}>Back to Market</Button> </div>)
     }
     render(){
         return <div>
