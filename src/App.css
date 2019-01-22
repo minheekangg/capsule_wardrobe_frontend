@@ -119,6 +119,7 @@
 }
 
 .category-item-overflow{
+  margin-left: 18vh;
   position: relative;
   display: flex;
   overflow-x: auto;
@@ -262,3 +263,58 @@
   border: none;
   overflow-y: hidden;
 }
+
+
+/* MARKET */
+.market-options{
+  /* background-color: teal; */
+  width: 100%;
+  height: 100%;
+}
+
+/* .market-options-user{
+  position: absolute;
+  height: 20vh;
+  margin-top: 5vh;
+  border: none;
+  background-image: url('./images/mmmmm.jpeg')
+} */
+.market-listing-item{
+  /* margin-top: 2vh; */
+  /* position: relative; */
+  /* background-color: cornflowerblue; */
+  width: 20vh;
+  height: 25vh;
+  padding: 2vh;
+  /* object-fit: cover; */
+}
+.market-listing-item-img1{
+   /* position: relative; */
+  z-index: 0;
+  width: 15vh;
+  height: 15vh;
+}
+.market-listing-item-img2{
+  position: absolute;
+  margin-top: -15vh;
+  left: 0;
+  width: 15vh;
+  height: 15vh;
+  z-index: 1;
+  opacity: 30%;
+}
+
+.market-listing-container{
+  margin-top: 5vh;
+  /* position: relative; */
+  padding: 2vh;
+  /* background-color: grey; */
+  width: 165vh;
+  overflow-x: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+/* MARKET */

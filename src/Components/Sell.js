@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { postMyItem } from "../actions/marketActions";
 import { changeItemStatus } from "../actions/closetActions";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import { Button} from "react-bootstrap";
 
 
 class Sell extends React.Component {
@@ -21,21 +22,21 @@ class Sell extends React.Component {
     }
 
   renderSellForm = () => {
-    return (
-        <div>
-            <form onSubmit={(e)=> this.handleSellPost(e)}>
-              <h2>Please add more information to post to Market</h2>
-              <div className="listing-item">
-                <img src={this.props.firstItem.image} alt={this.props.firstItem.id} />
-                <p>{this.props.firstItem.name}</p>
-                <input type="number" min="0" placeholder="Price" onChange={this.handlePriceChange}value={this.state.price}/>
-              </div>
-                <button type="Submit">I'll sell!</button>
-            </form>
-                <Link to="/donate">I'll donate!</Link>
-        </div>
-    );
+    return <div>
+        <div className="fakeNavbar" style={{ backgroundColor: "#C95D2D" }} />
+        <form onSubmit={e => this.handleSellPost(e)} className="donate">
+          <h4>Please add more information to post to Market</h4>
+          <div className="listing-item">
+            <img src={this.props.firstItem.image} alt={this.props.firstItem.id} />
+            <h6>{this.props.firstItem.name}</h6>
+            Price:
+            <input type="number" min="0" placeholder="Price" onChange={this.handlePriceChange} value={this.state.price} />
+          </div>
+            <Button type="Submit" style={{ marginLeft: "2vh", backgroundolor: "grey" }} >I'll sell!</Button>
+        </form>
+      </div>;
   };
+//   <Button style={{ marginLeft: "426px", marginTop: "2vh"}} href="/donate">I'll donate instead</Button>
 
 
   render() {

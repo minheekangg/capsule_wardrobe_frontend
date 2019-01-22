@@ -14,16 +14,16 @@ const NavBar = (props) => {
   }
 
 
-  return props.loggedIn ? <div class="navbar-fixed">
+  return props.loggedIn ? <div className="navbar-fixed">
     <nav >
-      <div class="nav-wrapper">
+      <div className="nav-wrapper">
         <a href="/" className="brand-logo center" style={{color: "black", fontSize: "2vh"}}>CAPSULE WARDROBE</a>
    
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
          <li><a href="/market" className="nav-closet-right">MARKET</a></li>
           <li> <button className="logout-button" onClick={() => handleLogoutClick()}>Logout</button> </li>
         </ul>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <ul id="nav-mobile" className="left hide-on-med-and-down">
           <li> <p className="userIcon">{props.username}</p> </li>
           <li><a href="/closet" className="nav-closet-left">CLOSET</a></li>
         </ul>
