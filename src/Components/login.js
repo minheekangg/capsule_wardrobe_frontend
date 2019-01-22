@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router";
 import { LoginUser } from "../actions/userActions";
 import '../App.css'
-import {  FormGroup,  FormControl, Row, Col } from "react-bootstrap";
+import {  FormGroup,  FormControl, Row, Col, HelpBlock } from "react-bootstrap";
 // import { Link } from "react-router-dom";
 
 class Login extends React.Component{
@@ -23,28 +23,38 @@ class Login extends React.Component{
     }
 
 
-        // <FormGroup widths="equal" className="loginInput" loading={this.props.authenticatingUser} error={this.props.failedLogin}></FormGroup>
-    // <HelpBlock error header={this.props.failedLogin ? this.props.error : null} />
     renderLoginForm = () => {
         return <div>
             <Row className="show-grid">
               <Col xs={6} md={4} />
               <Col xs={6} md={4}>
                 <form onSubmit={this.handleLoginSubmit} className="loginForm">
+                    {this.props.failedLogin ? <HelpBlock>
+                        {this.props.error}
+                      </HelpBlock> : null}
                   <h2 className="loginHeader">CAPSULE WARDROBE</h2>
                   <FormControl.Feedback />
                   <FormGroup widths="equal" className="loginInput">
-                    <FormControl type="text" label="Text" name="username" placeholder="Enter text" onChange={this.handleChange} value={this.state.username} style={{color: "grey"}} />
+                    <FormControl type="text" label="Text" name="username" placeholder="Enter text" onChange={this.handleChange} value={this.state.username} style={{ color: "grey" }} />
                     <FormControl type="password" label="password" placeholder="password" name="password" onChange={this.handleChange} value={this.state.password} />
                   </FormGroup>
                   <div className="loginbutton">
                     <Col md={6}>
-                    <button style={{ color: "#1D4306", border: "none", font:"inherit", cursor: "pointer"}}>
+                      <button
+                        style={{
+                          color: "#1D4306",
+                          border: "none",
+                          font: "inherit",
+                          cursor: "pointer"
+                        }}
+                      >
                         Sign In
                       </button>
                     </Col>
                     <Col md={6}>
-                    <button to="/signup" style={{ color: "#C95D2D", border: "none", font: "inherit", cursor: "pointer" }}> Sign Up </button>
+                      <a href="/signup" style={{ color: "#C95D2D", border: "none", font: "inherit", cursor: "pointer" }}>
+                        Sign Up
+                      </a>
                     </Col>
                   </div>
                 </form>
@@ -55,6 +65,7 @@ class Login extends React.Component{
     }
     
     render(){
+        console.log(this.props)
         return this.props.isLoggedIn ? <Redirect to="/welcome" /> : this.renderLoginForm()
     }
 }

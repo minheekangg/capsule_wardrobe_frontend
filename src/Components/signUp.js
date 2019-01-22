@@ -42,11 +42,14 @@ class signUp extends React.Component{
                     <FormControl type="text" label="Text" name="image" placeholder="Upload Image" onChange={this.handleChange} value={this.state.image} />
                   </FormGroup>
                   <div className="loginbutton">
-                    <Col md={6}>
-                    </Col>
-                 
-                      <button type="submit" style={{ color: "#C95D2D", border: "none", font: "inherit", cursor: "pointer" }}> Submit</button>
-           
+                <Col md={6}>
+                  <a href="login" style={{ color: "#1D4306", border: "none", font: "inherit", cursor: "pointer" }}>
+                    Sign In
+                      </a>
+                </Col>
+                <Col md={6}>
+                  <button to="/signup" style={{ color: "#C95D2D", border: "none", font: "inherit", cursor: "pointer" }}> Submit </button>
+                </Col>
                   </div>
                 </form>
               </Col>
