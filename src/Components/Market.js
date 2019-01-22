@@ -99,7 +99,7 @@ export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Market))
 //HELPER METHODS:
 function filterItemsAvailable(arr, userId){
     return arr.filter(e=> {
-        return e.buyer_id === null && e.seller_id !== userId
+        return e.seller_id !== userId
     })
 }
 function filterMyItemsAvailable(arr, userId){
