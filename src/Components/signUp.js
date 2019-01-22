@@ -28,11 +28,11 @@ class signUp extends React.Component{
 
 
     renderSignUpForm = () => {
-        return <div>
+      return <div style={{ height: "100vh" }}>
             <Row className="show-grid">
               <Col xs={6} md={4} />
               <Col xs={6} md={4}>
-              <form onSubmit={this.handleSubmit} className="loginForm">
+              <form onSubmit={this.handleSubmit} className="loginForm" style={{marginTop: "5vh"}}>
                   <h2 className="loginHeader">CAPSULE WARDROBE</h2>
                   <FormControl.Feedback />
                   <FormGroup widths="equal" className="loginInput" >
@@ -44,11 +44,9 @@ class signUp extends React.Component{
                   <div className="loginbutton">
                     <Col md={6}>
                     </Col>
-                    <Col md={6}>
-                      <button type="submit" style={{ color: "#C95D2D" }}>
-                        submit
-                      </button>
-                    </Col>
+                 
+                      <button type="submit" style={{ color: "#C95D2D", border: "none", font: "inherit", cursor: "pointer" }}> Submit</button>
+           
                   </div>
                 </form>
               </Col>
