@@ -43,7 +43,7 @@ class Outfit extends React.Component {
         return (
             <div>
                 <div className="fakeNavbar" style={{ backgroundColor: "#1D4306" }} />
-            { this.props.isLoaded ? this.renderOutfits() : null }
+            { this.props.createdOutfit || this.props.isLoaded ? this.renderOutfits() : null }
             </div>
         )
     }
@@ -56,7 +56,8 @@ function mapStateToProps(state) {
         outfits: state.outfit.outfits,
         items: state.closet.items,
         user: state.user.userId,
-        isLoaded: state.outfit.outfitsLoaded
+        isLoaded: state.outfit.outfitsLoaded,
+        createdOutfit: state.outfit.createdOutfit
     }
 }
 

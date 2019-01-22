@@ -3,7 +3,8 @@ import { FETCHED_OUTFITS, CREATING_OUTFITS, CREATED_OUTFIT, RESET, UPDATED_OUTFI
 
 const initialState = {
   outfits: [],
-  outfitsLoaded: false
+  outfitsLoaded: false,
+  createdOutfit: false
 };
 
 
@@ -11,11 +12,11 @@ export default function outfitReducer(state = initialState, action) {
     console.log("%c outfitReducer", "color: pink", state, action);
     switch (action.type) {
         case FETCHED_OUTFITS:
-            return { ...state, outfits: action.payload, outfitsLoaded: true };
+            return { ...state, outfits: action.payload, outfitsLoaded: true, createdOutfit: false };
         case CREATED_OUTFIT:
-            return { ...state, outfitsLoaded: true };
+            return { ...state, outfitsLoaded: true, createdOutfit: true };
         case CREATING_OUTFITS:
-            return { ...state, outfitsLoaded: false };
+            return { ...state, outfitsLoaded: false, createdOutfit: false };
         case UPDATED_OUTFITS: 
             let others = state.outfits.filter(s => { return s.id !== action.payload.id })
             return { ...state, outfits: [...others, action.payload], outfitsLoaded: true };

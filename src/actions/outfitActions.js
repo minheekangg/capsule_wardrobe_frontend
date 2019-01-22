@@ -78,11 +78,9 @@ export const addItemsToOutfit= (outfitId, itemArr) => {
       }
     })
   })
-  alert("created!")
 }
 
 export const faveOutfit = (userId, id, favorite) => {
-  console.log(favorite)
   return dispatch => {
     dispatch({ type: CREATING_OUTFITS });
     return (
