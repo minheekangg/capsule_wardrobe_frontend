@@ -18,7 +18,6 @@ const withAuth = (WrappedComponent) => {
             } else if (localStorage.getItem('jwt') && (this.props.authenticatingUser || !this.props.loggedIn)) {
                 return <Loader active inline="centered" />
             } else {
-                debugger
                 return <Redirect to="/login" />
             }
         }
