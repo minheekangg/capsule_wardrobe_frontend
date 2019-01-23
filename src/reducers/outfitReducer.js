@@ -15,7 +15,6 @@ export default function outfitReducer(state = initialState, action) {
         case FETCHING_CLOSET:
             return {...state, outfitsLoaded: false}
         case FETCHED_OUTFITS:
-        debugger
             return { ...state, outfits: action.payload, outfitsLoaded: true, createdOutfit: false };
         case CREATED_OUTFIT:
             return { ...state, outfitsLoaded: true, createdOutfit: true };

@@ -42,7 +42,7 @@ class NavBar extends React.Component{
    const mapStateToProps = state => {
        return {
            loggedIn: state.user.isLoggedIn, 
-     username: state.user.username
+     username: state.user.username, location: state.user.location
   }
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router";
-import { SignUpUser } from "../actions/userActions";
+import { SignUpUser, getLocation } from "../actions/userActions";
 import '../App.css'
 import {  FormGroup,  FormControl, Row, Col } from "react-bootstrap";
 // import { Link } from "react-router-dom";
@@ -11,7 +11,6 @@ class signUp extends React.Component{
         username: "",
         password: "",
         city: "",
-        image: "",
         isSignedUp: false
     }
 
@@ -21,8 +20,21 @@ class signUp extends React.Component{
       
       handleSubmit = (e) => { 
         e.preventDefault()
-        this.props.SignUpUser(this.state.username, this.state.password, this.state.city, this.state.image);
-        this.setState({ username: "", password: "", city: "", image: "", isSignedUp: true });
+        this.props.SignUpUser(this.state.username, this.state.password, this.state.city)
+        this.setState({ username: "", password: "", city: "", isSignedUp: true });
+
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+        const success = (pos) => {
+          this.props.getLocation(pos.coords.latitude, pos.coords.longitude)
+        }
+        const error = (err) => {
+          console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+        navigator.geolocation.getCurrentPosition(success, error, options);
     }
 
 
@@ -36,10 +48,9 @@ class signUp extends React.Component{
                   <h2 className="loginHeader">CAPSULE WARDROBE</h2>
                   <FormControl.Feedback />
                   <FormGroup widths="equal" className="loginInput" >
-                    <FormControl type="text" label="Text" name="username" placeholder="Enter text" onChange={this.handleChange} value={this.state.username} />
+                    <FormControl type="text" label="Text" name="username" placeholder="Enter username" onChange={this.handleChange} value={this.state.username} />
                     <FormControl type="password" label="password" placeholder="password" name="password" onChange={this.handleChange} value={this.state.password} />
                     <FormControl type="text" label="Text" name="city" placeholder="Enter your city" onChange={this.handleChange} value={this.state.city} />
-                    <FormControl type="text" label="Text" name="image" placeholder="Upload Image" onChange={this.handleChange} value={this.state.image} />
                   </FormGroup>
                   <div className="loginbutton">
                 <Col md={6}>
@@ -57,10 +68,12 @@ class signUp extends React.Component{
             </Row>
           </div>;
     }
+    // <FormControl type="text" label="Text" name="image" placeholder="Upload Image" onChange={this.handleChange} value={this.state.image} />
     
     render(){
+      console.log("is signed up?", this.state.isSignedUp)
         return this.state.isSignedUp ? (
-        <Redirect to="/welcome" />
+        <Redirect to="/login" />
       ) : (
           <div className="card">
               {this.renderSignUpForm()}
@@ -78,9 +91,16 @@ const mapStateToProps = (state) => {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    SignUpUser: (username, password, city) => dispatch(SignUpUser(username, password, city)),
+    getLocation: ()=> dispatch(getLocation())
+  }
+}
+
 export default withRouter(
   connect(
     mapStateToProps,
-    { SignUpUser }
+    mapDispatchToProps
   )(signUp)
 );

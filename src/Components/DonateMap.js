@@ -1,19 +1,17 @@
 import React from 'react'
 import DonateMarker from "./DonateMarker";
 import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
-// import {donationLocations} from '../types'
-import { connect } from 'react-redux';
-// import { getMarkers } from "../actions/mapActions";
+
 
 const DonateMap = withScriptjs(withGoogleMap((props) => {
 
-    const markers = this.props.markers.map(store => (
-        <DonateMarker
-        key={store.name}
-        store={store.name}
-        location={{ lat: store.latitude, lng: -store.longitude }}
-    />
-    ));
+    const markers = props.marker.markers.map(store => {
+          return <DonateMarker
+          key={store.name}
+          store={store.name}
+              location={{ lat: store.geometry.location.lat, lng: store.geometry.location.lng }}
+      />
+    });
 
 
     console.log(props.marker)
@@ -23,7 +21,5 @@ const DonateMap = withScriptjs(withGoogleMap((props) => {
       </GoogleMap>;
 }
 ))
-function mapStateToProps(state) {
-    return { markers: state.items.donationMarkers }
-}
-export default connect(mapStateToProps)(DonateMap)
+
+export default DonateMap

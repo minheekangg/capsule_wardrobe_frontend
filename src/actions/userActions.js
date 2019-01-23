@@ -1,4 +1,8 @@
 import { AUTHENTICATING_USER, SET_CURRENT_USER, FAILED_LOGIN, RESET, GET_LOCATION} from '../types'
+// import { getMarkers } from './mapActions'
+import axios from "axios";
+import { GET_NEAREST_DONATION } from "../types";
+const API_KEY = process.env.REACT_APP_GOOGLE_MAP_API;
 
 export const LoginUser = (username, password) => {
     return (dispatch) =>{
@@ -24,7 +28,33 @@ export const LoginUser = (username, password) => {
           })
         .then(JSONResponse => {
           localStorage.setItem('jwt', JSONResponse.jwt);
-          dispatch(setCurrentUser(JSONResponse.user))})
+          dispatch(setCurrentUser(JSONResponse.user))
+          axios({
+            method: "GET",
+            baseURL: `${process.env.REACT_APP_API_ENDPOINT}/api/v1/geocode?location=${JSONResponse.user.city}`,
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              key: API_KEY
+            }
+          }).then(result => {
+            const lat = result.data.results[0].geometry.location.lat
+            const lng = result.data.results[0].geometry.location.lng
+            axios({
+              method: "GET",
+              baseURL: `${process.env.REACT_APP_API_ENDPOINT}/api/v1/donate?latitude=${lat}&longitude=${lng}`,
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                key: API_KEY
+              }
+            }).then(result => {
+              dispatch({ type: GET_NEAREST_DONATION, payload: result.data.results })
+            })
+          });
+        })
           .catch(r =>
             r
             .json()
@@ -66,9 +96,9 @@ export const logout = () => {
   return { type: RESET }
 }
 
-export const SignUpUser = (username, password, city, image) => {
+export const SignUpUser = (username, password, city) => {
   return (dispatch) => {
-    const data = { user: {username: username, password: password, city: city, image: image}}
+    const data = { user: {username: username, password: password, city: city}}
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users`, {
       method: "POST",
       headers: {

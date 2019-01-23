@@ -5,6 +5,7 @@ import { LoginUser, getLocation } from "../actions/userActions";
 import '../App.css'
 import {  FormGroup,  FormControl, Row, Col, HelpBlock } from "react-bootstrap";
 // import { Link } from "react-router-dom";
+// import { getMarkers } from "../actions/mapActions";
 
 class Login extends React.Component{
     state = {
@@ -20,18 +21,8 @@ class Login extends React.Component{
 
     handleLoginSubmit = (e) => { 
         e.preventDefault()
-        // this.geolocation()
         this.props.LoginUser(this.state.username, this.state.password)
         this.setState({ username: "", password: "" });
-        // navigator.geolocation.getCurrentPosition(
-        //   (position) => {
-        //     debugger
-        //     this.props.getLocation(position.coords.latitude, position.coords.longitude);
-        //   },
-        //   (error) => this.setState({ error: error.message }),
-        //   { enableHighAccuracy: true, timeout: 1, maximumAge: 1000 },
-        // )
-
       var options = {
         enableHighAccuracy: true,
         timeout: 5000,
@@ -93,7 +84,7 @@ class Login extends React.Component{
     }
     
     render(){
-        console.log(this.props)
+      console.log("IS LOGGED IN?", this.props.isLoggedIn)
         return this.props.isLoggedIn ? <Redirect to="/welcome" /> : this.renderLoginForm()
     }
 }
@@ -110,7 +101,7 @@ const mapStateToProps = (state) => {
 function mapDispatchToProps(dispatch) {
   return { 
     LoginUser: (username, password) => dispatch(LoginUser(username, password)), 
-    getLocation: (lat, long) => dispatch(getLocation(lat, long)) }
+    getLocation: (lat, long) => dispatch(getLocation(lat, long))}
 }
 
 

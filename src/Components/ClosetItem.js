@@ -15,7 +15,7 @@ class ClosetItem extends React.Component {
             {daysSinceLastWorn > 15 ? <div>
                 <p style={{ fontSize: "12px"}}> {daysSinceLastWorn} days since last worn</p>
                 <Col md={6}> 
-                    <button to="./donate" className="item-buttons" style={{ color: "#1D4306"}} onClick={(e)=>this.redirectDonateOrSell(e,item.id)}>
+                    <button className="item-buttons" style={{ color: "#1D4306"}} onClick={(e)=>this.redirectDonateOrSell(e,item.id)}>
                     Donate </button>
                 </Col>
                 <Col md={6}>
