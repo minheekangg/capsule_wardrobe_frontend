@@ -5,30 +5,25 @@ import { Carousel } from "react-bootstrap";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import '../css/main.css'
+import image1 from '../images/note1.png'
+import image2 from '../images/note2.png'
+import image3 from '../images/note3.png'
+import image4 from '../images/1.png'
 class Welcome extends React.Component {
 
     renderCarousel = () => {
-        return <Carousel style={{ width: "98%", height: "80vh", marginTop: "4vh" }}>
+        return <Carousel style={{ width: "98%", height: "700px", marginTop: "50px" }}>
             <Carousel.Item>
-                <img width={300} height={150} alt="900x500" src="/carousel.png" />
-                <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </Carousel.Caption>
+                <img style={{ marginLeft: "250px" }}alt="image1" src={image1} />
             </Carousel.Item>
             <Carousel.Item>
-                <img width={300} height={150} alt="900x500" src="/carousel.png" />
-                <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
+                <img width={"100%"} height={150} style={{position:"center"}}alt="image2" src={image2} />
             </Carousel.Item>
             <Carousel.Item>
-                <img width={300} height={150} alt="900x500" src="/carousel.png" />
-                <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                </Carousel.Caption>
+                <img width={"100%"} height={150} alt="image3" src={image3} />
+            </Carousel.Item>
+            <Carousel.Item>
+                <img width={"100%"} height={150} alt="image4" src={image4} />
             </Carousel.Item>
         </Carousel>
     }
@@ -37,6 +32,7 @@ class Welcome extends React.Component {
     render() {
         return this.props.loggedIn ? <div className="welcome">
             <Link className="leftButton" to="/closet"> </Link>
+                <br/>
                 {this.renderCarousel()}
             <Link className="rightButton" to="/market">  </Link>
     </div> : <Redirect to="/login" />  }

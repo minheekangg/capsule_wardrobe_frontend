@@ -1,6 +1,6 @@
 import React from "react";
 import { Marker } from "react-google-maps";
-import image from "../images/waste-bin.png"; 
+import image from "../images/earth.png"; 
 // import { connect } from 'react-redux';
 // import StoreCard from "./StoreCard"
 // import { InfoWindow } from 'google-maps-react';

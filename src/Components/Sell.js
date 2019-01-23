@@ -4,7 +4,7 @@ import { postMyItem } from "../actions/marketActions";
 import { changeItemStatus } from "../actions/closetActions";
 import { Redirect } from "react-router-dom";
 import { Button} from "react-bootstrap";
-
+import { withRouter } from "react-router-dom";
 
 class Sell extends React.Component {
     state = {
@@ -53,4 +53,4 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return { postMyItem: (userId, itemId, price) => dispatch(postMyItem(userId, itemId, price)), changeItemStatus: (userId, itemId, newStatus) => dispatch(changeItemStatus(userId, itemId, newStatus)) };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Sell)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Sell))

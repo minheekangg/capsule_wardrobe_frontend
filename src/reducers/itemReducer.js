@@ -32,7 +32,7 @@ export default function itemReducer(state = initialState, action) {
       case FETCHED_CLOSET:
         return { ...state, items: action.payload, loadingItems: false, isLoaded: true, addedItem: false };
       case FETCHING_CLOSET:
-        return { ...state, loadingItems: true, isLoaded: false, addedItem: false };
+        return { ...state, loadingItems: true, isLoaded: false, addedItem: false, itemToDeleteStatus:"" };
       case SELECT_ITEM:
         return { ...state, selectedItems: [...state.selectedItems, state.items.find(item => item.id === action.payload)] };
       case REPLACE_ITEM:
