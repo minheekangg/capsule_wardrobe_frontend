@@ -8,7 +8,8 @@ import {
   UPDATED_ITEM,
   DESELECT_ITEM,
   SELECT_DELETE_ACTION,
-  SELECT_ITEM_TO_DELETE
+  SELECT_ITEM_TO_DELETE,
+  GET_NEAREST_DONATION
 } from "../types";
 
 const initialState = {
@@ -18,7 +19,8 @@ const initialState = {
     isLoaded: false,
     itemToDelete: [],
     itemToDeleteStatus: "",
-    addedItem: false
+    addedItem: false,
+    donationMarkers: []
 };
 
 
@@ -54,6 +56,9 @@ export default function itemReducer(state = initialState, action) {
         return { ...state, itemToDeleteStatus: action.payload, isLoaded: true };
         case SELECT_ITEM_TO_DELETE:
         return { ...state, itemToDelete: state.items.filter(i => i.id === action.payload) };
+        case GET_NEAREST_DONATION:
+        debugger
+        return {...state, donationMarkers: action.payload}
       case RESET:
         return initialState;
       default:

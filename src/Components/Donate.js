@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { changeItemStatus } from "../actions/closetActions";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import {getMarkers} from '../actions/mapActions'
 
 const API_KEY = process.env.REACT_APP_GOOGLE_MAP_API
 
@@ -25,7 +26,7 @@ class Donate extends React.Component {
                     long: r.data.results[0].geometry.location.lng,
                     lat: r.data.results[0].geometry.location.lat
                 },
-                () =>{console.log(this.state)
+                () =>{this.props.getMarkers(this.state.long, this.state.lat)
                 }
             );
         }).catch(error => {
@@ -43,8 +44,8 @@ class Donate extends React.Component {
             <div className="fakeNavbar" style={{ backgroundColor: "#1D4306"}} />
             <div className="donate">
             <h4>Please confirm to donate</h4>
-              <div class="row"> 
-                  <div class="col s3">      
+              <div className="row"> 
+                  <div className="col s3">      
                     <div className="listing-item">
                         <img
                             src={this.props.firstItem.image}
@@ -56,7 +57,7 @@ class Donate extends React.Component {
                     </button>
                     </div>
                   </div>
-                  <div class="col s9">      
+                  <div className="col s9">      
                     <p style={{color: "grey"}}>Donation Bins Near You</p>
                     <DonateMap
                         googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
@@ -83,6 +84,6 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch =>{
-    return { changeItemStatus: (userId, itemId, newStatus) => dispatch(changeItemStatus(userId, itemId, newStatus)) };
+    return { changeItemStatus: (userId, itemId, newStatus) => dispatch(changeItemStatus(userId, itemId, newStatus)), getMarkers: (lat, long)=>dispatch(getMarkers(lat, long)) };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Donate)

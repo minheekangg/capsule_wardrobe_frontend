@@ -29,5 +29,6 @@ export const POST_LISTING = "POST_LISTING";
 export const GET_LOCATION = "GET_LOCATION"; 
 export const GET_WEATHER = "GET_WEATHER"; 
 export const GET_PRETTY_LOC = "GET_PRETTY_LOC"; 
+export const GET_NEAREST_DONATION = "GET_NEAREST_DONATION"; 
 
 export const donationLocations = [{name: "Salvation Army", latitude: 40.732953, longitude: 73.990442}, {name: "Salvation Army", latitude: 40.732953, longitude: 73.990442}, {name: "Salvation Army", latitude: 40.732953, longitude: 73.990442}]

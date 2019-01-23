@@ -1,10 +1,11 @@
 import React from "react";
 import { Marker } from "react-google-maps";
 import image from "../images/waste-bin.png"; 
+// import { connect } from 'react-redux';
 // import StoreCard from "./StoreCard"
 // import { InfoWindow } from 'google-maps-react';
 
-export default class DonateMarker extends React.Component {
+ export default class DonateMarker extends React.Component {
 
     state = {
         clicked: false,
@@ -37,6 +38,7 @@ export default class DonateMarker extends React.Component {
         );
     }
 }
+
 
 // // TODO: GET INFO WINDOW TO WORK!!!!!!!!!!
 // {this.state.clicked && this.state.activeStatus ?
