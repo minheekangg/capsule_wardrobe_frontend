@@ -3,7 +3,6 @@ import {
   CREATING_OUTFITS,
   CREATED_OUTFIT,
   UPDATED_OUTFITS,
-  GET_LOCATION,
   GET_WEATHER,
   GET_PRETTY_LOC
 } from "../types";
@@ -113,19 +112,6 @@ export const faveOutfit = (userId, id, favorite) => {
       })
   };
 } 
-
-export function getLocation() {
-  return dispatch => {
-    const geolocation = navigator.geolocation;
-    geolocation.getCurrentPosition((position) => {
-      dispatch({
-        type: GET_LOCATION,
-        payload: position
-      })
-    })
-  }
-}
-
 
 export function fetchWeather(latitude, longitude, date){
   const currentDate= (date/1000).toFixed(0)

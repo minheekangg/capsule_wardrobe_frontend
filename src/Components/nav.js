@@ -1,77 +1,41 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { Redirect } from "react-router";
+import { withRouter, Link } from 'react-router-dom'
+// import { Redirect } from "react-router";
 // import { Navbar, Nav, NavItem } from "react-bootstrap";
 import {logout} from '../actions/userActions'
-import { getLocation } from "../actions/outfitActions";
+// import { getLocation } from "../actions/outfitActions";
 
 
 class NavBar extends React.Component{
-
-  state = {
-    redirect: false
-  }
-
 
    handleLogoutClick = () => {
     this.props.history.push('./login')
     this.props.logout()
   }
 
-   handleRedirectToClosetClick = () => {
-    this.props.getLocation()
-    this.setState({redirect: true})
-  }
+
 
   render(){
 
-    if (this.props.loggedIn && !this.state.redirect){
-     return (<div className="navbar-fixed">
+    return this.props.loggedIn ? <div className="navbar-fixed">
        <nav >
          <div className="nav-wrapper">
-           <a href="/" className="brand-logo center" style={{ color: "black", fontSize: "2vh" }}>CAPSULE WARDROBE</a>
+           <a href="/" className="brand-logo center" style={{ color: "black", fontSize: "20px" }}>CAPSULE WARDROBE</a>
  
            <ul id="nav-mobile" className="right hide-on-med-and-down">
-             <li><a href="/market" className="nav-closet-right">MARKET</a></li>
+             <li><Link to="/market" className="nav-closet-right">MARKET</Link></li>
              <li> <button className="logout-button" onClick={() => this.handleLogoutClick()}>Logout</button> </li>
            </ul>
            <ul id="nav-mobile" className="left hide-on-med-and-down">
              <li> <p className="userIcon">{this.props.username}</p> </li>
-             <li><a href="/closet" className="nav-closet-left" onClick={()=>this.handleRedirectToClosetClick()}>CLOSET</a></li>
+            <li><Link to="/closet" className="nav-closet-left">CLOSET</Link></li>
            </ul>
          </div>
        </nav>
-     </div>)
-   } else if (this.props.loggedIn && this.state.redirect){
-      return <Redirect to="/closet" />
-   } else{
-     return null
-   }
+    </div> : null
   }
-  
-  
-  
-    // return props.loggedIn ? <Navbar>
-    //     <Nav className="navbarCss">
-    //           <NavItem href="/closet" >
-    //             <p className="navText" style={{ color: "#1D4306" }}>
-    //               Closet
-    //             </p>
-    //           </NavItem>
-    //           <Navbar.Header style={{paddingLeft: "50px", "paddingRight": "50px"}}>
-    //             <Navbar.Brand>
-    //               <a href="/">CAPSULE WARDROBE</a>
-    //             </Navbar.Brand>
-    //           </Navbar.Header>
-    //           <NavItem href="/market">
-    //             <p className="navText" style={{ color: "#C95D2D" }}>
-    //               Market
-    //             </p>
-    //           </NavItem>
-    //     <button onClick={()=> handleLogoutClick()}>Logout</button>
-    //     </Nav>
-    //   </Navbar> : null; 
+
 }
         
        
@@ -84,8 +48,7 @@ class NavBar extends React.Component{
 
 const mapDispatchToProps = dispatch => {
   return {
-    logout: () => dispatch(logout()),
-    getLocation: ()=> dispatch(getLocation())
+    logout: () => dispatch(logout())
   }
 }
 

@@ -35,7 +35,7 @@ class Weather extends React.Component {
 
 
 function mapStateToProps(state) {
-    return { weather: state.outfit.weather, location: state.outfit.location}
+    return { weather: state.outfit.weather, location: state.user.location}
 }
 
 function mapDispatchToProps(dispatch){

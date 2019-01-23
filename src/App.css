@@ -33,20 +33,20 @@
 
 .loginForm{
   
-  margin-top: 15vh;
+  margin-top: 150px;
   text-align: center;
   align-items: center;
-  padding: 10vh;
+  padding: 100px;
 
 }
 
 .loginInput{
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .loginHeader{
-  margin-bottom: 5vh;
+  margin-bottom: 50px;
   font-size: 
 }
 
@@ -67,21 +67,21 @@
   color: #C95D2D;
   position: absolute;
   left: 60%;
-  font-size: 1.5vh;
+  font-size: 15px;
   /* margin-left: 70vh; */
 }
 .nav-closet-left{
   position:abolute;
   color: #1D4306;
-  margin-left:60vh;
-  font-size: 1.5vh;
+  margin-left:650px;
+  font-size: 15px;
   /* right: 0; */
 }
 .logout-button{
   /* border: none; */
   color: grey;
-  font-size: 1.5vh;
-  margin-right: 2vh;
+  font-size: 15px;
+  margin-right: 20px;
   
 }
 .nav ul li:hover {
@@ -89,7 +89,7 @@
 }
 .userIcon{
   color: grey;
-  font-size: 1.5vh;
+  font-size: 15px;
   margin-left: 2vh;
 }
 /* NAVBAR */

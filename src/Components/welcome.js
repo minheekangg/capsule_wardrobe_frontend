@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import withAuth from "../hoc/withAuth";
 import { Carousel } from "react-bootstrap";
 import { Redirect } from "react-router";
-import { getLocation } from "../actions/outfitActions";
+import { Link } from "react-router-dom";
 import '../css/main.css'
 class Welcome extends React.Component {
 
@@ -36,9 +36,9 @@ class Welcome extends React.Component {
  
     render() {
         return this.props.loggedIn ? <div className="welcome">
-            <a className="leftButton" href="/closet"> </a>
+            <Link className="leftButton" to="/closet"> </Link>
                 {this.renderCarousel()}
-                <a className="rightButton" href="/market">  </a>
+            <Link className="rightButton" to="/market">  </Link>
     </div> : <Redirect to="/login" />  }
 } 
 
@@ -49,8 +49,4 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = (dispatch)=>{
-    return{getLocation: ()=> dispatch(getLocation())}
-}
-
-export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Welcome))
+export default withAuth(connect(mapStateToProps)(Welcome))

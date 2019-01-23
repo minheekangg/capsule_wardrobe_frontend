@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, RESET } from "../types";
+import { SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, RESET, GET_LOCATION } from "../types";
 
 const initialState = {
     username: "",
@@ -8,7 +8,8 @@ const initialState = {
     isLoggedIn: false,
     authenticatingUser: false,
     failedLogin: false,
-    error: null
+    error: null,
+    location: { latitude: "", longitude: "" },
 };
 
 
@@ -27,6 +28,8 @@ export default function userReducer(state = initialState, action) {
                 failedLogin: true,
                 error: action.payload,
                 authenticatingUser: false}
+        case GET_LOCATION:
+            return { ...state, location: { latitude: action.payload.latitude, longitude: action.payload.longitude } };
         case RESET:
             return initialState
         default:

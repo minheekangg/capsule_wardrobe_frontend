@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { fetchCloset, increaseTimesWorn, selectThisItem, replaceSelectedItem } from "../actions/closetActions";
 import { fetchCategories } from "../actions/categoryActions";
-import { createOutfits, fetchWeather, getLocation } from "../actions/outfitActions";
+import { createOutfits, fetchWeather } from "../actions/outfitActions";
 import ClosetItem from './ClosetItem';
 import ClosetView from './ClosetView';
 import Weather from './Weather';
@@ -21,10 +21,10 @@ class Closet extends React.Component {
   state = {
     date: new Date(),
     selectionRender: false,
+    toOutfits: false
   };
 
   componentDidMount() {
-    this.props.getLocation()
     this.props.fetchCloset(this.props.user);
     this.props.fetchCategories(this.props.user);
   }
@@ -46,6 +46,7 @@ class Closet extends React.Component {
       this.props.weather
     );
     this.props.increaseTimesWorn(this.props.selectedItems, this.props.user );
+      this.setState({toOutfits: true})
   };
 
   handleSelectItem = (newItemId, newItemCatId) => {
@@ -103,10 +104,12 @@ class Closet extends React.Component {
       </div> : this.renderCloset();
   }
 
+
   render() {
     return <div>
         <div className="fakeNavbar" style={{ backgroundColor: "#1D4306" }} />
-        {this.props.hasOutfits ? <Redirect to="./outfits" /> : <div>
+           {this.state.toOutfits? <Redirect to='./outfits'/> :
+         <div>
           <div style={{position: "relative", height: "2vh", fontSize: "15px"}}>
             <Link to="/additem" content="Add item" style={{ color: "#C95D2D", position:"absolute", right:0, paddingRight: "2vh" }}>
               Add more!
@@ -117,20 +120,28 @@ class Closet extends React.Component {
           </div>
         
         {this.props.isLoaded ? this.renderClosetAndSelectionContainer() : <LoadingPage />}
+        </div>
 
       
-          </div>}
-      </div>;
+        }
+        </div>
   }
 }
 
 function mapStateToProps(state){
   console.log('%c inside closet', 'color:green',state)
-  return { user: state.user.userId, items: state.closet.items, selectedItems: state.closet.selectedItems, categories: state.category.category, hasOutfits: state.outfit.outfitsLoaded, isLoaded: state.closet.isLoaded, location: state.outfit.location, weather: state.outfit.weather };
+  return { user: state.user.userId, items: state.closet.items, selectedItems: state.closet.selectedItems, categories: state.category.category,  isLoaded: state.closet.isLoaded, location: state.user.location , weather: state.outfit.weather };
 }
 
 function mapDispatchToProps(dispatch) {
-  return { fetchCategories: id => dispatch(fetchCategories(id)), fetchCloset: id => dispatch(fetchCloset(id)), createOutfits: (date, id, itemsArr, weather) => dispatch(createOutfits(date, id, itemsArr, weather)), increaseTimesWorn: (itemsArr, userId) => dispatch(increaseTimesWorn(itemsArr, userId)), selectThisItem: id => dispatch(selectThisItem(id)), replaceSelectedItem: (newId, oldId) => dispatch(replaceSelectedItem(newId, oldId)), fetchWeather: (longitude, latitude, date) => dispatch(fetchWeather(longitude, latitude, date)), getLocation: () => dispatch(getLocation()) };
+  return { 
+    fetchCategories: id => dispatch(fetchCategories(id)), 
+    fetchCloset: id => dispatch(fetchCloset(id)), 
+    createOutfits: (date, id, itemsArr, weather) => dispatch(createOutfits(date, id, itemsArr, weather)), 
+    increaseTimesWorn: (itemsArr, userId) => dispatch(increaseTimesWorn(itemsArr, userId)), 
+    selectThisItem: id => dispatch(selectThisItem(id)), 
+    replaceSelectedItem: (newId, oldId) => dispatch(replaceSelectedItem(newId, oldId)), 
+    fetchWeather: (longitude, latitude, date) => dispatch(fetchWeather(longitude, latitude, date)) };
 }
 
 

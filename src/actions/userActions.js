@@ -1,4 +1,4 @@
-import {AUTHENTICATING_USER, SET_CURRENT_USER, FAILED_LOGIN, RESET} from '../types'
+import { AUTHENTICATING_USER, SET_CURRENT_USER, FAILED_LOGIN, RESET, GET_LOCATION} from '../types'
 
 export const LoginUser = (username, password) => {
     return (dispatch) =>{
@@ -27,12 +27,12 @@ export const LoginUser = (username, password) => {
           dispatch(setCurrentUser(JSONResponse.user))})
           .catch(r =>
             r
-              .json()
-              .then(e =>
-                dispatch(failedLogin(e.message))
+            .json()
+            .then(e =>
+              dispatch(failedLogin(e.message))
               )
-          );
-    }
+              );
+            }
 } 
 
 export const fetchCurrentUser = () => {
@@ -80,8 +80,12 @@ export const SignUpUser = (username, password, city, image) => {
       .then(r=> r.json())
       .then(res=> {
         localStorage.setItem("jwt", res.jwt)
-        debugger
         dispatch({ type: SET_CURRENT_USER, payload: res.user})
       })
   }
 }
+
+export const getLocation = (lat, long) => ({
+  type: GET_LOCATION,
+  payload: { latitude: lat, longitude: long }
+});

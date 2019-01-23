@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router";
-import { LoginUser } from "../actions/userActions";
+import { LoginUser, getLocation } from "../actions/userActions";
 import '../App.css'
 import {  FormGroup,  FormControl, Row, Col, HelpBlock } from "react-bootstrap";
 // import { Link } from "react-router-dom";
@@ -9,7 +9,9 @@ import {  FormGroup,  FormControl, Row, Col, HelpBlock } from "react-bootstrap";
 class Login extends React.Component{
     state = {
         username: "",
-        password: ""
+        password: "",
+        longitude: 0,
+        latitude: 0
     }
 
     handleChange = (e) => {
@@ -18,8 +20,34 @@ class Login extends React.Component{
 
     handleLoginSubmit = (e) => { 
         e.preventDefault()
+        // this.geolocation()
         this.props.LoginUser(this.state.username, this.state.password)
         this.setState({ username: "", password: "" });
+        // navigator.geolocation.getCurrentPosition(
+        //   (position) => {
+        //     debugger
+        //     this.props.getLocation(position.coords.latitude, position.coords.longitude);
+        //   },
+        //   (error) => this.setState({ error: error.message }),
+        //   { enableHighAccuracy: true, timeout: 1, maximumAge: 1000 },
+        // )
+
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
+
+      const success = (pos) => {
+        this.props.getLocation(pos.coords.latitude, pos.coords.longitude)
+      }
+
+      const error = (err) => {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+      }
+
+      navigator.geolocation.getCurrentPosition(success, error, options);
+
     }
 
 
@@ -35,7 +63,7 @@ class Login extends React.Component{
                   <h2 className="loginHeader">CAPSULE WARDROBE</h2>
                   <FormControl.Feedback />
                   <FormGroup widths="equal" className="loginInput">
-                    <FormControl type="text" label="Text" name="username" placeholder="Enter text" onChange={this.handleChange} value={this.state.username} style={{ color: "grey" }} />
+                    <FormControl type="text" label="Text" name="username" placeholder="Enter username" onChange={this.handleChange} value={this.state.username} style={{ color: "grey" }} />
                     <FormControl type="password" label="password" placeholder="password" name="password" onChange={this.handleChange} value={this.state.password} />
                   </FormGroup>
                   <div className="loginbutton">
@@ -79,9 +107,16 @@ const mapStateToProps = (state) => {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+  return { 
+    LoginUser: (username, password) => dispatch(LoginUser(username, password)), 
+    getLocation: (lat, long) => dispatch(getLocation(lat, long)) }
+}
+
+
 export default withRouter(
   connect(
     mapStateToProps,
-    { LoginUser }
+    mapDispatchToProps
   )(Login)
 );
