@@ -12,7 +12,7 @@ class ClosetItem extends React.Component {
          const daysSinceLastWorn = Math.ceil((Math.abs(today.getTime() - itemUpdateDate.getTime())) / (1000 * 3600 * 24))
         //  console.log("DAYS SINCE LAST WORN", daysSinceLastWorn, itemUpdateDate, today);
         return <Fragment>
-            {daysSinceLastWorn > 30 ? <div>
+            {daysSinceLastWorn > 15 ? <div>
                 <p style={{ fontSize: "12px"}}> {daysSinceLastWorn} days since last worn</p>
                 <Col md={6}> 
                     <button to="./donate" className="item-buttons" style={{ color: "#1D4306"}} onClick={(e)=>this.redirectDonateOrSell(e,item.id)}>
@@ -36,19 +36,19 @@ class ClosetItem extends React.Component {
 
      renderEachItem = itemArr => {
          return sortByTimesWorn(itemArr).map(eachItem=> {
-            return <div className="closet-item">
-                <div class="card" key={eachItem.id}>
-                  <div class="card-image">
+             return <div className="closet-item" key={eachItem.id}>
+                <div className="card" >
+                  <div className="card-image" >
                     <img src={eachItem.image} alt={eachItem.name} />
-                    <span class="card-title" style={{color: "grey", fontSize: "20px"}}>{eachItem.name}
+                    <span className="card-title" style={{color: "grey", fontSize: "20px"}}>{eachItem.name}
                     </span>
-                    <button class="btn-floating halfway-fab waves-effect waves-light red">
-                            <i class="material-icons" onClick={() => this.props.handleSelectItem(eachItem.id, eachItem.category_id)}>+</i>
+                    <button className="btn-floating halfway-fab waves-effect waves-light red">
+                            <i className="material-icons" onClick={() => this.props.handleSelectItem(eachItem.id, eachItem.category_id)}>+</i>
                     </button>
                   </div>
-                  <div class="card-content">
+                  <div className="card-content">
                         <p style={{fontSize: "15px"}}> Times Worn: {eachItem.times_worn}</p>
-                        <p> {this.renderDaysWorn(eachItem)}</p>
+                     {this.renderDaysWorn(eachItem)}
                   </div>
                 </div>
               </div>;
@@ -59,15 +59,14 @@ class ClosetItem extends React.Component {
      renderContainerWithFilteredCategory = (filteredCategory) => {
          return filteredCategory.map(category=> {
              return <div className="category-item" key={`123${category}`}>
-                 <div class="col s12">
-                     <h5 class="col s2">{category}</h5>
+                     <h5 className="category-item-title">{category}</h5>
                 <div className="category-item-overflow">
                   {this.renderEachItem(
                     returnArrItemsByCategory(this.props.items, category)
                   )}
                   </div>
                 </div>
-              </div>;
+
             })
     }
 

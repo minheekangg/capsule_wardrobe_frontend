@@ -142,7 +142,6 @@ export function changeItemStatus(userId, id, newStatus){
           }
         }).then(r => {
           if (r.statusText === "OK") {
-            alert("donated!");
             dispatch({ type: UPDATED_ITEM, payload: r.data });
           }
         });

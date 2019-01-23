@@ -5,9 +5,10 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { fetchCloset, increaseTimesWorn, selectThisItem, replaceSelectedItem } from "../actions/closetActions";
 import { fetchCategories } from "../actions/categoryActions";
-import { createOutfits } from '../actions/outfitActions'
+import { createOutfits, fetchWeather, getLocation } from "../actions/outfitActions";
 import ClosetItem from './ClosetItem';
 import ClosetView from './ClosetView';
+import Weather from './Weather';
 import Selection from './Selection';
 import {LoadingPage} from './misc';
 
@@ -19,28 +20,32 @@ import { Link, Redirect } from "react-router-dom";
 class Closet extends React.Component {
   state = {
     date: new Date(),
-    selectionRender: false
+    selectionRender: false,
   };
 
   componentDidMount() {
+    this.props.getLocation()
     this.props.fetchCloset(this.props.user);
     this.props.fetchCategories(this.props.user);
   }
 
+
   handleDateChange = date => {
     this.setState({
       date: date
-    });
-  };
+    }, () => { this.props.fetchWeather(this.props.location.latitude, this.props.location.longitude, this.state.date)}
+    )
+  }
 
   handleOutfitSubmit = e => {
     e.preventDefault();
-    this.props.createOutfits(
+    this.props.createOutfits(  
       formatDate(this.state.date),
       this.props.user,
-      this.props.selectedItems
+      this.props.selectedItems,
+      this.props.weather
     );
-    this.props.increaseTimesWorn(this.props.selectedItems, this.props.user);
+    this.props.increaseTimesWorn(this.props.selectedItems, this.props.user );
   };
 
   handleSelectItem = (newItemId, newItemCatId) => {
@@ -75,13 +80,16 @@ class Closet extends React.Component {
     return <div className="selection-container">
         <Form onSubmit={this.handleOutfitSubmit}>
           <h1>Selected:</h1>
+          <Weather currentDate={this.state.date} />
           <DatePicker selected={this.state.date} onChange={this.handleDateChange} />
           <div className="closet-container">
             {sortedSelection.map(selected => {
               return <Selection key={selected.id} image={selected.image} name={selected.name} id={selected.id} times_worn={selected.times_worn} />;
             })}
           </div>
-          <Button type="submit" style={{margin: "2vh", backgroundColor: "grey"}}>Outfit</Button>
+          <Button type="submit" style={{ margin: "2vh", backgroundColor: "grey" }}>
+            Outfit
+          </Button>
         </Form>
       </div>;
   }
@@ -118,11 +126,11 @@ class Closet extends React.Component {
 
 function mapStateToProps(state){
   console.log('%c inside closet', 'color:green',state)
-  return { user: state.user.userId, items: state.closet.items, selectedItems: state.closet.selectedItems, categories: state.category.category, hasOutfits: state.outfit.outfitsLoaded, isLoaded: state.closet.isLoaded };
+  return { user: state.user.userId, items: state.closet.items, selectedItems: state.closet.selectedItems, categories: state.category.category, hasOutfits: state.outfit.outfitsLoaded, isLoaded: state.closet.isLoaded, location: state.outfit.location, weather: state.outfit.weather };
 }
 
 function mapDispatchToProps(dispatch) {
-  return { fetchCategories: id => dispatch(fetchCategories(id)), fetchCloset: id => dispatch(fetchCloset(id)), createOutfits: (date, id, itemsArr) => dispatch(createOutfits(date, id, itemsArr)), increaseTimesWorn: (itemsArr, userId) => dispatch(increaseTimesWorn(itemsArr, userId)), selectThisItem: id => dispatch(selectThisItem(id)), replaceSelectedItem: (newId, oldId) => dispatch(replaceSelectedItem(newId, oldId)) };
+  return { fetchCategories: id => dispatch(fetchCategories(id)), fetchCloset: id => dispatch(fetchCloset(id)), createOutfits: (date, id, itemsArr, weather) => dispatch(createOutfits(date, id, itemsArr, weather)), increaseTimesWorn: (itemsArr, userId) => dispatch(increaseTimesWorn(itemsArr, userId)), selectThisItem: id => dispatch(selectThisItem(id)), replaceSelectedItem: (newId, oldId) => dispatch(replaceSelectedItem(newId, oldId)), fetchWeather: (longitude, latitude, date) => dispatch(fetchWeather(longitude, latitude, date)), getLocation: () => dispatch(getLocation()) };
 }
 
 

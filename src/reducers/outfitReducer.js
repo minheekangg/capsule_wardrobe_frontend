@@ -1,10 +1,12 @@
-import { FETCHED_OUTFITS, CREATING_OUTFITS, CREATED_OUTFIT, RESET, UPDATED_OUTFITS } from "../types";
+import { FETCHED_OUTFITS, CREATING_OUTFITS, CREATED_OUTFIT, RESET, UPDATED_OUTFITS, GET_LOCATION, GET_WEATHER, GET_PRETTY_LOC } from "../types";
 
 
 const initialState = {
   outfits: [],
   outfitsLoaded: false,
-  createdOutfit: false
+  createdOutfit: false,
+  location: {latitude: "", longitude: ""},
+  weather: {weather: "",temperature: "", timezone: ""}
 };
 
 
@@ -20,6 +22,12 @@ export default function outfitReducer(state = initialState, action) {
         case UPDATED_OUTFITS: 
             let others = state.outfits.filter(s => { return s.id !== action.payload.id })
             return { ...state, outfits: [...others, action.payload], outfitsLoaded: true };
+        case GET_LOCATION:
+            return { ...state, location: { latitude: action.payload.coords.latitude, longitude: action.payload.coords.longitude } };
+        case GET_WEATHER:
+            return { ...state, weather: { ...state.weather, weather:  action.payload.currently.icon, temperature: action.payload.currently.temperature } }
+        case GET_PRETTY_LOC:
+            return {...state, weather:{...state.weather, timezone: action.payload}}
         case RESET:
             return initialState
         default:

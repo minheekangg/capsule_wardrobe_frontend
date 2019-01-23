@@ -26,5 +26,8 @@ export const DESELECT_LISTING = "DESELECT_LISTING";
 export const SELECT_DELETE_ACTION = "SELECT_DELETE_ACTION"; 
 export const SELECT_ITEM_TO_DELETE = "SELECT_ITEM_TO_DELETE"; 
 export const POST_LISTING = "POST_LISTING"; 
+export const GET_LOCATION = "GET_LOCATION"; 
+export const GET_WEATHER = "GET_WEATHER"; 
+export const GET_PRETTY_LOC = "GET_PRETTY_LOC"; 
 
 export const donationLocations = [{name: "Salvation Army", latitude: 40.732953, longitude: 73.990442}, {name: "Salvation Army", latitude: 40.732953, longitude: 73.990442}, {name: "Salvation Army", latitude: 40.732953, longitude: 73.990442}]

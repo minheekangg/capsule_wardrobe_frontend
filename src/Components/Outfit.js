@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import withAuth from "../hoc/withAuth";
-import { fetchOutfits, faveOutfit } from "../actions/outfitActions";
+import { fetchOutfits, faveOutfit} from "../actions/outfitActions";
 import {Image} from "react-bootstrap";
 import { fetchCloset } from "../actions/closetActions";
 import favoriteImg from '../images/favorite.png'
 import starImg from '../images/star.png'
+
 
 class Outfit extends React.Component {
     state = {
@@ -13,18 +14,20 @@ class Outfit extends React.Component {
     }
 
     componentDidMount(){
-       this.props.fetchOutfits()
-     this.props.fetchCloset(this.props.userId)
+        this.props.fetchOutfits()
+        this.props.fetchCloset(this.props.userId)
     }
 
     renderOutfits = () => {
         let sorted = sortByDate(this.props.outfits);
         return sorted.map(o => {
+            console.log(o)
           return <div className="outfit-container" key={o.id}>
-              <h6 key={o.id}>{o.day}
-                  <button onClick={()=>this.props.faveOutfit(this.props.user, o.id, o.favorite)}  style={{border: "none"}}>
-         {o.favorite ? <img src={favoriteImg} alt="favorite"/> : <img src={starImg} alt="star" /> }
-                  </button>
+              <h6 key={o.id}>
+                {o.day} <p>{o.weather}, {o.location}, {o.temperature}</p>
+                <button onClick={() => this.props.faveOutfit(this.props.user, o.id, o.favorite)} style={{ border: "none" }}>
+                  {o.favorite ? <img src={favoriteImg} alt="favorite" /> : <img src={starImg} alt="star" />}
+                </button>
               </h6>
               {this.renderEachItemCollection(o.items, o.day)}
             </div>;
@@ -66,7 +69,8 @@ const mapDispatchToProps = dispatch => {
   return {
       fetchOutfits: () => dispatch(fetchOutfits()),
       fetchCloset: id => dispatch(fetchCloset(id)),
-      faveOutfit: (userId, outfitId, favorite) => dispatch(faveOutfit(userId, outfitId, favorite))
+      faveOutfit: (userId, outfitId, favorite) => dispatch(faveOutfit(userId, outfitId, favorite)),
+      
   }
 };
 

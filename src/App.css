@@ -108,37 +108,43 @@
 
 .category-item{
   margin-left: -20vh;
-  display: flex;
-  position: relative;
+  /* display: flex; */
+  /* position: relative; */
+  overflow: -webkit-paged-y;
 }
-
+/* CLOSETT */
 .closet-item{
-  width: 25vh;
-  height: 35vh;
+  width: 250px;
+  height: 370px;
   padding: 2vh;
+  position: relative;
+  display: inline-block;
+  overflow: auto;
 }
 
-.category-item-overflow{
-  margin-left: 18vh;
-  position: relative;
-  display: flex;
-  overflow-x: auto;
-  
+.category-item-title{
+  position: absolute;
 }
-.caption {
+.category-item-overflow{
+  margin-left: 15vh;
+  height: 300px;
+  /* overflow-x: scroll; */
+  position: relative; 
+}
+/* .caption {
   width: 100%;
   margin-bottom: 4vh;
   margin-top: -2vh;
   overflow: none;
   object-fit: contain;
-}
+} */
 .item-img {
   /* background-color:black; */
   width: 100%;
   height: 100%;
 }
 .closet-container{
-  overflow-x: none;
+  /* overflow-x: none; */
   position: relative;
   display: flex;
   flex-direction: row;
@@ -167,7 +173,7 @@
 
 
 .closet-category{
-  position: absolute;
+  position: relative;
 }
 
 .selected-item{
@@ -249,7 +255,7 @@
 } */
 
 .closetselection-container{
-  position: relative
+  position: relative;
 }
 
 .newItemForm{
