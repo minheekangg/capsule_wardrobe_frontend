@@ -46,7 +46,7 @@ class Outfit extends React.Component {
         return (
             <div>
                 <div className="fakeNavbar" style={{ backgroundColor: "#1D4306" }} />
-            { this.props.createdOutfit || this.props.isLoaded ? this.renderOutfits() : null }
+            { this.props.isLoaded ? this.renderOutfits() : null }
             </div>
         )
     }

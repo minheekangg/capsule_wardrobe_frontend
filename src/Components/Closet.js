@@ -20,7 +20,6 @@ import { Link, Redirect } from "react-router-dom";
 class Closet extends React.Component {
   state = {
     date: new Date(),
-    selectionRender: false,
     toOutfits: false
   };
 
@@ -46,7 +45,7 @@ class Closet extends React.Component {
       this.props.weather
     );
     this.props.increaseTimesWorn(this.props.selectedItems, this.props.user );
-      this.setState({toOutfits: true})
+      // this.setState({toOutfits: true})
   };
 
   handleSelectItem = (newItemId, newItemCatId) => {
@@ -107,29 +106,25 @@ class Closet extends React.Component {
   render() {
     return <div>
         <div className="fakeNavbar" style={{ backgroundColor: "#1D4306" }} />
-           {this.state.toOutfits? <Redirect to='./outfits'/> :
-         <div>
-          <div style={{position: "relative", height: "2vh", fontSize: "15px"}}>
-            <Link to="/additem" content="Add item" style={{ color: "#C95D2D", position:"absolute", right:0, paddingRight: "2vh" }}>
-              Add more!
-            </Link>
-          <Link to="/outfits" content="outfits" style={{ color: "#1D4306", position: "absolute", paddingLeft: "2vh"}}>
-              See Outfits
-            </Link>
-          </div>
-        
-        {this.props.isLoaded ? this.renderClosetAndSelectionContainer() : <LoadingPage />}
-        </div>
+        {this.props.createdOutfit ? <Redirect to="./outfits" /> : <div>
+            <div style={{ position: "relative", height: "2vh", fontSize: "15px" }}>
+              <Link to="/additem" content="Add item" style={{ color: "#C95D2D", position: "absolute", right: 0, paddingRight: "2vh" }}>
+                Add more!
+              </Link>
+              <Link to="/outfits" content="outfits" style={{ color: "#1D4306", position: "absolute", paddingLeft: "2vh" }}>
+                See Outfits
+              </Link>
+            </div>
 
-      
-        }
-        </div>
+            {this.props.isLoaded ? this.renderClosetAndSelectionContainer() : <LoadingPage />}
+          </div>}
+      </div>;
   }
 }
 
 function mapStateToProps(state){
   console.log('%c inside closet', 'color:green',state)
-  return { user: state.user.userId, items: state.closet.items, selectedItems: state.closet.selectedItems, categories: state.category.category,  isLoaded: state.closet.isLoaded, location: state.user.location , weather: state.outfit.weather };
+  return { user: state.user.userId, items: state.closet.items, selectedItems: state.closet.selectedItems, categories: state.category.category, isLoaded: state.closet.isLoaded, location: state.user.location, weather: state.outfit.weather, outfitsLoaded: state.outfit.outfitsLoaded, createdOutfit: state.outfit.createdOutfit };
 }
 
 function mapDispatchToProps(dispatch) {
