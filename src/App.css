@@ -8,7 +8,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -294,33 +294,33 @@
   /* margin-top: 2vh; */
   /* position: relative; */
   /* background-color: cornflowerblue; */
-  width: 20vh;
-  height: 25vh;
-  padding: 2vh;
+  width: 200px;
+  height: 250px;
+  padding: 20px;
   /* object-fit: cover; */
 }
 .market-listing-item-img1{
    /* position: relative; */
   z-index: 0;
-  width: 20vh;
-  height: 15vh;
+  width: 200px;
+  height: 150px;
 }
 .market-listing-item-img2{
   position: absolute;
-  margin-top: -15vh;
+  margin-top: -150px;
   left: 0;
-  width: 15vh;
-  height: 15vh;
+  width: 150px;
+  height: 150px;
   z-index: 1;
   opacity: 30%;
 }
 
 .market-listing-container{
-  margin-top: 5vh;
+  margin-top: 50px;
   /* position: relative; */
-  padding: 2vh;
+  padding: 20px;
   /* background-color: grey; */
-  width: 165vh;
+  width: 1650px;
   overflow-x: none;
   display: flex;
   flex-direction: row;

@@ -6,27 +6,35 @@ import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import '../css/main.css'
 import image1 from '../images/note1.png'
-import image2 from '../images/note3.png'
+// import image2 from '../images/note3.png'
 import image3 from '../images/testt.png'
-import image4 from '../images/1.png'
+// import image4 from '../images/1.png'
+import guide from '../images/CAPSULEGUIDE.png'
+import def from '../images/capusle-definition.jpg'
 class Welcome extends React.Component {
 
     renderCarousel = () => {
         return <Carousel style={{ width: "98%", height: "700px", marginTop: "50px" }}>
             <Carousel.Item>
-              <img style={{ marginLeft: "240px" }} alt="image1" src={image1} />
+                <img style={{ marginLeft: "240px" }} alt="def" src={def} />
+            </Carousel.Item>
+            <Carousel.Item>
+                <img style={{ marginLeft: "240px" }} alt="image2" src={image1} />
             </Carousel.Item>
             <Carousel.Item>
               <img style={{ marginLeft: "220px", width: "80%" }} alt="image2" src={image3} />
             </Carousel.Item>
             <Carousel.Item>
-              <img style={{ marginLeft: "200px", width: "80%" }} alt="image3" src={image2} />
-            </Carousel.Item>
-            <Carousel.Item>
-                <img style={{ marginLeft: "93px", width: "90%", height:"100%" }} alt="image4" src={image4} />
+              <img style={{ marginLeft: "240px" }} alt="guide" src={guide} />
             </Carousel.Item>
           </Carousel>;
     }
+            // <Carousel.Item>
+            //   <img style={{ marginLeft: "200px", width: "80%" }} alt="image3" src={image2} />
+            // </Carousel.Item>
+            // <Carousel.Item>
+            //     <img style={{ marginLeft: "93px", width: "90%", height:"100%" }} alt="image4" src={image4} />
+            // </Carousel.Item>
 
  
     render() {
