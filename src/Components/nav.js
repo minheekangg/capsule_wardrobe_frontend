@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-// import { Redirect } from "react-router";
 import {logout} from '../actions/userActions'
-// import { getLocation } from "../actions/outfitActions";
+// import { LoadingPage } from './misc';
 
 
 class NavBar extends React.Component{
@@ -28,7 +27,13 @@ class NavBar extends React.Component{
            </ul>
            <ul id="nav-mobile" className="left hide-on-med-and-down">
              <li> <p className="userIcon">
-             {this.props.user.username}</p> </li>
+              {this.props.user.username}</p> 
+                </li>
+              <li>
+            <p className="userIcon"> { this.props.user.city} </p></li>
+            <li><p style={{ color: "#C95D2D"}}>
+                {this.props.location.latitude === "" ? <i class="material-icons">location_off</i> : <i class="material-icons">location_on</i>}</p>
+              </li>
             <li><Link to="/closet" className="nav-closet-left">CLOSET</Link></li>
            </ul>
          </div>
@@ -49,6 +54,7 @@ class NavBar extends React.Component{
         
        
    const mapStateToProps = state => {
+     console.log(state)
        return {
            loggedIn: state.user.isLoggedIn, 
      user: state.user, location: state.user.location,
