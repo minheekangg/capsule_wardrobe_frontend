@@ -16,7 +16,7 @@ class Welcome extends React.Component {
     renderCarousel = () => {
         return <Carousel style={{ width: "98%", height: "700px", marginTop: "50px" }}>
             <Carousel.Item>
-                <img style={{ marginLeft: "240px" }} alt="def" src={def} />
+                <img style={{ marginLeft: "300px", marginTop: "50px" }} alt="def" src={def} />
             </Carousel.Item>
             <Carousel.Item>
                 <img style={{ marginLeft: "240px" }} alt="image2" src={image1} />
@@ -25,7 +25,7 @@ class Welcome extends React.Component {
               <img style={{ marginLeft: "220px", width: "80%" }} alt="image2" src={image3} />
             </Carousel.Item>
             <Carousel.Item>
-              <img style={{ marginLeft: "240px" }} alt="guide" src={guide} />
+              <img style={{ marginLeft: "240px", height: "700px" }} alt="guide" src={guide} />
             </Carousel.Item>
           </Carousel>;
     }

@@ -6,7 +6,7 @@ import MarketItem from './MarketItem'
 import { fetchCategories } from "../actions/categoryActions";
 // import Listing from './Listing'
 import { Redirect } from "react-router-dom";
-import { Grid, Row, Col, Image, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Grid, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
 class Market extends React.Component {
     state={
         reload: false,
@@ -34,9 +34,9 @@ class Market extends React.Component {
     rendermarketOption = () => {
         return <div className="market-options">
             <div style={{ height: "20vh", marginTop: "5vh", border: "none"}}>
-                <Image src={this.props.user.image} rounded />
-              <h4>{this.props.user.username}</h4>
+                <img style={{ height: "100%", zIndex: 0 }} src={this.props.user.image} class="circle responsive-img" alt="markeruserimage" />
             </div>
+              <h4>{this.props.user.username}</h4>
             <div style={{width:"100%", height: "1vh", backgroundColor: "grey"}}></div>
             <ListGroup componentClass="ul" onClick={this.handleFilterListings}>
               <ListGroupItem className="list-group-item">

@@ -23,10 +23,12 @@ class Listing extends React.Component{
 
     renderItemInfo=()=>{
         const item = this.props.select.item
-        const seller = this.props.select.seller.username
+        const seller = this.props.select.seller
         return (< div className="donate">
         <img src={item.image} alt={item.name}/>
-        <p>Seller: {seller}</p><h6>{item.name}</h6>
+        
+            <p> Seller:  <img style={{ width: "40px", height: "40px", marginRight: "10px",flexShrink: 0 }} src={seller.image} class="circle responsive-img" alt="markeruserimage" />{seller.username}</p>
+            <h6>{item.name}</h6>
         <h5>${this.props.select.price}</h5>
             <Button style={{ color: "#1D4306", marginRight: "2vh", width: "20vh"}} onClick={this.handleBuyButton}>BUY</Button> 
             <Button style={{ backgroundColor: "#C95D2D", width: "20vh" }} onClick={this.backtoMarketClick}>Back to Market</Button> </div>)

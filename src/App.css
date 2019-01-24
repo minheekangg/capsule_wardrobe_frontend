@@ -72,7 +72,7 @@
 .nav-closet-left{
   position:abolute;
   color: #1D4306;
-  margin-left:650px;
+  margin-left:550px;
   font-size: 15px;
   /* right: 0; */
 }
@@ -295,7 +295,7 @@
   /* position: relative; */
   /* background-color: cornflowerblue; */
   width: 200px;
-  height: 250px;
+  height: 300px;
   padding: 20px;
   /* object-fit: cover; */
 }
