@@ -6,7 +6,6 @@ import {
   POST_LISTING
 } from "../types";
 import axios from "axios";
-import swal from "sweetalert";
 
 
 export function fetchListings() {
@@ -71,7 +70,6 @@ export function postMyItem(userId, itemId, price){
         }
         }).then(r => {
             if (r.statusText === "Created"){
-            swal("Posted!", "", "success");
             dispatch({ type: POST_LISTING, payload: r.data });
             }
         })

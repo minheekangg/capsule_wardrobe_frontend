@@ -35,7 +35,7 @@ class Donate extends React.Component {
 
 
   handleDonateButtonClick = () => {
-      swal("Purchased!", "Now it's in your closet", "success");
+      swal("Donated!", "Thanks for donating!", "success");
       this.props.changeItemStatus(this.props.userId, this.props.firstItem.id, "Donate")
   }
 

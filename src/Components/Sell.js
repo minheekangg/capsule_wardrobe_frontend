@@ -5,7 +5,7 @@ import { changeItemStatus } from "../actions/closetActions";
 import { Redirect } from "react-router-dom";
 import { Button} from "react-bootstrap";
 import { withRouter } from "react-router-dom";
-
+import swal from "sweetalert";
 
 class Sell extends React.Component {
     state = {
@@ -16,6 +16,7 @@ class Sell extends React.Component {
       e.preventDefault()
       this.props.changeItemStatus(this.props.userId,this.props.firstItem.id, "Sell" )
       this.props.postMyItem(this.props.userId, this.props.firstItem.id, this.state.price)
+      swal("Posted!", "", "success");
   }
 
     handlePriceChange = event => {
@@ -37,8 +38,6 @@ class Sell extends React.Component {
         </form>
       </div>;
   };
-//   <Button style={{ marginLeft: "426px", marginTop: "2vh"}} href="/donate">I'll donate instead</Button>
-
 
   render() {
       return this.props.item.length > 0 ? this.renderSellForm() : <Redirect to="/market" />;

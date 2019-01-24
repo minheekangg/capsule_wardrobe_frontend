@@ -9,7 +9,7 @@ import {
     SELECT_DELETE_ACTION, SELECT_ITEM_TO_DELETE
 } from "../types";
 import axios from "axios";
-import swal from "sweetalert";
+
 export function fetchCloset(id){
     return (dispatch) =>{
         dispatch(
@@ -143,7 +143,7 @@ export function changeItemStatus(userId, id, newStatus){
           }
         }).then(r => {
           if (r.statusText === "OK") {
-            swal("Donated!", "Thanks for Donating", "success");
+         
             dispatch({ type: UPDATED_ITEM, payload: r.data });
           }
         });
