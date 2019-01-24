@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import { Button} from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 
+
 class Sell extends React.Component {
     state = {
         price: 0

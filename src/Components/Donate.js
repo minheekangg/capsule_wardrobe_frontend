@@ -5,7 +5,7 @@ import { changeItemStatus } from "../actions/closetActions";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { LoadingPage } from './misc';
-// import {getMarkers} from '../actions/mapActions'
+import swal from "sweetalert";
 
 const API_KEY = process.env.REACT_APP_GOOGLE_MAP_API
 
@@ -35,6 +35,7 @@ class Donate extends React.Component {
 
 
   handleDonateButtonClick = () => {
+      swal("Purchased!", "Now it's in your closet", "success");
       this.props.changeItemStatus(this.props.userId, this.props.firstItem.id, "Donate")
   }
 

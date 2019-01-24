@@ -5,7 +5,7 @@ const MarketItem = props =>{
     return !props.item.buyer_id ? <div className="market-listing-item">
         <div className="card">
           <div className="card-image">
-                <img className="market-listing-item-img1" src={props.item.item.image} alt={props.item.item.id} />
+            <img className="market-listing-item-img1" src={props.item.item.image} alt={props.item.item.id} />
             <button className="btn-floating halfway-fab waves-effect waves-light red">
               <i className="material-icons" onClick={() => props.handleListingInfoClick(props.item)}>
                 +
@@ -16,22 +16,27 @@ const MarketItem = props =>{
         <div className="card-content">
           <p>{props.item.item.name}</p>
           <p>${props.item.price}</p>
-          <p style={{color: "grey"}}>{props.item.seller.username}</p>
+
+          <img style={{ height: "25px", width: "25px", flexShrink: 0 }} src={props.item.seller.image} alt="" class="circle responsive-img" />
+
+          <p style={{ color: "grey" }}>{props.item.seller.username}</p>
         </div>
-      </div> :
-            <div className="market-listing-item">
+      </div> : <div className="market-listing-item">
         <div className="card">
-            <div className="card-image" style={{ position: "relative", width: "15vh", height: "15vh" }}>
+          <div className="card-image" style={{ position: "relative", width: "15vh", height: "15vh" }}>
             <img className="market-listing-item-img1" src={props.item.item.image} alt={props.item.item.id} />
             <img className="market-listing-item-img2" src="http://raylittlerealty.com/wp-content/themes/gwenty/images/sold.png" alt={`${props.item.item.id}234}`} />
-            </div>
+          </div>
         </div>
         <div className="card-content">
           <p>{props.item.item.name}</p>
           <p>${props.item.price}</p>
-            <p style={{color: "grey"}}>{props.item.seller.username}</p>
+
+          <img style={{ height: "25px", width: "25px", flexShrink: 0 }} src={props.item.seller.image} alt="" class="circle responsive-img" />
+
+          <p style={{ color: "grey" }}>{props.item.seller.username}</p>
         </div>
-    </div >
+      </div>;
 }
 
 export default MarketItem

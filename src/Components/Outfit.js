@@ -21,12 +21,13 @@ class Outfit extends React.Component {
     renderOutfits = () => {
         let sorted = sortByDate(this.props.outfits);
         return sorted.map(o => {
-            console.log(o)
+            var icon_URL = "./images/icons/" + o.weather + ".svg"
             return <div class="collection" key={o.id} style={{width:"1280px", marginLeft: "426px", padding: "20px"}}>
                       <span class="title">{o.day}</span>
                         <div class="collection-item avatar">
                         {this.renderEachItemCollection(o.items, o.day)}
-                    <p style={{color: "grey"}}>{o.weather} in  {o.location} </p>
+                    
+                    <p style={{ color: "grey" }}> <img height="20px" style={{ backgroundColor: "lightGrey" }} src={icon_URL} alt="icon" /> {o.weather} in  {o.location} </p>
                       <button style={{border: "none"}} onClick={() => this.props.faveOutfit(this.props.user, o.id, o.favorite)} class="secondary-content">
                         {o.favorite ? <i class="material-icons">grade</i> : <i class="material-icons">star_border</i>}
                       
