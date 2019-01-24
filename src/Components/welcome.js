@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import withAuth from "../hoc/withAuth";
+// import withAuth from "../hoc/withAuth";
 import { Carousel } from "react-bootstrap";
-import { Redirect } from "react-router";
+// import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import '../css/main.css'
 import image1 from '../images/note1.png'
@@ -35,7 +35,12 @@ class Welcome extends React.Component {
                 <br/>
                 {this.renderCarousel()}
             <Link className="rightButton" to="/market">  </Link>
-    </div> : <Redirect to="/login" />  }
+        </div> : <div className="welcome">
+                <p className="leftButton"> </p>
+                <br />
+                {this.renderCarousel()}
+                <p className="rightButton">  </p>
+            </div> }
 } 
 
 const mapStateToProps = state => {
@@ -45,4 +50,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default withAuth(connect(mapStateToProps)(Welcome))
+export default connect(mapStateToProps)(Welcome)

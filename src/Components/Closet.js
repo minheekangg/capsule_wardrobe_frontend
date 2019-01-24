@@ -26,7 +26,7 @@ class Closet extends React.Component {
 
   componentDidMount() {
     this.props.fetchCloset(this.props.user);
-    this.props.fetchCategories(this.props.user);
+    this.props.fetchCategories();
   }
 
 
@@ -64,7 +64,6 @@ class Closet extends React.Component {
   };
 
   renderCloset() {
-    // console.log("HERE inside rendercloset function", this.props.items )
     return <Fragment>
         <Grid>
           <div className="category-menu">

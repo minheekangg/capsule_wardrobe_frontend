@@ -21,8 +21,8 @@ class NavBar extends React.Component{
     return this.props.loggedIn ? <div className="navbar-fixed">
        <nav >
          <div className="nav-wrapper">
-           <a href="/" className="brand-logo center" style={{ color: "black", fontSize: "20px" }}>CAPSULE WARDROBE</a>
- 
+           <p className="brand-logo center" style={{ color: "black", fontSize: "20px" }}>CAPSULE WARDROBE</p>
+
            <ul id="nav-mobile" className="right hide-on-med-and-down">
              <li><Link to="/market" className="nav-closet-right">MARKET</Link></li>
              <li> <button className="logout-button" onClick={() => this.handleLogoutClick()}>Logout</button> </li>
@@ -33,7 +33,16 @@ class NavBar extends React.Component{
            </ul>
          </div>
        </nav>
-    </div> : null
+    </div> : <div className="navbar-fixed">
+        <nav >
+          <div className="nav-wrapper">
+            <a href="/" className="brand-logo center" style={{ color: "black", fontSize: "20px" }}>CAPSULE WARDROBE</a>
+            <ul id="nav-mobile" className="left hide-on-med-and-down">
+              <li><Link to="/login" className="userIcon">Login </Link></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
   }
 
 }

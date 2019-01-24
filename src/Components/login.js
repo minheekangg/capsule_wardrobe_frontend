@@ -4,8 +4,7 @@ import { withRouter, Redirect } from "react-router";
 import { LoginUser, getLocation } from "../actions/userActions";
 import '../App.css'
 import {  FormGroup,  FormControl, Row, Col, HelpBlock } from "react-bootstrap";
-// import { Link } from "react-router-dom";
-// import { getMarkers } from "../actions/mapActions";
+
 
 class Login extends React.Component{
     state = {
@@ -23,21 +22,21 @@ class Login extends React.Component{
         e.preventDefault()
         this.props.LoginUser(this.state.username, this.state.password)
         this.setState({ username: "", password: "" });
-      var options = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-      };
 
-      const success = (pos) => {
-        this.props.getLocation(pos.coords.latitude, pos.coords.longitude)
-      }
-
-      const error = (err) => {
-        console.warn(`ERROR(${err.code}): ${err.message}`);
-      }
-
-      navigator.geolocation.getCurrentPosition(success, error, options);
+        // GET CURRENT POSITION WITH GEOLOCATION
+          var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+          };
+          const success = (pos) => {
+            this.props.getLocation(pos.coords.latitude, pos.coords.longitude)
+          }
+          const error = (err) => {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+          }
+          navigator.geolocation.getCurrentPosition(success, error, options);
+          // 
 
     }
 
