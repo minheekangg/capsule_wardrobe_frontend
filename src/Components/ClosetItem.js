@@ -3,6 +3,7 @@ import { Col} from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import { selectItemToDelete, selectItemStatus } from "../actions/closetActions";
 import { connect } from 'react-redux';
+import { LoadingPage } from './misc';
 
 class ClosetItem extends React.Component {
 
@@ -76,7 +77,7 @@ class ClosetItem extends React.Component {
         } else if (this.props.itemToDeleteStatus === "Sell") {
             return <Redirect to="/sell" />;
         } else {
-            return filterOutCategoryName(this.props.items).length > 0 ? this.renderContainerWithFilteredCategory(filterOutCategoryName(filterByClosetStatus(this.props.items))) : null;
+            return filterOutCategoryName(this.props.items).length > 0 ? this.renderContainerWithFilteredCategory(filterOutCategoryName(filterByClosetStatus(this.props.items))) : <LoadingPage/>;
         }
     }
 

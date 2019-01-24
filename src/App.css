@@ -1,6 +1,5 @@
 
 /* $link-color {color: "purple", "darken-1" !default;} */
-
 .App {
   text-align: center;
   font-family: "Arial Black", Times, serif;
@@ -91,6 +90,12 @@
   color: grey;
   font-size: 15px;
   margin-left: 2vh;
+  max-height: "2px"
+}
+.userIcon img{
+  position:relative;
+  max-height: "2px";
+
 }
 /* NAVBAR */
 

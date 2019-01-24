@@ -2,6 +2,7 @@ import React from 'react'
 import { fetchWeather, fetchPrettyLocation } from '../actions/outfitActions'
 import { connect } from 'react-redux'
 import withAuth from "../hoc/withAuth";
+import { LoadingPage } from "./misc";
 
 class Weather extends React.Component {
 
@@ -13,11 +14,19 @@ class Weather extends React.Component {
 
     displayWeather = () => {
         const icon_URL = "./images/icons/"+this.props.weather.weather +".svg"
-        return <div> Weather in {this.props.weather.timezone} :
-        <br/>
-            <img height="30"  src={icon_URL} alt="icon" />
-            {this.props.weather.temperature}&deg;
-    </div>
+        return <div>
+        <div className="card horizontal">
+                <div className="card-image" style={{backgroundColor: "grey"}}>
+                    <img height="50px" src={icon_URL} alt="icon" />
+                </div>
+                    <div className="card-stacked">
+                        <div className="card-content">
+                            <p>Weather in {this.props.weather.timezone} </p>
+                            <p>{this.props.weather.temperature}&deg; </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
     }
 
 
@@ -25,9 +34,10 @@ class Weather extends React.Component {
       if (this.props.weather.weather.length > 0){
           return this.displayWeather()
       } else if (this.props.location.latitude.length > 0){
-          return <p>Loading Weather</p>
+          return <LoadingPage />
+       
       } else {
-        return null
+          return <LoadingPage />
       } 
     }
 }

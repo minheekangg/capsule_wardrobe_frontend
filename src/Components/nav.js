@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 // import { Redirect } from "react-router";
-// import { Navbar, Nav, NavItem } from "react-bootstrap";
 import {logout} from '../actions/userActions'
 // import { getLocation } from "../actions/outfitActions";
 
@@ -28,7 +27,8 @@ class NavBar extends React.Component{
              <li> <button className="logout-button" onClick={() => this.handleLogoutClick()}>Logout</button> </li>
            </ul>
            <ul id="nav-mobile" className="left hide-on-med-and-down">
-             <li> <p className="userIcon">{this.props.username}</p> </li>
+             <li> <p className="userIcon">
+             {this.props.user.username}</p> </li>
             <li><Link to="/closet" className="nav-closet-left">CLOSET</Link></li>
            </ul>
          </div>
@@ -51,7 +51,7 @@ class NavBar extends React.Component{
    const mapStateToProps = state => {
        return {
            loggedIn: state.user.isLoggedIn, 
-     username: state.user.username, location: state.user.location
+     user: state.user, location: state.user.location,
   }
 }
 

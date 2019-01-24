@@ -44,8 +44,7 @@ class Closet extends React.Component {
       this.props.selectedItems,
       this.props.weather
     );
-    this.props.increaseTimesWorn(this.props.selectedItems, this.props.user );
-      // this.setState({toOutfits: true})
+    this.props.increaseTimesWorn(this.props.selectedItems, this.props.user )
   };
 
   handleSelectItem = (newItemId, newItemCatId) => {

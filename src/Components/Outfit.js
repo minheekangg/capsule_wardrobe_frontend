@@ -4,8 +4,6 @@ import withAuth from "../hoc/withAuth";
 import { fetchOutfits, faveOutfit} from "../actions/outfitActions";
 import {Image} from "react-bootstrap";
 import { fetchCloset } from "../actions/closetActions";
-import favoriteImg from '../images/favorite.png'
-import starImg from '../images/star.png'
 
 
 class Outfit extends React.Component {
@@ -18,19 +16,23 @@ class Outfit extends React.Component {
         this.props.fetchCloset(this.props.userId)
     }
 
+
+    // div className = "outfit-container" key = { o.id } >
     renderOutfits = () => {
         let sorted = sortByDate(this.props.outfits);
         return sorted.map(o => {
             console.log(o)
-          return <div className="outfit-container" key={o.id}>
-              <h6 key={o.id}>
-                {o.day} <p>{o.weather}, {o.location}, {o.temperature}</p>
-                <button onClick={() => this.props.faveOutfit(this.props.user, o.id, o.favorite)} style={{ border: "none" }}>
-                  {o.favorite ? <img src={favoriteImg} alt="favorite" /> : <img src={starImg} alt="star" />}
-                </button>
-              </h6>
-              {this.renderEachItemCollection(o.items, o.day)}
-            </div>;
+            return <div class="collection" key={o.id} style={{width:"1280px", marginLeft: "426px", padding: "20px"}}>
+                      <span class="title">{o.day}</span>
+                        <div class="collection-item avatar">
+                        {this.renderEachItemCollection(o.items, o.day)}
+                    <p style={{color: "grey"}}>{o.weather} in  {o.location} </p>
+                      <button style={{border: "none"}} onClick={() => this.props.faveOutfit(this.props.user, o.id, o.favorite)} class="secondary-content">
+                        {o.favorite ? <i class="material-icons">grade</i> : <i class="material-icons">star_border</i>}
+                      
+                      </button>
+                </div>
+            </div>
         });
     }
    
@@ -46,7 +48,7 @@ class Outfit extends React.Component {
         return (
             <div>
                 <div className="fakeNavbar" style={{ backgroundColor: "#1D4306" }} />
-            { this.props.isLoaded ? this.renderOutfits() : null }
+                {this.props.isLoaded || this.props.updatedOutfit ? this.renderOutfits() : null }
             </div>
         )
     }
@@ -54,13 +56,14 @@ class Outfit extends React.Component {
 
 
 function mapStateToProps(state) {
-    console.log('%csfdfsd', 'color: pink', state)
+    // console.log('%csfdfsd', 'color: pink', state)
     return {
         outfits: state.outfit.outfits,
         items: state.closet.items,
         user: state.user.userId,
         isLoaded: state.outfit.outfitsLoaded,
-        createdOutfit: state.outfit.createdOutfit
+        createdOutfit: state.outfit.createdOutfit,
+        updatedOutfit: state.outfit.updatedOutfit
     }
 }
 
