@@ -22,7 +22,7 @@ class Outfit extends React.Component {
         let sorted = sortByDate(this.props.outfits);
         return sorted.map(o => {
             var icon_URL = "./images/icons/" + o.weather + ".svg"
-            return <div class="collection" key={o.id} style={{width:"1280px", marginLeft: "426px", padding: "20px"}}>
+            return <div class="collection" key={o.id} style={{width:"1280px", marginLeft: "350px", padding: "20px"}}>
                       <span class="title">{o.day}</span>
                         <div class="collection-item avatar">
                         {this.renderEachItemCollection(o.items, o.day)}

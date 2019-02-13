@@ -67,7 +67,7 @@ class Market extends React.Component {
           <div className="fakeNavbar" style={{ backgroundColor: "#C95D2D" }} />
           {this.props.selection.length > 0 ? <Redirect to="/listing" /> : this.props.listings.length > 0 ? <div className="closet-container">
               <Grid>
-                  <Row className="show-grid" style={{marginLeft: "-40vh"}}>
+                  <Row className="show-grid" style={{marginLeft: "-350px", width: "100%"}}>
                       <Col  md={3}>
                           {this.rendermarketOption()}
                       </Col>
