@@ -2,17 +2,17 @@ import React, { Component, Fragment } from 'react';
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import './App.css';
 
-import Welcome from './components/welcome'
-import Market from './components/Market'
-import Closet from './components/Closet'
-import NavBar from './components/nav'
-import Login from './components/login'
-import Cloudinary from './components/Cloudinary'
-import Outfit from './components/Outfit'
-import signUp from './components/signUp'
-import Listing from './components/Listing'
-import Donate from './components/Donate'
-import Sell from './components/Sell'
+import Welcome from './Components/welcome'
+import Market from './Components/Market'
+import Closet from './Components/Closet'
+import NavBar from './Components/nav'
+import Login from './Components/login'
+import Cloudinary from './Components/Cloudinary'
+import Outfit from './Components/Outfit'
+import signUp from './Components/signUp'
+import Listing from './Components/Listing'
+import Donate from './Components/Donate'
+import Sell from './Components/Sell'
 
 class App extends Component {
   // <Route component={NotFound} />
